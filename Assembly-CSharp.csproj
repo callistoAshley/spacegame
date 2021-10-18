@@ -63,14 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\alisonscript\Cutscene.cs" />
+    <Compile Include="Assets\alisonscript\FunctionAttribute.cs" />
+    <Compile Include="Assets\alisonscript\Functions.cs" />
     <Compile Include="Assets\alisonscript\Interpreter.cs" />
     <Compile Include="Assets\alisonscript\Line.cs" />
     <Compile Include="Assets\alisonscript\Object.cs" />
+    <Compile Include="Assets\alisonscript\RunningScript.cs" />
     <Compile Include="Assets\scripts\Controller.cs" />
     <Compile Include="Assets\scripts\Global.cs" />
     <Compile Include="Assets\scripts\MainCamera.cs" />
     <Compile Include="Assets\scripts\SpaceshipDoor.cs" />
     <Compile Include="Assets\sprites\idk\Something.cs" />
+    <None Include="Assets\cutscenes\hello.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

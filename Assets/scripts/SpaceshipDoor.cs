@@ -19,6 +19,7 @@ namespace spacegame
         private IEnumerator OnTriggerEnter2D(Collider2D collision)
         {
             if (closing) yield break;
+            if (opening) yield break;
 
             if (collision.CompareTag("Player"))
             {
@@ -72,6 +73,7 @@ namespace spacegame
                 if (trigger.IsTouching(Controller.instance.coll))
                 {
                     Debug.Log("player is still in door, reopening");
+                    yield return new WaitForSeconds(0.5f);
                     StartCoroutine(ToggleDoor(true));
                 }
             }
