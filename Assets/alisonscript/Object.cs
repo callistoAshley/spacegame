@@ -10,6 +10,6 @@ namespace spacegame.alisonscript
     /// </summary>
     public abstract class Object
     {
-
+        
     }
 }
