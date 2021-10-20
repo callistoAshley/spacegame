@@ -6,5 +6,5 @@
 ;wait "3"
 
 ;log "ok i finished waiting"
-;log "double log"bazinga"
+;log "double log" "bazinga"
 ;log "19 oct 2021"

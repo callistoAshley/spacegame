@@ -52,6 +52,9 @@ namespace spacegame.alisonscript
             if (_runningScript != null)
                 throw new Exception("cannot run a new alisonscript script while the runningScript instance has a value (a script is already running)");
 
+            if (!File.Exists(Application.dataPath + "/lang/en/" + script + ".alisonscript"))
+                throw new Exception($"couldn't find alisonscript file \"/lang/en/{script}\"");
+
             // read lines of file
             string[] file = File.ReadAllLines(Application.dataPath + "/lang/en/" + script + ".alisonscript");
 

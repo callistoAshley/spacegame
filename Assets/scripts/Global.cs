@@ -12,9 +12,10 @@ namespace spacegame
         // Start is called before the first frame update
         void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             instance = this;
             alisonscript.Interpreter.RegisterFunctions();
-            alisonscript.Interpreter.Run("debug_test");
+            // alisonscript.Interpreter.Run("");
         }
 
         // Update is called once per frame

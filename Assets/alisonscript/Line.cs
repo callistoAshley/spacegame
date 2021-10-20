@@ -39,6 +39,7 @@ namespace spacegame.alisonscript
                 // TODO: this regex picks up whitespaces between arguments,
                 // so additional arguments need to be passed like ';thing "an argument""another argument"'
                 // instead of 'thing "an argument" "another argument"'
+                // nevermind i just tested it again this is completely broken with more than one argument
                 Regex searchForArgs = new Regex("(?<=\")(.+?)(?=\")");
                 var argsCount = searchForArgs.Matches(line);
 
