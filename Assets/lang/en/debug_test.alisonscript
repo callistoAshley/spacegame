@@ -1,5 +1,10 @@
 ;log "hey guys!!! it's me alison the robot from space!!!!"
 ;log "this is the first alisonscript test"
 ;log "isn't it cool?"
-;log "double log" "bazinga"
+;log "i'm going to wait a bit"
+
+;wait "3"
+
+;log "ok i finished waiting"
+;log "double log"bazinga"
 ;log "19 oct 2021"
