@@ -13,6 +13,21 @@ namespace spacegame.alisonscript
 {
     public static class Interpreter
     {
+        private static RunningScript _runningScript;
+        public static RunningScript runningScript
+        {
+            get
+            {
+                return _runningScript;
+            }
+            set
+            {
+                if (!(_runningScript is null) && !(value is null))
+                    throw new Exception("shouldn't set the running script to a value while a script is running");
+                _runningScript = value;
+            }
+        }
+
         // reflection hurts my head man
         public static void RegisterFunctions()
         {
@@ -26,24 +41,25 @@ namespace spacegame.alisonscript
                     // haha this isn't a mess at all
                     FunctionAttribute f = (FunctionAttribute)Attribute.GetCustomAttribute(m, typeof(FunctionAttribute));
                     string functionName = f.name;
-                    Functions.functions.Add(functionName, m.Name);
+                    Functions.instance.functions.Add(functionName, m.Name);
                     Debug.Log($"registered alisonscript function: {functionName} ({m.Name})");
                 }
             }
         }
 
-        public static async void Run(string script)
+        public static void Run(string script)
         {
+            if (_runningScript != null)
+                throw new Exception("cannot run a new alisonscript script while the runningScript instance has a value (a script is already running)");
+
             // read lines of file
             string[] file = File.ReadAllLines(Application.dataPath + "/lang/en/" + script + ".alisonscript");
 
             // create running script
-            RunningScript runningScript = new RunningScript(Line.FromStringArray(file));
+            runningScript = new RunningScript(Line.FromStringArray(file));
 
-            foreach (Line line in runningScript)
-            {
-                await line.Process();
-            }
+            // process first line
+            runningScript.lines[0].Process(); 
         }
     }
 }

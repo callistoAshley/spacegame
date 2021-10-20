@@ -8,50 +8,39 @@ using System.Text.RegularExpressions;
 
 namespace spacegame.alisonscript
 {
-    public class RunningScript : IEnumerable
+    public class RunningScript 
     {
-        private List<Line> lines;
+        public List<Line> lines;
+        
+        private int _lineIndex;
+        public int lineIndex
+        {
+            get
+            {
+                return _lineIndex;
+            }
+            set
+            {
+                if (value > lines.Count - 1)
+                {
+                    // done!
+                    Interpreter.runningScript = null;
+                    return;
+                }
+
+                _lineIndex = value;
+                lines[_lineIndex].Process();
+            }
+        }
+
+        public void IncrementIndex()
+        {
+            Interpreter.runningScript.lineIndex++;
+        }
 
         public RunningScript(List<Line> lines)
         {
             this.lines = lines;
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return new ScriptEnumerator(lines);
-        }
-
-        private class ScriptEnumerator : IEnumerator
-        {
-            public List<Line> lines; // enumerator data
-            private int position = -1; // position in enumeration
-
-            public ScriptEnumerator(List<Line> lines)
-            {
-                this.lines = lines;
-            }
-
-            // current object in enumeration
-            public object Current
-            {
-                get
-                {
-                    return lines[position];
-                }
-            }
-
-            public bool MoveNext()
-            {
-                // increment the position
-                position++;
-                return position < lines.Count;
-            }
-
-            public void Reset()
-            {
-                position = -1;
-            }
         }
     }
 }

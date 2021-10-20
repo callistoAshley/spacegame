@@ -8,32 +8,57 @@ using UnityEngine;
 
 namespace spacegame.alisonscript
 {
-    public static class Functions 
+    public class Functions : MonoBehaviour
     {
-        public static Dictionary<string, string> functions = new Dictionary<string, string>();
+        public static Functions instance;
+        public Dictionary<string, string> functions = new Dictionary<string, string>();
 
-        public static async Task Call(string functionName, params string[] args)
+        private void Awake()
+        {
+            instance = this;
+        }
+
+        public void Call(string functionName, Action callback, params string[] args)
         {
             foreach (string s in functions.Keys)
             {
                 if (s == functionName)
                 {
-                    Debug.Log($"calling function: {functionName}");
-                    // just create a task out of a lambda that starts the coroutine
-                    // also use global's start coroutine method because i don't want feel like doing singleton stuff to make this inherit from MonoBehaviour
-                    Task t = new Task(() => { Debug.Log("hey"); Global.instance.StartCoroutine(functions[s], args); });
-                    await t;
-                    Debug.Log("WHY"); 
+                    // call function coroutine
+                    StartCoroutine(functions[s], new FunctionArgs(callback, args));
+                    return;
                 }
             }
             throw new Exception($"{functionName} didn't match any registered alisonscript functions");
         }
 
         [Function("log")]
-        public static IEnumerator Log(params string[] args)
+        public IEnumerator Log(FunctionArgs args)
         {
-            foreach (string s in args) Debug.Log(s);   
+            foreach (string s in args.args) 
+                Debug.Log(s);
+            args.callback.Invoke();
+            
             yield break;
+        }
+
+        [Function("wait")] 
+        public IEnumerator Wait(FunctionArgs args)
+        {
+            yield return new WaitForSeconds(int.Parse(args.args[0]));
+            args.callback.Invoke();
+        }
+
+        public struct FunctionArgs
+        {
+            public Action callback;
+            public string[] args;
+
+            public FunctionArgs(Action callback, params string[] args)
+            {
+                this.callback = callback;
+                this.args = args;
+            }
         }
     }
 }
