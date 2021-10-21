@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabManager : MonoBehaviour
+public static class PrefabManager 
 {
-    public static PrefabManager instance;
-    public List<GameObject> prefabs;
+    public static GameObject[] prefabs;
 
-    public GameObject GetPrefab(string name)
+    [RuntimeInitializeOnLoadMethod]
+    public static void RegisterPrefabs()
+    {
+        prefabs = Resources.LoadAll<GameObject>("prefabs/");
+    }
+
+    public static GameObject GetPrefab(string name)
     {
         // y'all like python indenting in c#
         foreach (GameObject g in prefabs)

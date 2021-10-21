@@ -16,7 +16,7 @@ namespace spacegame.alisonscript
             this.contents = contents;
         }
 
-        public void Process()
+        public void Process(RunningScript runningScript)
         {
             string line = contents;
 

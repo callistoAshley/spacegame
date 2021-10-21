@@ -18,7 +18,15 @@ namespace spacegame
 
             DontDestroyOnLoad(gameObject);
             instance = this;
+
+            // initialize other stuff
+            UIManager.SetInstance();
             alisonscript.Interpreter.RegisterFunctions();
+
+            // textbox
+            UIManager.instance.New(new Vector2(-52, 169), new Vector2(700, 200));
+            // speaker box
+            UIManager.instance.New(new Vector2(-52, 328), new Vector2(500, 100));
             // alisonscript.Interpreter.Run("");
         }
 
