@@ -73,9 +73,11 @@
     <Compile Include="Assets\scripts\Controller.cs" />
     <Compile Include="Assets\scripts\Global.cs" />
     <Compile Include="Assets\scripts\MainCamera.cs" />
+    <Compile Include="Assets\scripts\PrefabManager.cs" />
     <Compile Include="Assets\scripts\SpaceshipDoor.cs" />
+    <Compile Include="Assets\scripts\UI.cs" />
+    <Compile Include="Assets\scripts\UIManager.cs" />
     <Compile Include="Assets\sprites\idk\Something.cs" />
-    <None Include="Assets\cutscenes\hello.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

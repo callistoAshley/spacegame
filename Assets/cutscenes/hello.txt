@@ -1,6 +1,0 @@
-;objspec Cutscene
-
-cat has a boat that turns into a submarine and they collect "trinkets" that are added to their journal, once in
-they tell some lore and stuff
-if you collect all the trinkets the boat turns into a hot air balloon and the cat flies into space and meets
-another cat who's loosely implied to be some kind of friend and then they're happy and the credits play

@@ -7,7 +7,7 @@ namespace spacegame
     public class MainCamera : MonoBehaviour
     {
         public GameObject player;
-        public bool followPlayer;
+        public bool followPlayer = true;
 
         public static MainCamera instance;
 
@@ -21,7 +21,7 @@ namespace spacegame
         // Update is called once per frame
         void Update()
         {
-            if (player != null) transform.position = player.transform.position - new Vector3(0, 0, 10);
+            if (followPlayer && player != null) transform.position = player.transform.position - new Vector3(0, 0, 10);
         }
     }
 }

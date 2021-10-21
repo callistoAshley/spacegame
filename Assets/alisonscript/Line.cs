@@ -60,6 +60,8 @@ namespace spacegame.alisonscript
 
         public static List<Line> FromStringArray(string[] array)
         {
+            if (array.Length == 0)
+                throw new Exception("array is empty");
             List<Line> lines = new List<Line>();
 
             // initialize a line from every string in the array and add it to the list
