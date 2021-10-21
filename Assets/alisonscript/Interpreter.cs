@@ -62,7 +62,7 @@ namespace spacegame.alisonscript
             runningScript = new RunningScript(Line.FromStringArray(file));
 
             // process first line
-            runningScript.lines[0].Process(); 
+            runningScript.lines[0].Process(runningScript); 
         }
     }
 }

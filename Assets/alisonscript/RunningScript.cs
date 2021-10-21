@@ -11,6 +11,7 @@ namespace spacegame.alisonscript
     public class RunningScript 
     {
         public List<Line> lines;
+        public Dictionary<string, Object> objects = new Dictionary<string, Object>();
         
         private int _lineIndex;
         public int lineIndex
@@ -29,7 +30,7 @@ namespace spacegame.alisonscript
                 }
 
                 _lineIndex = value;
-                lines[_lineIndex].Process();
+                lines[_lineIndex].Process(this);
             }
         }
 
