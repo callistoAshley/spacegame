@@ -22,8 +22,8 @@ namespace spacegame
         public UI New(Vector2 position, Vector2 size)
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
-            GameObject prefab = PrefabManager.GetPrefab("ui");
-            GameObject canvas = PrefabManager.GetPrefab("Canvas");
+            GameObject prefab = PrefabManager.instance.GetPrefab("ui");
+            GameObject canvas = PrefabManager.instance.GetPrefab("Canvas");
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
             // get ui from gameobject and call the initialize method

@@ -15,7 +15,7 @@ namespace spacegame.alisonscript
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             instance = this;
         }
 
