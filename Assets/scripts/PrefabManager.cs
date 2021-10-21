@@ -2,23 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public static class PrefabManager 
+public class PrefabManager : MonoBehaviour
 {
-    public static GameObject[] prefabs;
+    public static PrefabManager instance;
+    public GameObject[] prefabs;
 
-    [RuntimeInitializeOnLoadMethod]
-    public static void RegisterPrefabs()
+    private void Awake()
     {
-        prefabs = Resources.LoadAll<GameObject>("prefabs/");
+        instance = this;
     }
 
-    public static GameObject GetPrefab(string name)
+    public GameObject GetPrefab(string name)
     {
         // y'all like python indenting in c#
         foreach (GameObject g in prefabs)
             if (g.name == name)
                 return g;
-        throw new Exception($"PrefabManager prefabs list does not have a prefab called {name}");
+        throw new Exception($"PrefabManager prefabs array does not have a prefab called {name}");
     }
 }
