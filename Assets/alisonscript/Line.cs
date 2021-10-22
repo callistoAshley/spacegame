@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace spacegame.alisonscript
 {
@@ -34,6 +35,14 @@ namespace spacegame.alisonscript
             // if the line starts with a semicolon, call a function
             if (line.StartsWith(";"))
             {
+                // this is absolutely horrible!
+                string functionName = line.Substring(1); // get the function name by substringing the line to exclude the semicolon
+                // then we just get rid of the args by cutting of the string at the first mention of a white space or quote
+                functionName = new Regex("\".*?\"|\\s").Replace(functionName, string.Empty);
+
+                if (functionName == string.Empty)
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "function call expected");
+
                 // i stole this regex lol https://stackoverflow.com/questions/49239218/get-string-between-character-using-regex-c-sharp
 
                 // TODO: this regex picks up whitespaces between arguments,
@@ -43,18 +52,21 @@ namespace spacegame.alisonscript
                 Regex searchForArgs = new Regex("(?<=\")(.+?)(?=\")");
                 var argsCount = searchForArgs.Matches(line);
 
+                // if there were no args, throw an syntax error
+                if (argsCount.Count == 0)
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "tried to call a function without arguments");
+
                 string[] args = new string[argsCount.Count];
                 for (int i = 0; i < argsCount.Count; i++)
                     args[i] = argsCount[i].Value;
 
-                // then call the function
-                // this is absolutely horrible!
-                string functionName = line.Substring(1); // get the function name by substringing the line to exclude the semicolon
-                // then we just get rid of the args by cutting of the string at the first mention of a white space or quote
-                functionName = new Regex("\".*?\"|\\s").Replace(functionName, string.Empty);
-
-                // increment into lineIndex as callback
-                Functions.instance.Call(functionName, () => Interpreter.runningScript.IncrementIndex(), args);
+                // then call the function 
+                if (Interpreter.runningScript is null)
+                {
+                    Debug.Log("i guess we're done?");
+                    return;
+                }
+                Functions.instance.Call(functionName, () => Interpreter.runningScript.IncrementIndex(), args); // increment into lineIndex as callback
             }
         }
 

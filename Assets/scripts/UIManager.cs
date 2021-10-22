@@ -33,11 +33,13 @@ namespace spacegame
                     // check if the ui has been destroyed, and if it has, dequeue it
                     if (ui is null)
                         inputQueue.Dequeue();
+
+                    yield return new WaitForSeconds(0.1f); // sleep for a moment
                 }
             }
         }
 
-        public UI New(Vector2 position, Vector2 size)
+        public UI New(Vector2 position, Vector2 size) 
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui");

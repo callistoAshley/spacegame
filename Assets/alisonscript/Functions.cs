@@ -82,8 +82,6 @@ namespace spacegame.alisonscript
 
             // create textbox
             UI textbox = UIManager.instance.New(new Vector2(-52, 169), new Vector2(700, 200));
-            if (!(speakerBox is null)) // destroy the speaker box when we destroy the textbox
-                textbox.alsoDestroy.Add(speakerBox);
             textbox.StartCoroutine(textbox.PrintText(fullText, false, args.callback, UI.PrintTextCallbackPosition.AfterInput, true));
             
             yield break;

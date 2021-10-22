@@ -47,9 +47,6 @@ namespace spacegame
             PrintTextCallbackPosition callbackPosition = PrintTextCallbackPosition.AfterInput, // where in the method the callback should be invoked
             bool destroyUiAfterCallback = true) // whether the ui should be destroyed after the callback is invoked
         {
-            // add this ui to the input queue
-            UIManager.instance.inputQueue.Enqueue(this);
-
             if (callbackPosition == PrintTextCallbackPosition.BeforePrinting)
                 callback.Invoke();
 
@@ -107,15 +104,14 @@ namespace spacegame
                     }
                     break;
             }
+
+            // add this ui to the input queue
+            UIManager.instance.inputQueue.Enqueue(this);
         }
 
         public void DisposeButNotReally()
         {
-            foreach (UI ui in alsoDestroy) 
-                if (ui != null)
-                    ui.DisposeButNotReally();
-            if (this != null) // how does this happen
-                Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

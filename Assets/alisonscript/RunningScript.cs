@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace spacegame.alisonscript
 {
@@ -25,6 +26,7 @@ namespace spacegame.alisonscript
                 if (value > lines.Count - 1)
                 {
                     // done!
+                    Debug.Log($"finished running script");
                     Interpreter.runningScript = null;
                     return;
                 }
@@ -32,6 +34,13 @@ namespace spacegame.alisonscript
                 _lineIndex = value;
                 lines[_lineIndex].Process(this);
             }
+        }
+
+        // NEVER use this get the actual line index, instead just get lineIndex
+        // this is just a tidy way of getting the current line for syntax errors
+        public int GetCurrentLine()
+        {
+            return lineIndex + 1;
         }
 
         public void IncrementIndex()
