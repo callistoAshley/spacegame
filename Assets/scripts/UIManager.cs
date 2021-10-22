@@ -30,11 +30,11 @@ namespace spacegame
                     UI ui = inputQueue.Peek(); // get the first object
                     ui.inputProcessedCallback.Invoke(); // invoke the callback
 
-                    // check if the ui has been destroyed, and if it has, dequeue it
-                    if (ui is null)
-                        inputQueue.Dequeue();
+                    yield return new WaitForEndOfFrame();
 
-                    yield return new WaitForSeconds(0.1f); // sleep for a moment
+                    // check if the ui has been destroyed, and if it has, dequeue it
+                    if (ui == null) // apparently there's something wrong with is null??? i thought it was tomato tomahto but there's defo something i don't understand
+                        inputQueue.Dequeue();
                 }
             }
         }

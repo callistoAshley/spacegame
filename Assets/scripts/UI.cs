@@ -16,12 +16,15 @@ namespace spacegame
 
         public List<UI> alsoDestroy = new List<UI>(); // ui to destroy when destroying this one 
 
-        // y'all like unnecessarily long and verbose variable names
-        public enum PrintTextCallbackPosition
+        public enum PrintTextOptions
         {
-            BeforePrinting,
-            AfterPrinting,
-            AfterInput,
+            // you get binary because i hate you that much <3
+            CallbackBeforePrinting = 0b_0000_0001,
+            CallbackAfterPrinting = 0b_0000_0010,
+            CallbackAfterInput = 0b_0000_0100,
+            DontCallback = 0b_0000_1000,
+            DestroyUIAfterCallback = 0b_0001_0000,
+            Instant = 0b_0010_0000,
         }
 
         public virtual void Initialize(Vector2 size)
@@ -42,15 +45,13 @@ namespace spacegame
         // also check out the stack overflow page i stole this code from: https://www.taste.com.au/recipes/collections/spaghetti-recipes
         public virtual IEnumerator PrintText(
             string text, // text input
-            bool instant, // whether the text should appear instantaneously
             Action callback = null, // callback (in alisonscript this is usually just increment the line index)
-            PrintTextCallbackPosition callbackPosition = PrintTextCallbackPosition.AfterInput, // where in the method the callback should be invoked
-            bool destroyUiAfterCallback = true) // whether the ui should be destroyed after the callback is invoked
+            PrintTextOptions options = PrintTextOptions.CallbackAfterInput) // options
         {
-            if (callbackPosition == PrintTextCallbackPosition.BeforePrinting)
+            if (options.HasFlag(PrintTextOptions.CallbackBeforePrinting))
                 callback.Invoke();
 
-            if (instant)
+            if (options.HasFlag(PrintTextOptions.Instant))
             {
                 this.text.text = text;
             }
@@ -73,44 +74,51 @@ namespace spacegame
 
             yield return new WaitForSeconds(0.1f);
 
-            // i made this a switch to end the unending hell of if statements but honestly i have no idea whether it looks worse
-            switch (callbackPosition)
+            // this is gross
+            if (options.HasFlag(PrintTextOptions.CallbackAfterPrinting))
             {
-                // if we're told to invoke the callback 
-                case PrintTextCallbackPosition.AfterPrinting:
+                if (callback != null)
                     callback.Invoke();
-                    if (destroyUiAfterCallback) // destroy this ui if configured to
-                        DisposeButNotReally();
-                    yield break; // break out of the coroutine here
-
-                case PrintTextCallbackPosition.AfterInput:
-                    // if a callback wasn't given and we're told to destroy the ui, destroy the ui
-                    if (callback is null && destroyUiAfterCallback)
-                    {
-                        inputProcessedCallback = new Action(() => DisposeButNotReally());
-                    }
-                    // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
-                    else if (callback != null && destroyUiAfterCallback)
-                    {
-                        inputProcessedCallback = new Action(() =>
-                        {
-                            callback.Invoke();
-                            DisposeButNotReally();
-                        });
-                    }
-                    else
-                    {
-                        throw new Exception("genuinely can't think of a reason i'd do this so i'll just throw an exception and hope i don't find it later");
-                    }
-                    break;
+                if (options.HasFlag(PrintTextOptions.DestroyUIAfterCallback)) // destroy this ui if configured to
+                    DisposeButNotReally();
+                yield break; // break out of the coroutine here
             }
+            if (options.HasFlag(PrintTextOptions.CallbackAfterInput))
+            {
+                // if a callback wasn't given and we're told to destroy the ui, destroy the ui
+                if (callback is null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
+                {
+                    inputProcessedCallback = new Action(() => DisposeButNotReally());
+                }
+                // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
+                else if (callback != null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
+                {
+                    inputProcessedCallback = new Action(() =>
+                    {
+                        callback.Invoke();
+                        DisposeButNotReally();
+                    });
 
-            // add this ui to the input queue
+                    
+                }
+                else
+                {
+                    throw new Exception("genuinely can't think of a reason i'd do this so i'll just throw an exception and hope i don't find it later");
+                }
+
+                UIManager.instance.inputQueue.Enqueue(this);
+            }
+        }
+
+        public void AddToInputQueue()
+        {
             UIManager.instance.inputQueue.Enqueue(this);
         }
 
         public void DisposeButNotReally()
         {
+            foreach (UI ui in alsoDestroy)
+                ui.DisposeButNotReally();
             Destroy(gameObject);
         }
     }

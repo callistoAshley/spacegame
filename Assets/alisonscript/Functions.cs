@@ -65,8 +65,8 @@ namespace spacegame.alisonscript
                 speakerBox = UIManager.instance.New(new Vector2(-152, 328), new Vector2(500, 100));
 
                 // print the speaker onto the speaker box
-                speakerBox.PrintText(searchForSpeaker.Match(fullText).Value, true, 
-                    callbackPosition: UI.PrintTextCallbackPosition.AfterPrinting); // since we don't have a callback just do this
+                speakerBox.StartCoroutine(speakerBox.PrintText(searchForSpeaker.Match(fullText).Value, 
+                    options: UI.PrintTextOptions.Instant | UI.PrintTextOptions.DontCallback));
 
                 // then replace the contents of the speaker with an empty string
                 // this regex includes the bars, eg "|guy| what a lovely day!!!" matches "|guy|"
@@ -82,8 +82,11 @@ namespace spacegame.alisonscript
 
             // create textbox
             UI textbox = UIManager.instance.New(new Vector2(-52, 169), new Vector2(700, 200));
-            textbox.StartCoroutine(textbox.PrintText(fullText, false, args.callback, UI.PrintTextCallbackPosition.AfterInput, true));
-            
+            if (speakerBox != null)
+                textbox.alsoDestroy.Add(speakerBox);
+            textbox.StartCoroutine(textbox.PrintText(fullText, callback: args.callback, 
+                options: UI.PrintTextOptions.CallbackAfterInput | UI.PrintTextOptions.DestroyUIAfterCallback));
+
             yield break;
         }
 
