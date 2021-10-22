@@ -22,7 +22,7 @@ namespace spacegame.alisonscript
             }
             set
             {
-                if (!(_runningScript is null) && !(value is null))
+                if (_runningScript != null && value != null)
                     throw new Exception("shouldn't set the running script to a value while a script is running");
                 _runningScript = value;
             }
@@ -31,14 +31,13 @@ namespace spacegame.alisonscript
         // reflection hurts my head man
         public static void RegisterFunctions()
         {
-            // iterate through methods in Functions type via reflection
+            // iterate through methods in Functions type 
             foreach (MethodInfo m in typeof(Functions).GetMethods())
             {
                 var v = m.GetCustomAttributes(typeof(FunctionAttribute));
                 if (v.Count() > 0) // yeah!!! it's a function!!! let's go!!!!
                 {
                     // get the name of the function from the function attribute and add it as a key to the functions dictionary
-                    // haha this isn't a mess at all
                     FunctionAttribute f = (FunctionAttribute)Attribute.GetCustomAttribute(m, typeof(FunctionAttribute));
                     string functionName = f.name;
                     Functions.instance.functions.Add(functionName, m.Name);
@@ -49,11 +48,13 @@ namespace spacegame.alisonscript
 
         public static void Run(string script)
         {
-            if (_runningScript != null)
+            if (runningScript != null)
                 throw new Exception("cannot run a new alisonscript script while the runningScript instance has a value (a script is already running)");
 
             if (!File.Exists(Application.dataPath + "/lang/en/" + script + ".alisonscript"))
                 throw new Exception($"couldn't find alisonscript file \"/lang/en/{script}\"");
+
+            Controller.instance.canMove = false;
 
             // read lines of file
             string[] file = File.ReadAllLines(Application.dataPath + "/lang/en/" + script + ".alisonscript");

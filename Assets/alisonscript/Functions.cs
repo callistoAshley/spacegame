@@ -71,7 +71,7 @@ namespace spacegame.alisonscript
                 // then replace the contents of the speaker with an empty string
                 // this regex includes the bars, eg "|guy| what a lovely day!!!" matches "|guy|"
                 Regex speaker = new Regex(@"\|.*?\|");
-                speaker.Replace(fullText, string.Empty);
+                fullText = speaker.Replace(fullText, string.Empty);
 
                 // i normally like adding an extra whitespace after the speaker so it's more readable so this checks for that and removes it
                 // you can disable this check by including "-ndws" (no delete white space) as an argument
@@ -87,6 +87,17 @@ namespace spacegame.alisonscript
             textbox.StartCoroutine(textbox.PrintText(fullText, callback: args.callback, 
                 options: UI.PrintTextOptions.CallbackAfterInput | UI.PrintTextOptions.DestroyUIAfterCallback));
 
+            yield break;
+        }
+
+        [Function("can_move")]
+        public IEnumerator ToggleMove(FunctionArgs args)
+        {
+            if (bool.TryParse(args.args[0], out bool result))
+                Controller.instance.canMove = result;
+            else
+                throw new ArgumentException($"failed to parse {args.args[0]} to boolean");
+            args.callback.Invoke();
             yield break;
         }
 

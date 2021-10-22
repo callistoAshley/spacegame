@@ -26,7 +26,7 @@ namespace spacegame.alisonscript
                 if (value > lines.Count - 1)
                 {
                     // done!
-                    Debug.Log($"finished running script");
+                    Finished();
                     Interpreter.runningScript = null;
                     return;
                 }
@@ -46,6 +46,11 @@ namespace spacegame.alisonscript
         public void IncrementIndex()
         {
             Interpreter.runningScript.lineIndex++;
+        }
+
+        public void Finished()
+        {
+            Controller.instance.canMove = true;
         }
 
         public RunningScript(List<Line> lines)
