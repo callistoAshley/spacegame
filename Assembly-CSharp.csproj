@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\alisonscript\AlisonscriptSyntaxError.cs" />
     <Compile Include="Assets\alisonscript\FunctionAttribute.cs" />
     <Compile Include="Assets\alisonscript\Functions.cs" />
     <Compile Include="Assets\alisonscript\Interpreter.cs" />
