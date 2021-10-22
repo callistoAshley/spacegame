@@ -26,7 +26,7 @@ namespace spacegame
             // initialize other stuff
             alisonscript.Interpreter.RegisterFunctions();
 
-            alisonscript.Interpreter.Run("debug_test2");
+            //alisonscript.Interpreter.Run("debug_test2");
         }
 
         public static GameObject GetCommonObject(string name)

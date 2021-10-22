@@ -48,6 +48,17 @@ namespace spacegame
             Action callback = null, // callback (in alisonscript this is usually just increment the line index)
             PrintTextOptions options = PrintTextOptions.CallbackAfterInput) // options
         {
+            // automatically skip through the text if holding left ctrl
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                this.text.text = text;
+                yield return new WaitForEndOfFrame(); // i want it to have like. you know. that oomph. you know. the oomph
+                if (callback != null)
+                    callback.Invoke();
+                DisposeButNotReally();
+                yield break;
+            }
+
             if (options.HasFlag(PrintTextOptions.CallbackBeforePrinting))
                 callback.Invoke();
 
@@ -81,7 +92,6 @@ namespace spacegame
                     callback.Invoke();
                 if (options.HasFlag(PrintTextOptions.DestroyUIAfterCallback)) // destroy this ui if configured to
                     DisposeButNotReally();
-                yield break; // break out of the coroutine here
             }
             if (options.HasFlag(PrintTextOptions.CallbackAfterInput))
             {
@@ -98,8 +108,6 @@ namespace spacegame
                         callback.Invoke();
                         DisposeButNotReally();
                     });
-
-                    
                 }
                 else
                 {

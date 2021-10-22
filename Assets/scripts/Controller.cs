@@ -17,27 +17,25 @@ namespace spacegame
         private bool facingRight = true;
 
         // components
-        private Animator animator;
+        [HideInInspector] public Animator animator;
         [HideInInspector] public BoxCollider2D coll;
 
         // singleton
         public static Controller instance;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             animator = GetComponent<Animator>();
             coll = GetComponent<BoxCollider2D>();
             instance = this;
         }
 
-        // hey KIDS ! it's me, your best friend, if else if if else else if else if else if if if else if if else if
-        
         // Update is called once per frame
         void Update()
         {
             // walk animation
-            if (Input.GetAxis("Horizontal") == 0)
+            if (Input.GetAxis("Horizontal") == 0 || !canMove)
                 animator.SetTrigger("idle");
             else
                 animator.SetTrigger("walking");
@@ -58,6 +56,8 @@ namespace spacegame
 
         private void Flip()
         {
+            if (!canMove) return;
+
             // flip sprite by inverting x value of scale
             facingRight = !facingRight;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
