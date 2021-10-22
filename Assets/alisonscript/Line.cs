@@ -45,10 +45,6 @@ namespace spacegame.alisonscript
 
                 // i stole this regex lol https://stackoverflow.com/questions/49239218/get-string-between-character-using-regex-c-sharp
 
-                // TODO: this regex picks up whitespaces between arguments,
-                // so additional arguments need to be passed like ';thing "an argument""another argument"'
-                // instead of 'thing "an argument" "another argument"'
-                // nevermind i just tested it again this is completely broken with more than one argument
                 Regex searchForArgs = new Regex("(?<=\")(.+?)(?=\")");
                 var argsCount = searchForArgs.Matches(line);
 
@@ -56,17 +52,21 @@ namespace spacegame.alisonscript
                 if (argsCount.Count == 0)
                     throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "tried to call a function without arguments");
 
-                string[] args = new string[argsCount.Count];
+                List<string> args = new List<string>();
                 for (int i = 0; i < argsCount.Count; i++)
-                    args[i] = argsCount[i].Value;
+                    // only treat the argument as an argument if it's the first argument or its index in the array isn divisible by 2
+                    // this avoids treating the empty whitespaces between arguments as arguments,
+                    // e.g. ;log "hello" "dooby" logs "hello" and "dooby" instead of "hello" " " and "dooby"
+                    if (i == 0 || i % 2 == 0)
+                        args.Add(argsCount[i].Value);
 
                 // then call the function 
-                if (Interpreter.runningScript is null)
+                if (Interpreter.runningScript is null) // how does this happen
                 {
                     Debug.Log("i guess we're done?");
                     return;
                 }
-                Functions.instance.Call(functionName, () => Interpreter.runningScript.IncrementIndex(), args); // increment into lineIndex as callback
+                Functions.instance.Call(functionName, () => Interpreter.runningScript.IncrementIndex(), args.ToArray()); // increment into lineIndex as callback
             }
         }
 
