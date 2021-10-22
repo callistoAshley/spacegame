@@ -6,5 +6,6 @@
 ;wait "3"
 
 ;log "ok i finished waiting"
+# this regex is broken atm lol
 ;log "double log" "bazinga"
 ;log "19 oct 2021"

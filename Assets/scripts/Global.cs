@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 namespace spacegame
 {
+    // Project Settings > Script Execution Order for all of this mayhem
     public class Global : MonoBehaviour
     {
         public static Global instance;
         public static bool initialized;
+
+        public static Dictionary<string, GameObject> commonObjects = new Dictionary<string, GameObject>();
 
         // Start is called before the first frame update
         void Awake()
@@ -21,20 +24,17 @@ namespace spacegame
             instance = this;
 
             // initialize other stuff
-            UIManager.SetInstance();
             alisonscript.Interpreter.RegisterFunctions();
 
-            // textbox
-            UIManager.instance.New(new Vector2(-52, 169), new Vector2(700, 200));
-            // speaker box
-            UIManager.instance.New(new Vector2(-52, 328), new Vector2(500, 100));
-            // alisonscript.Interpreter.Run("");
+            alisonscript.Interpreter.Run("debug_test2");
         }
 
-        // Update is called once per frame
-        void Update()
+        public static GameObject GetCommonObject(string name)
         {
-
+            foreach (string s in commonObjects.Keys)
+                if (s == name)
+                    return commonObjects[s];
+            throw new System.Exception($"the common objects list does not have a key called {name}");
         }
     }
 }

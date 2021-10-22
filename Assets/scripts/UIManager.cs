@@ -6,24 +6,42 @@ using System;
 namespace spacegame
 {
     // REMEMBER THIS IS ATTACHED TO THE CANVAS PREFAB
-    public class UIManager : ScriptableObject
+    public class UIManager : MonoBehaviour
     {
         public static UIManager instance;
-        // ui input queue
+        public Queue<UI> inputQueue = new Queue<UI>();
 
-        public static void SetInstance()
+        private void Awake()
         {
-            if (instance is null)
-                instance = CreateInstance<UIManager>();
-            else
-                throw new Exception("UIManager singleton instance already has a value");
+            instance = this;
+            StartCoroutine(ProcessInputQueue());
+        }
+
+        // pretty much 100% sure there's a better way to do this
+        public IEnumerator ProcessInputQueue()
+        {
+            while (true)
+            {
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X));
+
+                // if the queue isn't empty
+                if (inputQueue.Count != 0)
+                {
+                    UI ui = inputQueue.Peek(); // get the first object
+                    ui.inputProcessedCallback.Invoke(); // invoke the callback
+
+                    // check if the ui has been destroyed, and if it has, dequeue it
+                    if (ui is null)
+                        inputQueue.Dequeue();
+                }
+            }
         }
 
         public UI New(Vector2 position, Vector2 size)
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui");
-            GameObject canvas = PrefabManager.instance.GetPrefab("Canvas");
+            GameObject canvas = Global.GetCommonObject("Canvas");
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
             // get ui from gameobject and call the initialize method

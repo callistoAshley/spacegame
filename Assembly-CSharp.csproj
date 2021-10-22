@@ -69,6 +69,7 @@
     <Compile Include="Assets\alisonscript\Line.cs" />
     <Compile Include="Assets\alisonscript\Object.cs" />
     <Compile Include="Assets\alisonscript\RunningScript.cs" />
+    <Compile Include="Assets\scripts\CommonObject.cs" />
     <Compile Include="Assets\scripts\Controller.cs" />
     <Compile Include="Assets\scripts\Global.cs" />
     <Compile Include="Assets\scripts\MainCamera.cs" />
