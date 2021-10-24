@@ -10,10 +10,14 @@ namespace spacegame.alisonscript
     public class FunctionAttribute : Attribute
     {
         public string name;
+        public int minimumArgs;
 
-        public FunctionAttribute(string name)
+        public FunctionAttribute(string name) : this(name, 0) { }
+
+        public FunctionAttribute(string name, int minimumArgs)
         {
             this.name = name;
+            this.minimumArgs = minimumArgs;
         }
     }
 }
