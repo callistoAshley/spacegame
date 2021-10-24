@@ -44,6 +44,8 @@ namespace spacegame.alisonscript
                     Debug.Log($"registered alisonscript function: {functionName} ({m.Name})");
                 }
             }
+
+            Debug.Log("finished registering functions");
         }
 
         public static void Run(string script)

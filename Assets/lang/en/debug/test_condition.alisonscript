@@ -1,10 +1,14 @@
 @thingy "howsit"
 
-&if "@thingy" "howsit"
-    ;spk "howdy"
-&end
-&!if "@thingy" "howsit"
-    ;spk "very much not howdy (the condition was false :()"
-&end
+cond "@thingy"
+    when "hello!"
+        ;spk "hello!"
+    when "howsit"
+        ;spk "howsit goin"
+    when "something else"
+        ;spk "also"
+    when "howsit"
+        ;spk "i'm the debug guy"
+end
 
-;spk "|skooby dooby| all done"
+;spk "|the debug guy| all finished"
