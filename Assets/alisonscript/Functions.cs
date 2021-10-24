@@ -31,7 +31,7 @@ namespace spacegame.alisonscript
                     return;
                 }
             }
-            throw new Exception($"{functionName} didn't match any registered alisonscript functions");
+            throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), $"{functionName} didn't match any registered alisonscript functions");
         }
 
         [Function("log")]
@@ -90,7 +90,7 @@ namespace spacegame.alisonscript
             yield break;
         }
 
-        [Function("can_move")]
+        [Function("can_move")] 
         public IEnumerator ToggleMove(FunctionArgs args)
         {
             if (bool.TryParse(args.args[0], out bool result))
@@ -98,6 +98,14 @@ namespace spacegame.alisonscript
             else
                 throw new ArgumentException($"failed to parse {args.args[0]} to boolean");
             args.callback.Invoke();
+            yield break;
+        }
+
+        [Function("goto")]
+        public IEnumerator Goto(FunctionArgs args)
+        {
+            // don't need to invoke the callback here because the line is processed in lineIndex setter
+            Interpreter.runningScript.lineIndex = int.Parse(args.args[0]);
             yield break;
         }
 

@@ -17,14 +17,15 @@ namespace spacegame
         // Start is called before the first frame update
         void Awake()
         {
-            if (initialized) return;
-            initialized = true;
-
-            DontDestroyOnLoad(gameObject);
             instance = this;
 
             // initialize other stuff
+            if (initialized) return;
+            initialized = true;
+
             alisonscript.Interpreter.RegisterFunctions();
+
+            alisonscript.Interpreter.Run("debug/test_condition");
         }
 
         public static GameObject GetCommonObject(string name)
