@@ -14,6 +14,9 @@ namespace spacegame.alisonscript
         public List<Line> lines;
         public List<Label> labels;
         public Dictionary<string, Object> objects = new Dictionary<string, Object>();
+
+        public bool inCond;
+        public string condObjectName;
         
         private int _lineIndex;
         public int lineIndex
@@ -28,7 +31,6 @@ namespace spacegame.alisonscript
                 {
                     // done!
                     Finished();
-                    Interpreter.runningScript = null;
                     return;
                 }
 
@@ -40,12 +42,11 @@ namespace spacegame.alisonscript
         public RunningScript(List<Line> lines)
         {
             this.lines = lines;
-            labels = new List<Label>();
 
             // create labels
             foreach (
-                Line line in from line in lines where // why do you call it oven when you of in the cold food of out hot eat the food
-                line.contents.StartsWith("&") select line)
+                Line line in from line in lines where line // why do you call it oven when you of in the cold food of out hot eat the food
+                .contents.StartsWith("&") select line)
             {
                 // use the same regex in Line to just get the name of the label without the args
                 string labelName = new Regex("\".*?\"|\\s").Replace(line.contents, string.Empty);
@@ -56,6 +57,15 @@ namespace spacegame.alisonscript
                 // then create the label and add it to the labels list
                 labels.Add(new Label(labelName, line.index, args));
             }
+        }
+
+        public bool ConditionalTrue(string objectName, string value)
+        {
+            if (!objects.ContainsKey(objectName))
+                throw new AlisonscriptSyntaxError(GetCurrentLine(), $"the current script does not have an object called {objectName}");
+
+            // compare the object's value to the inputted value
+            return objects[objectName].value == value;
         }
 
         // NEVER use this get the actual line index, instead just get lineIndex
@@ -73,8 +83,9 @@ namespace spacegame.alisonscript
         public void Finished()
         {
             Controller.instance.canMove = true;
+            Interpreter.runningScript = null;
         }
-
+        
         public Label GetLabelByName(int start, string name)
         {
             for (int i = start; i < labels.Count; i++)

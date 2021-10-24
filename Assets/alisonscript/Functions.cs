@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace spacegame.alisonscript
 {
@@ -20,12 +21,29 @@ namespace spacegame.alisonscript
             instance = this;
         }
 
+        // this is only used in the Call method to keep it tidy so it's private
+        private static MemberInfo GetMemberInfoForFunction(string name)
+        {
+            foreach (MemberInfo m in typeof(Functions).GetMethods())
+                if (m.Name == name)
+                    return m;
+            throw new Exception($"no alisonscript function called {name}");
+        }
+
         public void Call(string functionName, Action callback, params string[] args)
         {
             foreach (string s in functions.Keys)
             {
                 if (s == functionName)
                 {
+                    // get function attribute
+                    FunctionAttribute f = (FunctionAttribute)Attribute.GetCustomAttribute(GetMemberInfoForFunction(functionName), typeof(FunctionAttribute));
+
+                    // if there isn't enough arguments, get outta here
+                    if (args.Length < f.minimumArgs)
+                        throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), 
+                            $"{f.name} requires a minimum of {f.minimumArgs} arguments (only {args.Length} were given)");
+
                     // call function coroutine
                     StartCoroutine(functions[s], new FunctionArgs(callback, args));
                     return;
@@ -34,7 +52,7 @@ namespace spacegame.alisonscript
             throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), $"{functionName} didn't match any registered alisonscript functions");
         }
 
-        [Function("log")]
+        [Function("log", 1)]
         public IEnumerator Log(FunctionArgs args)
         {
             foreach (string s in args.args) 
@@ -44,14 +62,14 @@ namespace spacegame.alisonscript
             yield break;
         }
 
-        [Function("wait")] 
+        [Function("wait", 1)] 
         public IEnumerator Wait(FunctionArgs args)
         {
             yield return new WaitForSeconds(int.Parse(args.args[0]));
             args.callback.Invoke();
         }
 
-        [Function("spk")]
+        [Function("spk", 1)]
         public IEnumerator Speak(FunctionArgs args)
         {
             string fullText = args.args[0];
@@ -90,7 +108,7 @@ namespace spacegame.alisonscript
             yield break;
         }
 
-        [Function("can_move")] 
+        [Function("can_move", 1)] 
         public IEnumerator ToggleMove(FunctionArgs args)
         {
             if (bool.TryParse(args.args[0], out bool result))
@@ -101,7 +119,7 @@ namespace spacegame.alisonscript
             yield break;
         }
 
-        [Function("goto")]
+        [Function("goto", 1)]
         public IEnumerator Goto(FunctionArgs args)
         {
             // don't need to invoke the callback here because the line is processed in lineIndex setter

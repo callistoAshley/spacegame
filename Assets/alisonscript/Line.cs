@@ -14,10 +14,13 @@ namespace spacegame.alisonscript
         public string contents;
         public int index;
 
-        public Line(string contents, int index)
+        public bool inConditional;
+
+        public Line(string contents, int index, bool inConditional = false)
         {
             this.contents = contents;
             this.index = index;
+            this.inConditional = inConditional;
         }
 
         // i stole this regex lol https://stackoverflow.com/questions/49239218/get-string-between-character-using-regex-c-sharp
@@ -38,8 +41,15 @@ namespace spacegame.alisonscript
             return args.ToArray();
         }
 
+        // this is absolutely horrible!
         public void Process(RunningScript runningScript)
         {
+            if (inConditional && !Interpreter.runningScript.inCond)
+            {
+                Interpreter.runningScript.IncrementIndex();
+                return;
+            }
+
             string line = contents;
 
             // remove indenting with regex to get the actual line
@@ -53,10 +63,11 @@ namespace spacegame.alisonscript
                 return;
             }
 
+            // TODO: regex and get the line starter here and put the logic in a switch
+
             // if the line starts with a semicolon, call a function
             if (line.StartsWith(";"))
             {
-                // this is absolutely horrible!
                 string functionName = line.Substring(1); // get the function name by substringing the line to exclude the semicolon
                 // then we just get rid of the args by cutting of the string at the first mention of a white space or quote
                 functionName = new Regex("\".*?\"|\\s").Replace(functionName, string.Empty);
@@ -68,8 +79,8 @@ namespace spacegame.alisonscript
                 string[] args = ArgsRegex(line);
 
                 // if there were no args, throw an syntax error
-                if (args.Length == 0)
-                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "tried to call a function without arguments");
+                //if (args.Length == 0)
+                //    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "tried to call a function without arguments");
 
                 // then call the function 
                 if (Interpreter.runningScript is null) // how does this happen
@@ -101,45 +112,39 @@ namespace spacegame.alisonscript
 
                 Interpreter.runningScript.IncrementIndex();
             }
-            // if the line starts with a & then it's referring to a label
-            else if (line.StartsWith("&"))
+            // if the line starts with cond, it's a conditional
+            else if (line.StartsWith("cond"))
             {
-                line = line.Substring(1);
-                // get label name
-                string labelName = string.Empty;
-                labelName = new Regex("\".*?\"|\\s").Replace(labelName, string.Empty);
-
                 string[] args = ArgsRegex(line);
 
-                // some labels have special behaviour, like if/end
-                switch (labelName)
-                {
-                    // continue until the next end label if a condition is met
-                    case "if":
-                        // if the condition is true, continue
-                        // otherwise, go to end
-                        if (Interpreter.runningScript.objects[args[0]].value != args[1])
-                        {
-                            Interpreter.runningScript.lineIndex =
-                                Interpreter.runningScript.GetLabelByName(Interpreter.runningScript.lineIndex,
-                                // you can supply a third argument to if to indicate the label to jump to
-                                // e.g. if "@cool_object" "hello" "end1" jumps to "end1" 
-                                // because i don't feel like working out nested if statement mayhem
-                                args.Length == 3 ? args[2] : "end").index;
-                        }
-                        break;
+                if (Interpreter.runningScript.inCond)
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), 
+                        "nested conditionals haven't been added yet and will break");
 
-                    // inverse if - continue until the next end label if a condition is not met
-                    case "!if":
-                        // condition true
-                        if (Interpreter.runningScript.objects[args[0]].value == args[1])
-                        {
-                            Interpreter.runningScript.lineIndex =
-                                Interpreter.runningScript.GetLabelByName(Interpreter.runningScript.lineIndex,
-                                args.Length == 3 ? args[2] : "end").index;
-                        }
-                        break;
-                }
+                if (args.Length < 1)
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), 
+                        $"a conditional statement expects 1 argument (given {args.Length})");
+
+                Interpreter.runningScript.inCond = true;
+                Interpreter.runningScript.condObjectName = args[0];
+
+                Interpreter.runningScript.IncrementIndex();
+            }
+            // when in conditional
+            else if (line.StartsWith("when"))
+            {
+                if (Interpreter.runningScript.inCond)
+                    Interpreter.runningScript.inCond = false;
+                else
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "stray when statement");
+            }
+            // end conditional statement
+            else if (line.StartsWith("end"))
+            {
+                if (Interpreter.runningScript.inCond)
+                    Interpreter.runningScript.inCond = false;
+                else
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "stray end statement");
 
                 Interpreter.runningScript.IncrementIndex();
             }
@@ -152,8 +157,21 @@ namespace spacegame.alisonscript
             List<Line> lines = new List<Line>();
 
             // initialize a line from every string in the array and add it to the list
+            bool inConditional = false;
             for (int i = 0; i < array.Length; i++)
-                lines.Add(new Line(array[i], i));
+            {
+                Line add = new Line(array[i], i);
+
+                // mark future lines as in conditional 
+                if (add.contents.StartsWith("cond"))
+                    inConditional = true;
+                else if (add.contents.StartsWith("end"))
+                    inConditional = false;
+
+                add.inConditional = inConditional;
+
+                lines.Add(add);
+            }
 
             // convert the list to an array and return
             return lines;
