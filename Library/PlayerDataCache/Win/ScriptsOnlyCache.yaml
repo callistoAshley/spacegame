@@ -1,10 +1,14 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - spacegame.CommonObject
     - spacegame.Controller
     - spacegame.Global
     - spacegame.MainCamera
+    - spacegame.PrefabManager
     - spacegame.SpaceshipDoor
+    - spacegame.UI
+    - spacegame.UIManager
     - spacegame.alisonscript.Functions
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
@@ -16,10 +20,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -66,25 +68,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9670}
     - Class: 114
-      Script: {instanceID: 9834}
+      Script: {instanceID: 9772}
     - Class: 114
-      Script: {instanceID: 9876}
+      Script: {instanceID: 9836}
     - Class: 114
-      Script: {instanceID: 10276}
+      Script: {instanceID: 9878}
     - Class: 114
-      Script: {instanceID: 10686}
+      Script: {instanceID: 10278}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10688}
     - Class: 114
-      Script: {instanceID: 10894}
+      Script: {instanceID: 10866}
     - Class: 114
-      Script: {instanceID: 11124}
+      Script: {instanceID: 10896}
     - Class: 114
-      Script: {instanceID: 11160}
+      Script: {instanceID: 11126}
     - Class: 114
-      Script: {instanceID: 11218}
+      Script: {instanceID: 11162}
+    - Class: 114
+      Script: {instanceID: 11220}
+    - Class: 114
+      Script: {instanceID: 11448}
     - Class: 114
       Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11506}
+    - Class: 114
+      Script: {instanceID: 11552}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -140,6 +150,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 897dd686661b3f4fb11878ae3f923f01
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: PrefabManager
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -412,7 +428,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 95394a8f4e706d0495d5f8be2131805e
+      Hash: 1bb22709e2ed477105c32d0db45343a0
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Controller
@@ -502,6 +518,12 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
+      Hash: 74a23d53a3ed8085a62a29e58f12c61c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: UI
+  - hash:
+      serializedVersion: 2
       Hash: a63fc1a3b035e5a0b5839cd7f7b3086e
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -524,6 +546,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: CommonObject
   - hash:
       serializedVersion: 2
       Hash: 748dd2a2a28da4e618912da5ac45684b
@@ -550,6 +578,12 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: UIManager
+  - hash:
+      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -563,4 +597,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/scenes/ship_alison_intro.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/20OCT2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/24OCT2021/space!!!!.exe

@@ -93,5 +93,23 @@ namespace spacegame.alisonscript
                     return labels[i];
             throw new Exception($"a label with the name \"{name}\" could not be found from index position {start}");
         }
+
+        public void JumpToNextOccurence(int start, string input)
+        {
+            for (int i = start + 1; i < lines.Count; i++)
+            {
+                // remove indenting
+                Regex indenting = new Regex(@"\A\s*");
+                string line = indenting.Replace(lines[i], string.Empty);
+
+                if (line.StartsWith(input)
+                    || (input == "when" && line.StartsWith("end"))) // also jump to end if the input is when to break out of conditionals
+                {
+                    lineIndex = i;
+                    return;
+                }
+            }
+            throw new Exception($"couldn't find an occurence of {input} from {start}");
+        }
     }
 }

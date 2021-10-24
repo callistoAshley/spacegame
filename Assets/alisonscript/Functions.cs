@@ -27,7 +27,8 @@ namespace spacegame.alisonscript
             foreach (MemberInfo m in typeof(Functions).GetMethods())
                 if (m.Name == name)
                     return m;
-            throw new Exception($"no alisonscript function called {name}");
+            throw new Exception($"no alisonscript function called {name} " +
+                $"(make sure you're referring to the name of the coroutine rather than the function)");
         }
 
         public void Call(string functionName, Action callback, params string[] args)
@@ -37,7 +38,7 @@ namespace spacegame.alisonscript
                 if (s == functionName)
                 {
                     // get function attribute
-                    FunctionAttribute f = (FunctionAttribute)Attribute.GetCustomAttribute(GetMemberInfoForFunction(functionName), typeof(FunctionAttribute));
+                    FunctionAttribute f = (FunctionAttribute)Attribute.GetCustomAttribute(GetMemberInfoForFunction(functions[s]), typeof(FunctionAttribute));
 
                     // if there isn't enough arguments, get outta here
                     if (args.Length < f.minimumArgs)

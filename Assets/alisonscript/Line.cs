@@ -44,11 +44,12 @@ namespace spacegame.alisonscript
         // this is absolutely horrible!
         public void Process(RunningScript runningScript)
         {
+            /* // what was this for
             if (inConditional && !Interpreter.runningScript.inCond)
             {
                 Interpreter.runningScript.IncrementIndex();
                 return;
-            }
+            }*/
 
             string line = contents;
 
@@ -93,7 +94,7 @@ namespace spacegame.alisonscript
             // if the line starts with an @ then it's referring to an object, so set it to a value
             else if (line.StartsWith("@"))
             {
-                string objectName = string.Empty;
+                string objectName = line;
                 objectName = new Regex("\".*?\"|\\s").Replace(objectName, string.Empty); // remove everything after the whitespace
 
                 string[] args = ArgsRegex(line); // args
@@ -106,7 +107,7 @@ namespace spacegame.alisonscript
                 if (Interpreter.runningScript.objects.ContainsKey(objectName)) 
                     // if the script already has an object with the name objectName, set its value
                     Interpreter.runningScript.objects[objectName].value = objectValue;
-                else 
+                else
                     // otherwise, create it and add it
                     Interpreter.runningScript.objects.Add(objectName, new Object(objectValue));
 
@@ -133,10 +134,21 @@ namespace spacegame.alisonscript
             // when in conditional
             else if (line.StartsWith("when"))
             {
-                if (Interpreter.runningScript.inCond)
-                    Interpreter.runningScript.inCond = false;
-                else
+                string[] args = ArgsRegex(line);
+
+                if (!Interpreter.runningScript.inCond)
                     throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "stray when statement");
+
+                if (args.Length < 1)
+                    throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(),
+                        $"a when statement expects 1 argument (given {args.Length})");
+
+                // if the condition is true, process the rest of the in the when
+                if (Interpreter.runningScript.ConditionalTrue(Interpreter.runningScript.condObjectName, args[0]))
+                    Interpreter.runningScript.IncrementIndex();
+                else
+                    // otherwise, jump to the next occurence of when or end
+                    Interpreter.runningScript.JumpToNextOccurence(Interpreter.runningScript.lineIndex, "when");
             }
             // end conditional statement
             else if (line.StartsWith("end"))
@@ -147,6 +159,10 @@ namespace spacegame.alisonscript
                     throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "stray end statement");
 
                 Interpreter.runningScript.IncrementIndex();
+            }
+            else
+            {
+                Debug.Log(line);
             }
         }
 
