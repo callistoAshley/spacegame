@@ -12,6 +12,7 @@ namespace spacegame.alisonscript
     public class RunningScript 
     {
         public List<Line> lines;
+        public List<Label> labels;
         public Dictionary<string, Object> objects = new Dictionary<string, Object>();
         
         private int _lineIndex;
@@ -36,6 +37,27 @@ namespace spacegame.alisonscript
             }
         }
 
+        public RunningScript(List<Line> lines)
+        {
+            this.lines = lines;
+            labels = new List<Label>();
+
+            // create labels
+            foreach (
+                Line line in from line in lines where // why do you call it oven when you of in the cold food of out hot eat the food
+                line.contents.StartsWith("&") select line)
+            {
+                // use the same regex in Line to just get the name of the label without the args
+                string labelName = new Regex("\".*?\"|\\s").Replace(line.contents, string.Empty);
+
+                // then get the args 
+                string[] args = Line.ArgsRegex(line);
+
+                // then create the label and add it to the labels list
+                labels.Add(new Label(labelName, line.index, args));
+            }
+        }
+
         // NEVER use this get the actual line index, instead just get lineIndex
         // this is just a tidy way of getting the current line for syntax errors
         public int GetCurrentLine()
@@ -53,9 +75,12 @@ namespace spacegame.alisonscript
             Controller.instance.canMove = true;
         }
 
-        public RunningScript(List<Line> lines)
+        public Label GetLabelByName(int start, string name)
         {
-            this.lines = lines;
+            for (int i = start; i < labels.Count; i++)
+                if (labels[i].name == name)
+                    return labels[i];
+            throw new Exception($"a label with the name \"{name}\" could not be found from index position {start}");
         }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Assets\alisonscript\FunctionAttribute.cs" />
     <Compile Include="Assets\alisonscript\Functions.cs" />
     <Compile Include="Assets\alisonscript\Interpreter.cs" />
+    <Compile Include="Assets\alisonscript\Label.cs" />
     <Compile Include="Assets\alisonscript\Line.cs" />
     <Compile Include="Assets\alisonscript\Object.cs" />
     <Compile Include="Assets\alisonscript\RunningScript.cs" />

@@ -1,0 +1,10 @@
+@thingy "howsit"
+
+&if "@thingy" "howsit"
+    ;spk "howdy"
+&end
+&!if "@thingy" "howsit"
+    ;spk "very much not howdy (the condition was false :()"
+&end
+
+;spk "|skooby dooby| all done"
