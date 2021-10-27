@@ -111,5 +111,16 @@ namespace spacegame.alisonscript
             }
             throw new Exception($"couldn't find an occurence of {input} from {start}");
         }
+
+        public void AddObject(string objectName, string objectValue)
+        {
+            Debug.Log($"adding object: {objectName} with value: {objectValue}");
+            if (Interpreter.runningScript.objects.ContainsKey(objectName))
+                // if the script already has an object with the name objectName, set its value
+                Interpreter.runningScript.objects[objectName].value = objectValue;
+            else
+                // otherwise, create it and add it
+                Interpreter.runningScript.objects.Add(objectName, new Object(objectValue));
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace spacegame
         public static UIManager instance;
         public Queue<UI> inputQueue = new Queue<UI>();
 
+        private bool pressedSelect => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X);
+        private bool pressedVertical => Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0;
+
         private void Awake()
         {
             instance = this;
@@ -22,21 +25,35 @@ namespace spacegame
         {
             while (true)
             {
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X));
+                StartOfLoop:
+                // wait until we've either pressed select or the vertical keys
+                yield return new WaitUntil(() => pressedSelect || pressedVertical);
 
-                // if the queue isn't empty
-                if (inputQueue.Count != 0)
+                // only continue if the queue isn't empty
+                if (inputQueue.Count == 0) goto StartOfLoop; // i tried using a continue statement here but it just broke out of the whole coroutine? so you get labels in c# get pranked
+
+                // get the first object
+                UI ui = inputQueue.Peek();
+
+                if (pressedVertical && ui is UINavigateable)
                 {
-                    UI ui = inputQueue.Peek(); // get the first object
+                    (ui as UINavigateable).Navigate(Input.GetAxis("Vertical") > 0);
+                    yield return new WaitForSeconds(0.2f);
+                }
+                else if (pressedSelect)
+                {
                     ui.inputProcessedCallback.Invoke(); // invoke the callback
-
-                    yield return new WaitForEndOfFrame();
 
                     // check if the ui has been destroyed, and if it has, dequeue it
                     if (ui == null) // apparently there's something wrong with is null??? i thought it was tomato tomahto but there's defo something i don't understand
                         inputQueue.Dequeue();
                 }
+
+                yield return new WaitForEndOfFrame();
+
+                // loop after the end of the frame
             }
+            throw new Exception("broke out of ui input queue loop");
         }
 
         public UI New(Vector2 position, Vector2 size) 
@@ -49,6 +66,20 @@ namespace spacegame
             // get ui from gameobject and call the initialize method
             UI ui = g.GetComponent<UI>();
             ui.Initialize(size);
+            return ui; // return the ui
+        }
+
+        public UINavigateable NewNavigateable(Vector2 position, Vector2 size)
+        {
+            // get prefab from PrefabManager and instantiate it as a child of the canvas
+            GameObject prefab = PrefabManager.instance.GetPrefab("ui navigateable");
+            GameObject canvas = Global.GetCommonObject("Canvas");
+            GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
+
+            // initialize
+            UINavigateable ui = g.GetComponent<UINavigateable>();
+            ui.Initialize(size);
+
             return ui; // return the ui
         }
     }

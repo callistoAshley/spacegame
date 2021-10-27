@@ -11,7 +11,6 @@ ScriptsOnlyBuild:
     - spacegame.UIManager
     - spacegame.alisonscript.Functions
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
@@ -82,19 +81,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10896}
     - Class: 114
-      Script: {instanceID: 11126}
+      Script: {instanceID: 11128}
     - Class: 114
-      Script: {instanceID: 11162}
+      Script: {instanceID: 11164}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11222}
     - Class: 114
-      Script: {instanceID: 11448}
+      Script: {instanceID: 11450}
     - Class: 114
-      Script: {instanceID: 11500}
+      Script: {instanceID: 11502}
     - Class: 114
-      Script: {instanceID: 11506}
+      Script: {instanceID: 11508}
     - Class: 114
-      Script: {instanceID: 11552}
+      Script: {instanceID: 11554}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -584,6 +583,12 @@ ScriptsOnlyBuild:
     className: UIManager
   - hash:
       serializedVersion: 2
+      Hash: 1916ea451f0f8dae76a15eb34d699c42
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: UINavigateable
+  - hash:
+      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -597,4 +602,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/scenes/ship_alison_intro.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/24OCT2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/27OCT2021/space!!!!.exe

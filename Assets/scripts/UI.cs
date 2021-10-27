@@ -103,6 +103,7 @@ namespace spacegame
                 // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
                 else if (callback != null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
                 {
+                    //Debug.Log("input");
                     inputProcessedCallback = new Action(() =>
                     {
                         callback.Invoke();
@@ -114,6 +115,7 @@ namespace spacegame
                     throw new Exception("genuinely can't think of a reason i'd do this so i'll just throw an exception and hope i don't find it later");
                 }
 
+                Debug.Log("enqueing" + gameObject.name);
                 UIManager.instance.inputQueue.Enqueue(this);
             }
         }

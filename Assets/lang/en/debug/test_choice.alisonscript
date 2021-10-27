@@ -1,0 +1,11 @@
+;spk "|the debug guy| i am going to ask you a question"
+;choice "@ch" "yes" "no"
+
+cond "@ch"
+    when "yes"
+        ;spk "|the debug guy| you selected 'yes'"
+    when "no"
+        ;spk "|the debug guy| you selected 'no'"
+end
+
+;spk "|the debug guy| cool choice"
