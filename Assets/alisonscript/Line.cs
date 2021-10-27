@@ -102,14 +102,11 @@ namespace spacegame.alisonscript
                 if (args.Length == 0)
                     throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "value assignment expected");
 
+                // get the value being assigned to the object
                 string objectValue = args[0];
 
-                if (Interpreter.runningScript.objects.ContainsKey(objectName)) 
-                    // if the script already has an object with the name objectName, set its value
-                    Interpreter.runningScript.objects[objectName].value = objectValue;
-                else
-                    // otherwise, create it and add it
-                    Interpreter.runningScript.objects.Add(objectName, new Object(objectValue));
+                // add the object
+                Interpreter.runningScript.AddObject(objectName, objectValue);
 
                 Interpreter.runningScript.IncrementIndex();
             }

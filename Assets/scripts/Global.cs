@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace spacegame
 {
@@ -24,8 +25,9 @@ namespace spacegame
             initialized = true;
 
             alisonscript.Interpreter.RegisterFunctions();
-
-            alisonscript.Interpreter.Run("debug/test_condition");
+            alisonscript.Interpreter.Run("debug/test_choice");
+            //UIManager.instance.NewNavigateable(new Vector2(200, 0), new Vector2(400, 50)).SetOptions(
+              //  new string[]{ "yes", "no", "maybe", "so", "peas"}, new Action(() => Debug.Log("hello")));
         }
 
         public static GameObject GetCommonObject(string name)

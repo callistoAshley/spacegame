@@ -128,6 +128,20 @@ namespace spacegame.alisonscript
             yield break;
         }
 
+        [Function("choice", 2)]
+        public IEnumerator DialogueChoice(FunctionArgs args)
+        {
+            UINavigateable ui = UIManager.instance.NewNavigateable(new Vector2(200, 0), new Vector2(400, 50));
+            ui.SetOptions(args.args.Skip(1).ToArray(), // first element of the array is the string that the navigateable ui is hovering over
+                new Action(() =>
+                {
+                    Interpreter.runningScript.AddObject(args.args[0], ui.selectedOption);
+                    Debug.Log("hello!!!!");
+                    args.callback.Invoke();
+                })) ;
+            yield break;
+        }
+
         public struct FunctionArgs
         {
             public Action callback;
