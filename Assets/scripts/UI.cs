@@ -15,7 +15,6 @@ namespace spacegame
         public Action inputProcessedCallback; // called when dequeued from the UIManager input queue
 
         public List<UI> alsoDestroy = new List<UI>(); // ui to destroy when destroying this one 
-        private string hello; // this is for debugging remove it
 
         [HideInInspector] public bool readyToDequeue;
 
@@ -51,7 +50,6 @@ namespace spacegame
             Action callback = null, // callback (in alisonscript this is usually just increment the line index)
             PrintTextOptions options = PrintTextOptions.CallbackAfterInput) // options
         {
-            hello = text;
             // automatically skip through the text if holding left ctrl
             if (Input.GetKey(KeyCode.LeftControl))
             {
@@ -129,18 +127,11 @@ namespace spacegame
             UIManager.instance.inputQueue.Enqueue(this);
         }
 
-        private void OnDestroy()
-        {
-            //Dispose();
-        }
-
         public void DestroyGameObject()
         {
             foreach (UI ui in alsoDestroy)
                 ui.DestroyGameObject();
-
-            if (this == null) Debug.Log("how does this happen " + hello);
-            else Destroy(gameObject);
+            Destroy(gameObject);
 
             readyToDequeue = true; // unity is the worst game development engine istg
         }
