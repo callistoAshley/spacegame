@@ -136,7 +136,6 @@ namespace spacegame.alisonscript
                 new Action(() =>
                 {
                     Interpreter.runningScript.AddObject(args.args[0], ui.selectedOption);
-                    Debug.Log("hello!!!!");
                     args.callback.Invoke();
                 })) ;
             yield break;

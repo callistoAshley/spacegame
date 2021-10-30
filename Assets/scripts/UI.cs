@@ -9,12 +9,15 @@ using UnityEngine.UI;
 
 namespace spacegame
 {
-    public class UI : MonoBehaviour
+    public class UI : MonoBehaviour//, IDisposable
     {
         public Text text;
         public Action inputProcessedCallback; // called when dequeued from the UIManager input queue
 
         public List<UI> alsoDestroy = new List<UI>(); // ui to destroy when destroying this one 
+        private string hello; // this is for debugging remove it
+
+        [HideInInspector] public bool readyToDequeue;
 
         public enum PrintTextOptions
         {
@@ -48,6 +51,7 @@ namespace spacegame
             Action callback = null, // callback (in alisonscript this is usually just increment the line index)
             PrintTextOptions options = PrintTextOptions.CallbackAfterInput) // options
         {
+            hello = text;
             // automatically skip through the text if holding left ctrl
             if (Input.GetKey(KeyCode.LeftControl))
             {
@@ -55,7 +59,7 @@ namespace spacegame
                 yield return new WaitForEndOfFrame(); // i want it to have like. you know. that oomph. you know. the oomph
                 if (callback != null)
                     callback.Invoke();
-                DisposeButNotReally();
+                DestroyGameObject();
                 yield break;
             }
 
@@ -91,14 +95,14 @@ namespace spacegame
                 if (callback != null)
                     callback.Invoke();
                 if (options.HasFlag(PrintTextOptions.DestroyUIAfterCallback)) // destroy this ui if configured to
-                    DisposeButNotReally();
+                    DestroyGameObject();
             }
             if (options.HasFlag(PrintTextOptions.CallbackAfterInput))
             {
                 // if a callback wasn't given and we're told to destroy the ui, destroy the ui
                 if (callback is null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
                 {
-                    inputProcessedCallback = new Action(() => DisposeButNotReally());
+                    inputProcessedCallback = new Action(() => DestroyGameObject());
                 }
                 // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
                 else if (callback != null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
@@ -107,7 +111,7 @@ namespace spacegame
                     inputProcessedCallback = new Action(() =>
                     {
                         callback.Invoke();
-                        DisposeButNotReally();
+                        DestroyGameObject();
                     });
                 }
                 else
@@ -115,7 +119,7 @@ namespace spacegame
                     throw new Exception("genuinely can't think of a reason i'd do this so i'll just throw an exception and hope i don't find it later");
                 }
 
-                Debug.Log("enqueing" + gameObject.name);
+                //Debug.Log("enqueing " + gameObject.name);
                 UIManager.instance.inputQueue.Enqueue(this);
             }
         }
@@ -125,11 +129,20 @@ namespace spacegame
             UIManager.instance.inputQueue.Enqueue(this);
         }
 
-        public void DisposeButNotReally()
+        private void OnDestroy()
+        {
+            //Dispose();
+        }
+
+        public void DestroyGameObject()
         {
             foreach (UI ui in alsoDestroy)
-                ui.DisposeButNotReally();
-            Destroy(gameObject);
+                ui.DestroyGameObject();
+
+            if (this == null) Debug.Log("how does this happen " + hello);
+            else Destroy(gameObject);
+
+            readyToDequeue = true; // unity is the worst game development engine istg
         }
     }
 }

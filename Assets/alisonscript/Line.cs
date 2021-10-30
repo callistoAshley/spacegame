@@ -89,7 +89,7 @@ namespace spacegame.alisonscript
                     Debug.Log("i guess we're done?");
                     return;
                 }
-                Functions.instance.Call(functionName, () => Interpreter.runningScript.IncrementIndex(), args); // increment into lineIndex as callback
+                Functions.instance.Call(functionName, () => { Debug.Log("invoking callback on " + line); Interpreter.runningScript.IncrementIndex(); }, args); // increment into lineIndex as callback
             }
             // if the line starts with an @ then it's referring to an object, so set it to a value
             else if (line.StartsWith("@"))
@@ -159,7 +159,7 @@ namespace spacegame.alisonscript
             }
             else
             {
-                Debug.Log(line);
+                Debug.Log("unrecognized statement: " + line); // throw a syntax error here
             }
         }
 
