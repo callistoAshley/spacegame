@@ -45,7 +45,7 @@ namespace spacegame
                     ui.inputProcessedCallback.Invoke(); // invoke the callback
 
                     // check if the ui has been destroyed, and if it has, dequeue it
-                    if (ui == null) // apparently there's something wrong with is null??? i thought it was tomato tomahto but there's defo something i don't understand
+                    if (ui.readyToDequeue) // unity doesn't actually dispose objects when you use destroy for no reason
                         inputQueue.Dequeue();
                 }
 
