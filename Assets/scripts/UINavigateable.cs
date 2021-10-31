@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace spacegame
 {
@@ -29,11 +30,11 @@ namespace spacegame
             GameObject canvas = Global.GetCommonObject("Canvas");
             Vector2 currentSize = rect.sizeDelta;
             GameObject arrow = PrefabManager.instance.GetPrefab("arrow");
-            Vector2 arrowPosition = new Vector2((rect.localPosition.x * -1) + 10, 0);
+            Text text = GetComponentInChildren<Text>();
 
             this.options = options;
             // resize box to fit options
-            Initialize(new Vector2(currentSize.x, currentSize.y + (50 * options.Length))); // for each option, add 50 to the y scale
+            Initialize(new Vector2(currentSize.x, currentSize.y + (45 * options.Length))); // for each option, add 50 to the y scale
 
             // print text (this also adds it to the input queue)
             string optionsPrint = string.Join("\n", options);
@@ -41,7 +42,9 @@ namespace spacegame
                 PrintTextOptions.CallbackAfterInput | PrintTextOptions.Instant | PrintTextOptions.DestroyUIAfterCallback));
 
             // create arrow
-            this.arrow = Instantiate(arrow, new Vector2(arrowPosition.x, 27 * (options.Length - 1)) + (Vector2)gameObject.transform.position, 
+            Vector2 arrowPosition = new Vector2(rect.rect.xMin + 10, 
+                rect.rect.yMax - (rect.rect.yMax - text.rectTransform.rect.yMax) - 15);
+            this.arrow = Instantiate(arrow, new Vector2(arrowPosition.x,/* 25 * (options.Length - 1)*/arrowPosition.y) + (Vector2)gameObject.transform.position, 
                 Quaternion.identity, gameObject.transform);
         }
 
@@ -53,12 +56,12 @@ namespace spacegame
             if (up && index > 0)
             {
                 index--;
-                arrow.transform.position += new Vector3(0, 45);
+                arrow.transform.position += new Vector3(0, 35);
             }
             else if (!up && index < options.Length - 1)
             {
                 index++;
-                arrow.transform.position -= new Vector3(0, 45);
+                arrow.transform.position -= new Vector3(0, 35);
             }
         }
     }

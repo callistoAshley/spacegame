@@ -28,6 +28,9 @@ namespace spacegame.alisonscript
             }
         }
 
+        // these are objects that are alive as long as the interpreter is
+        public static Dictionary<string, Object> globalObjects = new Dictionary<string, Object>();
+
         // reflection hurts my head man
         public static void RegisterFunctions()
         {

@@ -83,6 +83,9 @@ namespace spacegame.alisonscript
                 // create speaker box
                 speakerBox = UIManager.instance.New(new Vector2(-152, 328), new Vector2(500, 100));
 
+                // set alignment to middle left so it doesn't go all abjkdgfjls mnczxivpyppio89aysuid mzn.oixczxnycvluz.xcv like that
+                speakerBox.SetTextAlignment(TextAnchor.MiddleLeft);
+
                 // print the speaker onto the speaker box
                 speakerBox.StartCoroutine(speakerBox.PrintText(searchForSpeaker.Match(fullText).Value, 
                     options: UI.PrintTextOptions.Instant | UI.PrintTextOptions.DontCallback));

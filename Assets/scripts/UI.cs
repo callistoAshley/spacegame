@@ -44,6 +44,11 @@ namespace spacegame
             textRect.localPosition = new Vector2(0, 0); // don't remember why this is set, try removing it later
         }
 
+        public void SetTextAlignment(TextAnchor alignment)
+        {
+            text.alignment = alignment;
+        }
+
         // also check out the stack overflow page i stole this code from: https://www.taste.com.au/recipes/collections/spaghetti-recipes
         public virtual IEnumerator PrintText(
             string text, // text input
