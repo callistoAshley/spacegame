@@ -21,6 +21,7 @@ namespace spacegame
         public enum PrintTextOptions
         {
             // you get binary because i hate you that much <3
+            None = 0b_0000_0000,
             CallbackBeforePrinting = 0b_0000_0001,
             CallbackAfterPrinting = 0b_0000_0010,
             CallbackAfterInput = 0b_0000_0100,

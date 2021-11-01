@@ -12,7 +12,7 @@ namespace spacegame
         public AudioClip[] bgm;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             aud = GetComponent<AudioSource>();
             instance = this;
@@ -26,8 +26,10 @@ namespace spacegame
                 {
                     aud.clip = a;
                     aud.Play();
+                    return;
                 }
             }
+            throw new System.Exception($"no AudioClip called {name} in bgm array");
         }
 
         public void Stop()
