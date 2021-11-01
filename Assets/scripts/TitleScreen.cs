@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace spacegame
 {
@@ -24,7 +25,17 @@ namespace spacegame
 
         private void Input(string selectedOption)
         {
-            Debug.Log(selectedOption);
+            switch (selectedOption)
+            {
+                case "play game":
+                    SceneManager.LoadScene("ship_alison_intro");
+                    break;
+                case "don't play game":
+                    UI ui = UIManager.instance.New(new Vector2(0, -140), new Vector2(400, 200));
+                    StartCoroutine(ui.PrintText("see ya later!", new Action(() => Application.Quit()),
+                        UI.PrintTextOptions.CallbackAfterInput));
+                    break;
+            }
         }
     }
 }
