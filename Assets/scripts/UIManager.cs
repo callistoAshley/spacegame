@@ -9,7 +9,7 @@ namespace spacegame
     public class UIManager : MonoBehaviour
     {
         public static UIManager instance;
-        public Queue<UI> inputQueue = new Queue<UI>();
+        public Stack<UI> inputQueue = new Stack<UI>(); // a stack is a LAST IN FIRST OUT queue
 
         private bool pressedSelect => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X);
         private bool pressedVertical => Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0;
@@ -46,7 +46,7 @@ namespace spacegame
 
                     // check if the ui has been destroyed, and if it has, dequeue it
                     if (ui.readyToDequeue) // unity doesn't actually dispose objects when you use destroy for no reason
-                        inputQueue.Dequeue();
+                        inputQueue.Pop(); // pop
                 }
 
                 yield return new WaitForEndOfFrame();
