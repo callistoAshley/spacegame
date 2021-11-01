@@ -13,24 +13,39 @@ namespace spacegame
         public static Global instance;
         public static bool initialized;
 
-        public static Dictionary<string, GameObject> commonObjects = new Dictionary<string, GameObject>();
+        public Dictionary<string, GameObject> commonObjects = new Dictionary<string, GameObject>();
 
         // Start is called before the first frame update
         void Awake()
         {
-            instance = this;
-
             // initialize other stuff
             if (initialized) return;
             initialized = true;
 
+            Init();
+        }
+        /*
+        private void SceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Debug.Log("scene loaded " + scene.name);
+            commonObjects.Clear();
+            instance = this;
+        }*/
+
+        private void Init()
+        {
+            // singleton stuff
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+
+            // alisonscript initialization
             alisonscript.Interpreter.RegisterFunctions();
-            alisonscript.Interpreter.Run("debug/test_choice");
-            //UIManager.instance.NewNavigateable(new Vector2(200, 0), new Vector2(400, 50)).SetOptions(
-              //  new string[]{ "yes", "no", "maybe", "so", "peas"}, new Action(() => Debug.Log("hello")));
+
+            // then go to title screen
+            SceneManager.LoadScene("title");
         }
 
-        public static GameObject GetCommonObject(string name)
+        public GameObject GetCommonObject(string name)
         {
             foreach (string s in commonObjects.Keys)
                 if (s == name)

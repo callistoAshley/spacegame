@@ -60,7 +60,8 @@ namespace spacegame
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui");
-            GameObject canvas = Global.GetCommonObject("Canvas");
+            GameObject canvas = Global.instance.GetCommonObject("Canvas");
+            // canvas MissingReferenceException
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
             // get ui from gameobject and call the initialize method
@@ -73,7 +74,7 @@ namespace spacegame
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui navigateable");
-            GameObject canvas = Global.GetCommonObject("Canvas");
+            GameObject canvas = Global.instance.GetCommonObject("Canvas");
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
             // initialize
