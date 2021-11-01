@@ -16,7 +16,8 @@ namespace spacegame
 
         private void CreateMainMenu()
         {
-            UINavigateable ui = UIManager.instance.NewNavigateable(new Vector2(0, -140), new Vector2(400, 100));
+            UINavigateable ui = UIManager.instance.NewNavigateable(new Vector2(0, -140), new Vector2(400, 100),
+                UI.PrintTextOptions.CallbackAfterInput | UI.PrintTextOptions.Instant); // don't destroy the ui after callback
             ui.SetOptions(new string[] { "play game", "don't play game", "fabjsdgfjk", "hi" },
                 new Action(() => Input(ui.selectedOption)));
         }

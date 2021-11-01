@@ -14,6 +14,8 @@ namespace spacegame
         public int index; // the index position of the currently selected option
         private GameObject arrow;
 
+        public PrintTextOptions customPrintTextOptions;
+
         public string selectedOption
         {
             get
@@ -27,7 +29,7 @@ namespace spacegame
         {
             // references
             RectTransform rect = GetComponent<RectTransform>();
-            GameObject canvas = Global.instance.GetCommonObject("Canvas");
+            GameObject canvas = CommonObject.GetCommonObject("Canvas");
             Vector2 currentSize = rect.sizeDelta;
             GameObject arrow = PrefabManager.instance.GetPrefab("arrow");
             Text text = GetComponentInChildren<Text>();
@@ -38,8 +40,16 @@ namespace spacegame
 
             // print text (this also adds it to the input queue)
             string optionsPrint = string.Join("\n", options);
-            StartCoroutine(PrintText(optionsPrint, callback, 
-                PrintTextOptions.CallbackAfterInput | PrintTextOptions.Instant | PrintTextOptions.DestroyUIAfterCallback));
+            if (customPrintTextOptions == PrintTextOptions.None)
+            {
+                StartCoroutine(PrintText(optionsPrint, callback,
+                    PrintTextOptions.CallbackAfterInput | PrintTextOptions.Instant | PrintTextOptions.DestroyUIAfterCallback));
+            }
+            else
+            {
+                StartCoroutine(PrintText(optionsPrint, callback,
+                    customPrintTextOptions));
+            }
 
             // create arrow
             Vector2 arrowPosition = new Vector2(rect.rect.xMin + 10, 

@@ -63,27 +63,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\alisonscript\AlisonscriptSyntaxError.cs" />
-    <Compile Include="Assets\Resources\alisonscript\FunctionAttribute.cs" />
-    <Compile Include="Assets\Resources\alisonscript\Functions.cs" />
-    <Compile Include="Assets\Resources\alisonscript\Interpreter.cs" />
-    <Compile Include="Assets\Resources\alisonscript\Label.cs" />
-    <Compile Include="Assets\Resources\alisonscript\Line.cs" />
-    <Compile Include="Assets\Resources\alisonscript\Object.cs" />
-    <Compile Include="Assets\Resources\alisonscript\RunningScript.cs" />
-    <Compile Include="Assets\Resources\scripts\BGMPlayer.cs" />
-    <Compile Include="Assets\Resources\scripts\CommonObject.cs" />
-    <Compile Include="Assets\Resources\scripts\Controller.cs" />
-    <Compile Include="Assets\Resources\scripts\GameState.cs" />
-    <Compile Include="Assets\Resources\scripts\Global.cs" />
-    <Compile Include="Assets\Resources\scripts\MainCamera.cs" />
-    <Compile Include="Assets\Resources\scripts\PrefabManager.cs" />
-    <Compile Include="Assets\Resources\scripts\SpaceshipDoor.cs" />
-    <Compile Include="Assets\Resources\scripts\TitleScreen.cs" />
-    <Compile Include="Assets\Resources\scripts\UI.cs" />
-    <Compile Include="Assets\Resources\scripts\UIManager.cs" />
-    <Compile Include="Assets\Resources\scripts\UINavigateable.cs" />
-    <Compile Include="Assets\Resources\sprites\idk\Something.cs" />
+    <Compile Include="Assets\alisonscript\AlisonscriptSyntaxError.cs" />
+    <Compile Include="Assets\alisonscript\FunctionAttribute.cs" />
+    <Compile Include="Assets\alisonscript\Functions.cs" />
+    <Compile Include="Assets\alisonscript\Interpreter.cs" />
+    <Compile Include="Assets\alisonscript\Label.cs" />
+    <Compile Include="Assets\alisonscript\Line.cs" />
+    <Compile Include="Assets\alisonscript\Object.cs" />
+    <Compile Include="Assets\alisonscript\RunningScript.cs" />
+    <Compile Include="Assets\scripts\BGMPlayer.cs" />
+    <Compile Include="Assets\scripts\CommonObject.cs" />
+    <Compile Include="Assets\scripts\Controller.cs" />
+    <Compile Include="Assets\scripts\GameState.cs" />
+    <Compile Include="Assets\scripts\Global.cs" />
+    <Compile Include="Assets\scripts\Init.cs" />
+    <Compile Include="Assets\scripts\MainCamera.cs" />
+    <Compile Include="Assets\scripts\MapData.cs" />
+    <Compile Include="Assets\scripts\PrefabManager.cs" />
+    <Compile Include="Assets\scripts\SpaceshipDoor.cs" />
+    <Compile Include="Assets\scripts\TitleScreen.cs" />
+    <Compile Include="Assets\scripts\UI.cs" />
+    <Compile Include="Assets\scripts\UIManager.cs" />
+    <Compile Include="Assets\scripts\UINavigateable.cs" />
+    <Compile Include="Assets\sprites\idk\Something.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
