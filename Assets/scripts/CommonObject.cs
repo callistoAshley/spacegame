@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace spacegame
 {
@@ -13,8 +14,8 @@ namespace spacegame
     {
         private void Awake()
         {
-            if (!Global.commonObjects.Keys.Contains(gameObject.name))
-                Global.commonObjects.Add(gameObject.name, gameObject);
+            if (!Global.instance.commonObjects.ContainsKey(gameObject.name))
+                Global.instance.commonObjects.Add(gameObject.name, gameObject);
         }
     }
 }

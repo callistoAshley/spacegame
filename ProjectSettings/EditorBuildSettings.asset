@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/scenes/init.unity
+    guid: 26457871f4dda2442a4ca1afbfa36262
+  - enabled: 1
+    path: Assets/scenes/title.unity
+    guid: 2f842cd75c2758b489cd880ec09bbf72
+  - enabled: 1
+    path: Assets/scenes/ship_alison_intro.unity
+    guid: 964b1a3b6c4c4d54e96dfc3c0aa620ad
   m_configObjects: {}

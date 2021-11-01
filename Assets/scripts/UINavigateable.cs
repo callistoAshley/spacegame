@@ -27,14 +27,14 @@ namespace spacegame
         {
             // references
             RectTransform rect = GetComponent<RectTransform>();
-            GameObject canvas = Global.GetCommonObject("Canvas");
+            GameObject canvas = Global.instance.GetCommonObject("Canvas");
             Vector2 currentSize = rect.sizeDelta;
             GameObject arrow = PrefabManager.instance.GetPrefab("arrow");
             Text text = GetComponentInChildren<Text>();
 
             this.options = options;
             // resize box to fit options
-            Initialize(new Vector2(currentSize.x, currentSize.y + (45 * options.Length))); // for each option, add 50 to the y scale
+            Initialize(new Vector2(currentSize.x, currentSize.y + (35 * options.Length))); // for each option, add 50 to the y scale
 
             // print text (this also adds it to the input queue)
             string optionsPrint = string.Join("\n", options);
