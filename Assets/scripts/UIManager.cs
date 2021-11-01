@@ -80,6 +80,7 @@ namespace spacegame
 
             // initialize
             UINavigateable ui = g.GetComponent<UINavigateable>();
+            ui.customPrintTextOptions = customPrintTextOptions;
             ui.Initialize(size);
 
             return ui; // return the ui
