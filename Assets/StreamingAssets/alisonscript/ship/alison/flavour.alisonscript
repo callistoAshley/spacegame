@@ -1,0 +1,4 @@
+cond "@in_args0"
+    when "0"
+        ;spk "|alison the robot| this console is as tall as me so i stand on my chair to reach the buttons"
+end

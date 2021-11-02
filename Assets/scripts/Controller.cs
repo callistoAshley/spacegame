@@ -16,6 +16,16 @@ namespace spacegame
         public bool canMove = true;
         private bool facingRight = true;
 
+        // interaction
+        [SerializeField] private GameObject interactableObject; // the game object the player is colliding with that they can interact with
+        public bool canInteract
+        {
+            get
+            {
+                return interactableObject != null;
+            }
+        }
+
         // components
         [HideInInspector] public Animator animator;
         [HideInInspector] public BoxCollider2D coll;
@@ -45,6 +55,8 @@ namespace spacegame
                 Flip();
             else if (Input.GetAxis("Horizontal") < 0 && facingRight)
                 Flip();
+
+            ProcessInteraction();
         }
 
         private void FixedUpdate()
@@ -61,6 +73,36 @@ namespace spacegame
             // flip sprite by inverting x value of scale
             facingRight = !facingRight;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+
+        // interaction
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("interactable"))
+            {
+                interactableObject = collision.gameObject;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            // compare the object we're leaving the trigger of, and if it's the interactable object, set it to null
+            if (collision.gameObject == interactableObject)
+                interactableObject = null;
+        }
+
+        private void ProcessInteraction()
+        {
+            if (!canMove || !canInteract) return;
+
+            // process actual interaction
+            else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Interactable interactable = interactableObject.GetComponent<Interactable>();
+
+                // run script
+                alisonscript.Interpreter.Run(interactable.script, interactable.scriptStartArgs);
+            }
         }
     }
 
