@@ -123,11 +123,19 @@ namespace spacegame.alisonscript
             yield break;
         }
 
-        [Function("goto", 1)]
-        public IEnumerator Goto(FunctionArgs args)
+        [Function("jump", 1)]
+        public IEnumerator Jump(FunctionArgs args)
         {
             // don't need to invoke the callback here because the line is processed in lineIndex setter
             Interpreter.runningScript.lineIndex = int.Parse(args.args[0]);
+            yield break;
+        }
+
+        [Function("goto", 1)]
+        public IEnumerator GotoLabel(FunctionArgs args) 
+        {
+            // don't need to invoke the callback here because the line is processed in lineIndex setter
+            Interpreter.runningScript.JumpToNextOccurence(0, $"&{args.args[0]}");
             yield break;
         }
 

@@ -12,7 +12,7 @@ namespace spacegame.alisonscript
     public class RunningScript 
     {
         public List<Line> lines;
-        public List<Label> labels;
+        public List<Label> labels = new List<Label>();
         public Dictionary<string, Object> objects = new Dictionary<string, Object>();
 
         public bool inCond;
@@ -106,6 +106,9 @@ namespace spacegame.alisonscript
                     || (input == "when" && line.StartsWith("end"))) // also jump to end if the input is when to break out of conditionals
                 {
                     lineIndex = i;
+                    // break out of conditional if the line isn't in one
+                    if (!Interpreter.runningScript.lines[lineIndex].inConditional)
+                        Interpreter.runningScript.inCond = false;
                     return;
                 }
             }

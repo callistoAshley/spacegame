@@ -159,7 +159,7 @@ namespace spacegame.alisonscript
             }
             else
             {
-                Debug.Log("unrecognized statement: " + line); // throw a syntax error here
+                Interpreter.runningScript.IncrementIndex();
             }
         }
 
