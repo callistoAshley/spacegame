@@ -59,7 +59,7 @@ namespace spacegame.alisonscript
             foreach (string s in args.args) 
                 Debug.Log(s);
             args.callback.Invoke();
-            
+
             yield break;
         }
 

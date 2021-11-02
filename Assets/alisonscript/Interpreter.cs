@@ -62,7 +62,7 @@ namespace spacegame.alisonscript
             Controller.instance.canMove = false;
 
             // read lines of file
-            string[] file = File.ReadAllLines(Application.dataPath + "/lang/en/" + script + ".alisonscript");
+            string[] file = File.ReadAllLines(Application.streamingAssetsPath + "/lang/en/" + script + ".alisonscript");
 
             // create running script
             runningScript = new RunningScript(Line.FromStringArray(file));
