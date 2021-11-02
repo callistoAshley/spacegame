@@ -122,19 +122,12 @@ namespace spacegame
                 {
                     inputProcessedCallback = new Action(() =>
                     {
-                        Debug.Log("invoking thingimajig " + text);
                         callback.Invoke();
                     });
                 }
 
                 //Debug.Log("enqueing " + text);
                 UIManager.instance.inputQueue.Push(this);
-
-                Debug.Log("ok so!");
-                foreach (UI ui in UIManager.instance.inputQueue)
-                {
-                    Debug.Log(ui.text.text);
-                }
             }
         }
 
