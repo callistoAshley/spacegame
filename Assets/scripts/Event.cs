@@ -12,6 +12,7 @@ namespace spacegame
         {
             RunScript,
             ChangeMap,
+            PlaySfx,
         }
 
         public EventType eventType; // the type of event

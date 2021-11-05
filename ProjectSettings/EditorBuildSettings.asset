@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/ship_alison_intro.unity
     guid: 964b1a3b6c4c4d54e96dfc3c0aa620ad
+  - enabled: 1
+    path: Assets/scenes/debug_guy.unity
+    guid: de0213b3fd69e04428ee05ce94e6c92e
   m_configObjects: {}

@@ -1,0 +1,21 @@
+# vsc thinks this file is ruby, it hasn't done this with any other alisonscript file
+;sfx "sfx_guy"
+;spk "|guy| hello"
+;spk "|guy| if you're programmed to be human, are you really human?"
+
+# create loop label
+&booga
+
+;choice "@ch" "yes" "no"
+
+cond "@ch"
+    when "yes"
+        ;spk "|guy| do you really believe that?"
+        # go back to label
+        ;goto "booga"
+    when "no"
+        ;spk "|guy| how much more of this world is going to disappear before i have the chance to say goodbye?"
+        ;change_map "ship_alison_intro" "0"
+end
+# "stray end statement" uh no there isn't
+# ughhh another weird alisonscript bug i need to fix these

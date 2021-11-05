@@ -155,7 +155,24 @@ namespace spacegame.alisonscript
         [Function("end_processing")]
         public IEnumerator EndProcessing(FunctionArgs args)
         {
+            // don't need to invoke the callback here 
             Interpreter.runningScript.Finished();
+            yield break;
+        }
+
+        [Function("change_map", 2)]
+        public IEnumerator ChangeMap(FunctionArgs args)
+        {
+            MapManager.ChangeMap(args.args[0], int.Parse(args.args[1]));
+            args.callback.Invoke();
+            yield break;
+        }
+
+        [Function("sfx", 1)]
+        public IEnumerator PlaySfx(FunctionArgs args)
+        {
+            SFXPlayer.instance.Play(args.args[0]);
+            args.callback.Invoke();
             yield break;
         }
 
