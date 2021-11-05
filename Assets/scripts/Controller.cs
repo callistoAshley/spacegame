@@ -17,12 +17,12 @@ namespace spacegame
         private bool facingRight = true;
 
         // interaction
-        [SerializeField] private GameObject interactableObject; // the game object the player is colliding with that they can interact with
+        [SerializeField] private Interactable interactable; // the interactable component of the game object the player is colliding with that they can interact with
         public bool canInteract
         {
             get
             {
-                return interactableObject != null;
+                return interactable != null;
             }
         }
 
@@ -78,17 +78,18 @@ namespace spacegame
         // interaction
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("interactable"))
+            if (collision.CompareTag("interactable") && collision.TryGetComponent(out Interactable i))
             {
-                interactableObject = collision.gameObject;
+                interactable = i;
             }
+            //Debug.Log("on trigger enter " + collision.gameObject.name);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            // compare the object we're leaving the trigger of, and if it's the interactable object, set it to null
-            if (collision.gameObject == interactableObject)
-                interactableObject = null;
+            // compare the object we're leaving the trigger of, and if it's the interactable, set it to null
+            if (interactable != null && collision.gameObject == interactable.gameObject)
+                interactable = null;
         }
 
         private void ProcessInteraction()
@@ -98,11 +99,14 @@ namespace spacegame
             // process actual interaction
             else if (Input.GetKeyDown(KeyCode.Z))
             {
-                Interactable interactable = interactableObject.GetComponent<Interactable>();
-
-                // run script
-                alisonscript.Interpreter.Run(interactable.script, interactable.scriptStartArgs);
+                // great! let's let the event manager do the rest of the work
+                EventManager.ProcessEvent(interactable.doOnInteract);
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            //Debug.Log("on collision enter " + collision);
         }
     }
 

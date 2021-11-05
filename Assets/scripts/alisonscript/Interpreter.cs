@@ -59,7 +59,7 @@ namespace spacegame.alisonscript
                 throw new Exception("cannot run a new alisonscript script while the runningScript instance has a value (a script is already running)");
 
             if (!File.Exists(fullScriptPath))
-                throw new Exception($"couldn't find alisonscript file \"/lang/en/{script}\"");
+                throw new Exception($"couldn't find alisonscript file \"{script}\"");
 
             Controller.instance.canMove = false;
 

@@ -152,6 +152,13 @@ namespace spacegame.alisonscript
             yield break;
         }
 
+        [Function("end_processing")]
+        public IEnumerator EndProcessing(FunctionArgs args)
+        {
+            Interpreter.runningScript.Finished();
+            yield break;
+        }
+
         public struct FunctionArgs
         {
             public Action callback;

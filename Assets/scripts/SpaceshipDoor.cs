@@ -6,8 +6,8 @@ namespace spacegame
 {
     public class SpaceshipDoor : MonoBehaviour
     {
-        private bool opening;
-        private bool closing;
+        [SerializeField] private bool opening;
+        [SerializeField] private bool closing;
 
         private BoxCollider2D trigger;
 
@@ -18,8 +18,7 @@ namespace spacegame
 
         private IEnumerator OnTriggerEnter2D(Collider2D collision)
         {
-            if (closing) yield break;
-            if (opening) yield break;
+            if (closing || opening) yield break;
 
             if (collision.CompareTag("Player"))
             {
@@ -29,6 +28,8 @@ namespace spacegame
 
         private IEnumerator ToggleDoor(bool open)
         {
+            SFXPlayer.instance.Play("sfx_spaceship_door_open");
+
             if (open)
             {
                 opening = true;
@@ -69,7 +70,7 @@ namespace spacegame
 
         private IEnumerator OnTriggerExit2D(Collider2D collision)
         {
-            if (opening) yield break;
+            if (closing || opening) yield break;
 
             if (collision.CompareTag("Player"))
             {

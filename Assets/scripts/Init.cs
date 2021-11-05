@@ -20,10 +20,11 @@ namespace spacegame
 
             // load resources
             BGMPlayer.instance.bgm = Resources.LoadAll<AudioClip>("audio/bgm");
+            SFXPlayer.instance.sfx = Resources.LoadAll<AudioClip>("audio/sfx");
             PrefabManager.instance.prefabs = Resources.LoadAll<GameObject>("prefabs");
 
             // then go to title screen
-            SceneManager.LoadScene("title");
+            MapManager.ChangeMap("title");
         }
     }
 

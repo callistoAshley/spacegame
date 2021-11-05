@@ -1,11 +1,11 @@
 cond "@in_args0"
-    when "0"
+    when "console"
         ;spk "|alison the robot| it's my console it has a lot of buttons"
-        ;spk "|alison the robot| should i spin on my chair?"
-        ;goto "spin_on_chair"
+        ;spk "|alison the robot| but i can't reach them without standing on my chair"
+        #;goto "spin_on_chair"
 end
 
-;end
+;end_processing
 
 # spin on chair (label)
 &spin_on_chair
@@ -17,4 +17,4 @@ cond "@ch"
         ;spk "|alison the robot| animate me spinning on my chair"
     when "no"
         ;spk "|alison the robot| don't animate me spinning on my chair"
-end 
+end

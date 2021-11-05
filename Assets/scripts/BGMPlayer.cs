@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace spacegame
 {
@@ -29,7 +30,7 @@ namespace spacegame
                     return;
                 }
             }
-            throw new System.Exception($"no AudioClip called {name} in bgm array");
+            throw new Exception($"no AudioClip called {name} in bgm array");
         }
 
         public void Stop()
