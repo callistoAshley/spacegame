@@ -28,7 +28,7 @@ namespace spacegame
             switch (selectedOption)
             {
                 case "play game":
-                    SceneManager.LoadScene("ship_alison_intro");
+                    MapManager.ChangeMap("ship_alison_intro");
                     break;
                 case "don't play game":
                     UI ui = UIManager.instance.New(new Vector2(0, -140), new Vector2(400, 200));

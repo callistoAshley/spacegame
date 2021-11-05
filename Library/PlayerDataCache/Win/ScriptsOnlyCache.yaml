@@ -5,6 +5,7 @@ ScriptsOnlyBuild:
     - spacegame.CommonObject
     - spacegame.Controller
     - spacegame.Global
+    - spacegame.Interactable
     - spacegame.MainCamera
     - spacegame.MapData
     - spacegame.PrefabManager
@@ -79,25 +80,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9900}
     - Class: 114
+      Script: {instanceID: 10236}
+    - Class: 114
       Script: {instanceID: 10612}
     - Class: 114
       Script: {instanceID: 10714}
     - Class: 114
-      Script: {instanceID: 10894}
+      Script: {instanceID: 10896}
     - Class: 114
-      Script: {instanceID: 10924}
+      Script: {instanceID: 10926}
     - Class: 114
-      Script: {instanceID: 11156}
+      Script: {instanceID: 11158}
     - Class: 114
-      Script: {instanceID: 11250}
+      Script: {instanceID: 11254}
     - Class: 114
-      Script: {instanceID: 11478}
+      Script: {instanceID: 11482}
     - Class: 114
-      Script: {instanceID: 11530}
+      Script: {instanceID: 11534}
     - Class: 114
-      Script: {instanceID: 11582}
+      Script: {instanceID: 11586}
     - Class: 114
-      Script: {instanceID: 11588}
+      Script: {instanceID: 11592}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -156,21 +159,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9692}
     - Class: 114
+      Script: {instanceID: 10236}
+    - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 10924}
+      Script: {instanceID: 10926}
     - Class: 114
-      Script: {instanceID: 11156}
+      Script: {instanceID: 11158}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11250}
+      Script: {instanceID: 11254}
     - Class: 114
-      Script: {instanceID: 11530}
+      Script: {instanceID: 11534}
     - Class: 114
-      Script: {instanceID: 11536}
+      Script: {instanceID: 11540}
     - Class: 114
-      Script: {instanceID: 11582}
+      Script: {instanceID: 11586}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -217,17 +222,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 11156}
+      Script: {instanceID: 11158}
     - Class: 114
-      Script: {instanceID: 11250}
+      Script: {instanceID: 11252}
     - Class: 114
-      Script: {instanceID: 11530}
+      Script: {instanceID: 11254}
     - Class: 114
-      Script: {instanceID: 11536}
+      Script: {instanceID: 11534}
     - Class: 114
-      Script: {instanceID: 11582}
+      Script: {instanceID: 11540}
     - Class: 114
-      Script: {instanceID: 14728}
+      Script: {instanceID: 11586}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -405,16 +410,16 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 8cb0c6c4966ea7936a55cdd9d956f060
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Something
-  - hash:
-      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
+  - hash:
+      serializedVersion: 2
+      Hash: 5634acf555162e4bf0381d8b03e66524
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: Interactable
   - hash:
       serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
@@ -561,7 +566,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 1bb22709e2ed477105c32d0db45343a0
+      Hash: e64e523481993a8750e9fceec3e9c27f
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Controller
@@ -601,6 +606,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: SpaceshipDoor
+  - hash:
+      serializedVersion: 2
+      Hash: 3f26ed5719b1c07edc6c75b5a2ef2c73
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: MapData
   - hash:
       serializedVersion: 2
       Hash: 21a685337c5447f0875cc024d08dd4a2
@@ -733,15 +744,9 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 3f26ed5719b1c07edc6c75b5a2ef2c73
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: spacegame
-    className: MapData
   platform: 5
   scenePathNames:
   - Assets/scenes/init.unity
   - Assets/scenes/title.unity
   - Assets/scenes/ship_alison_intro.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/01NOV2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/04NOV2021/space!!!!.exe

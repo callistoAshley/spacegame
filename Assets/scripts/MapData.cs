@@ -10,11 +10,22 @@ namespace spacegame
     public class MapData : MonoBehaviour
     {
         public string autoBgm;
+        public Vector2[] transferPoints;
 
-        private void Start()
+        public static MapData map;
+
+        private void Awake()
+        {
+            Init();
+        }
+
+        public void Init(int transferPointIndex = 0)
         {
             if (!string.IsNullOrEmpty(autoBgm) && !string.IsNullOrWhiteSpace(autoBgm))
                 BGMPlayer.instance.Play(autoBgm);
+
+            if (transferPoints != null && transferPoints.Length > 0)
+                Controller.instance.gameObject.transform.position = transferPoints[transferPointIndex];
         }
     }
 }

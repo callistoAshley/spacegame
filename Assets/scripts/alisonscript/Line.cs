@@ -176,10 +176,12 @@ namespace spacegame.alisonscript
                 Line add = new Line(array[i], i);
 
                 // mark future lines as in conditional 
+                inConditional = add.contents.StartsWith("cond") && (!add.contents.StartsWith("end"));
+                /*
                 if (add.contents.StartsWith("cond"))
                     inConditional = true;
                 else if (add.contents.StartsWith("end"))
-                    inConditional = false;
+                    inConditional = false;*/
 
                 add.inConditional = inConditional;
 
