@@ -15,7 +15,7 @@ namespace spacegame
             switch (ev.eventType)
             {
                 case Event.EventType.RunScript:
-                    // run the script
+                    // run a script
                     // event argument 0 should be the name of the script and every argument afterward should be additional script args
                     alisonscript.Interpreter.Run(ev.args[0], ev.args.Skip(1).ToArray());
                     break;
@@ -23,6 +23,11 @@ namespace spacegame
                     // change the map
                     // event argument 0 should be the name of the map and argument 1 should be the transfer point
                     MapManager.ChangeMap(ev.args[0], ev.args.Length > 1 ? int.Parse(ev.args[1]) : 0);
+                    break;
+                case Event.EventType.PlaySfx:
+                    // play sfx
+                    // event argument 0 should be the name of the sound effect
+                    SFXPlayer.instance.Play(ev.args[0]);
                     break;
             }
         }
