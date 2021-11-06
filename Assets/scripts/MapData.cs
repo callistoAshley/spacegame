@@ -16,7 +16,7 @@ namespace spacegame
 
         private void Awake()
         {
-            Init();
+            map = this;
         }
 
         public void Init(int transferPointIndex = 0)
