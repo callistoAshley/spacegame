@@ -29,7 +29,7 @@ namespace spacegame
         {
             // references
             RectTransform rect = GetComponent<RectTransform>();
-            GameObject canvas = CommonObject.GetCommonObject("Canvas");
+            GameObject canvas = UIManager.instance.canvas;
             Vector2 currentSize = rect.sizeDelta;
             GameObject arrow = PrefabManager.instance.GetPrefab("arrow");
             Text text = GetComponentInChildren<Text>();
