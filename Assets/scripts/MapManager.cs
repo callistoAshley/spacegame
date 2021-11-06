@@ -16,8 +16,10 @@ namespace spacegame
         public static void ChangeMap(string name, int transferPoint = 0)
         {
             // load the scene
-            SceneManager.LoadScene(name);
-
+            AsyncOperation a = SceneManager.LoadSceneAsync(name);
+            a.completed += new Action<AsyncOperation>(
+                // call map data init as callback
+                x => MapData.map.Init(transferPoint));
             // do map init
             //MapData.map.Init(transferPoint);
         }

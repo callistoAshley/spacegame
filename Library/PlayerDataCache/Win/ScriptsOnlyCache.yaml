@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - spacegame.MainCamera
     - spacegame.MapData
     - spacegame.PrefabManager
+    - spacegame.SFXPlayer
     - spacegame.SpaceshipDoor
     - spacegame.TitleScreen
     - spacegame.UI
@@ -16,16 +17,22 @@ ScriptsOnlyBuild:
     - spacegame.UINavigateable
     - spacegame.alisonscript.Functions
     Unity.2D.Tilemap.Editor.dll:
+    - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
+    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
+    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -38,6 +45,73 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/scenes/debug_guy.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 598}
+    - Class: 114
+      Script: {instanceID: 9692}
+    - Class: 114
+      Script: {instanceID: 10236}
+    - Class: 114
+      Script: {instanceID: 10928}
+    - Class: 114
+      Script: {instanceID: 11162}
+    - Class: 114
+      Script: {instanceID: 11256}
+    - Class: 114
+      Script: {instanceID: 11258}
+    - Class: 114
+      Script: {instanceID: 11542}
+    - Class: 114
+      Script: {instanceID: 11594}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
     Assets/scenes/init.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -82,25 +156,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10236}
     - Class: 114
-      Script: {instanceID: 10612}
+      Script: {instanceID: 10614}
     - Class: 114
-      Script: {instanceID: 10714}
+      Script: {instanceID: 10716}
     - Class: 114
-      Script: {instanceID: 10896}
+      Script: {instanceID: 10898}
     - Class: 114
-      Script: {instanceID: 10926}
+      Script: {instanceID: 10928}
     - Class: 114
-      Script: {instanceID: 11158}
+      Script: {instanceID: 11162}
     - Class: 114
-      Script: {instanceID: 11254}
+      Script: {instanceID: 11258}
     - Class: 114
-      Script: {instanceID: 11482}
+      Script: {instanceID: 11438}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11490}
     - Class: 114
-      Script: {instanceID: 11586}
+      Script: {instanceID: 11542}
     - Class: 114
-      Script: {instanceID: 11592}
+      Script: {instanceID: 11594}
+    - Class: 114
+      Script: {instanceID: 11600}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -163,19 +239,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 10926}
+      Script: {instanceID: 10928}
     - Class: 114
-      Script: {instanceID: 11158}
+      Script: {instanceID: 11162}
     - Class: 114
-      Script: {instanceID: 11194}
+      Script: {instanceID: 11198}
     - Class: 114
-      Script: {instanceID: 11254}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11258}
     - Class: 114
-      Script: {instanceID: 11540}
+      Script: {instanceID: 11542}
     - Class: 114
-      Script: {instanceID: 11586}
+      Script: {instanceID: 11548}
+    - Class: 114
+      Script: {instanceID: 11594}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -222,17 +300,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 11158}
+      Script: {instanceID: 11162}
     - Class: 114
-      Script: {instanceID: 11252}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11254}
+      Script: {instanceID: 11258}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11542}
     - Class: 114
-      Script: {instanceID: 11540}
+      Script: {instanceID: 11548}
     - Class: 114
-      Script: {instanceID: 11586}
+      Script: {instanceID: 11594}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -416,7 +494,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 5634acf555162e4bf0381d8b03e66524
+      Hash: e3034f88dcaccd55a9b7176aedcd6cfc
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Interactable
@@ -566,7 +644,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: e64e523481993a8750e9fceec3e9c27f
+      Hash: 10f06b7eb2d1e974d216aa2835ea64ed
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Controller
@@ -602,13 +680,13 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 170ac10a0f1ea35228302ee008a53626
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: SpaceshipDoor
   - hash:
       serializedVersion: 2
-      Hash: 3f26ed5719b1c07edc6c75b5a2ef2c73
+      Hash: 8fe9293591131089d2f42fef1fff55a9
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: MapData
@@ -630,6 +708,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: 1e956093e3273fd5a3398d3831111873
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: SFXPlayer
   - hash:
       serializedVersion: 2
       Hash: df434544c9f7b33d1cc7e635b180d279
@@ -749,4 +833,5 @@ ScriptsOnlyBuild:
   - Assets/scenes/init.unity
   - Assets/scenes/title.unity
   - Assets/scenes/ship_alison_intro.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/04NOV2021/space!!!!.exe
+  - Assets/scenes/debug_guy.unity
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/06NOV2021/space!!!!.exe
