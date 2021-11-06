@@ -18,15 +18,9 @@ namespace spacegame
             // singleton stuff
             DontDestroyOnLoad(gameObject);
             instance = this;
-            SceneManager.sceneLoaded += SceneLoaded;
+            //SceneManager.sceneLoaded += SceneLoaded;
             
             Init.Initialization();
-        }
-
-        // this runs before common object
-        private void SceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            CommonObject.commonObjects.Clear();
         }
     }
 }

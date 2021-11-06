@@ -14,9 +14,12 @@ namespace spacegame
         private bool pressedSelect => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X);
         private bool pressedVertical => Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0;
 
+        public GameObject canvas;
+
         private void Awake()
         {
             instance = this;
+            canvas = gameObject;
             StartCoroutine(ProcessInputQueue());
         }
 
@@ -60,7 +63,7 @@ namespace spacegame
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui");
-            GameObject canvas = CommonObject.GetCommonObject("Canvas");
+            GameObject canvas = this.canvas;
             // canvas MissingReferenceException
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
@@ -75,7 +78,7 @@ namespace spacegame
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas
             GameObject prefab = PrefabManager.instance.GetPrefab("ui navigateable");
-            GameObject canvas = CommonObject.GetCommonObject("Canvas");
+            GameObject canvas = this.canvas;
             GameObject g = Instantiate(prefab, position + (Vector2)canvas.transform.position, Quaternion.identity, canvas.transform);
 
             // initialize
