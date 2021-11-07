@@ -7,7 +7,7 @@ namespace spacegame
 {
     public class BGMPlayer : MonoBehaviour
     {
-        private AudioSource aud;
+        [HideInInspector] public AudioSource aud;
         public static BGMPlayer instance;
 
         public AudioClip[] bgm;

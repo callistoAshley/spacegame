@@ -1,0 +1,8 @@
+cond "@in_args0"
+    when "dialogue"
+        ;spk "|microwave man sam| forever trapped in debug room hell"
+    when "move_left"
+        ;npc_move "microwave man sam" "-4" "2"
+    when "move_right"
+        ;npc_move "microwave man sam" "5" "2"
+end
