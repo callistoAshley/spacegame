@@ -106,6 +106,13 @@ namespace spacegame.alisonscript
                     || (input == "when" && line.StartsWith("end"))) // also jump to end if the input is when to break out of conditionals
                 {
                     lineIndex = i;
+
+                    if (Interpreter.runningScript == null) // how does this happen part 2
+                    {
+                        Debug.Log("running script is null " + lineIndex);
+                        return;
+                    }
+
                     // break out of conditional if the line isn't in one
                     if (!Interpreter.runningScript.lines[lineIndex].inConditional)
                         Interpreter.runningScript.inCond = false;

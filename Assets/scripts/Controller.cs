@@ -44,6 +44,19 @@ namespace spacegame
         // Update is called once per frame
         void Update()
         {
+            WalkAnimation();
+            ProcessInteraction();
+        }
+
+        private void FixedUpdate()
+        {
+            // move left/right
+            if (canMove)
+                transform.Translate(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0, 0);
+        }
+
+        private void WalkAnimation()
+        {
             // walk animation
             if (Input.GetAxis("Horizontal") == 0 || !canMove)
                 animator.SetTrigger("idle");
@@ -55,15 +68,6 @@ namespace spacegame
                 Flip();
             else if (Input.GetAxis("Horizontal") < 0 && facingRight)
                 Flip();
-
-            ProcessInteraction();
-        }
-
-        private void FixedUpdate()
-        {
-            // move left/right
-            if (canMove)
-                transform.Translate(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0, 0);
         }
 
         private void Flip()
@@ -99,14 +103,10 @@ namespace spacegame
             // process actual interaction
             else if (Input.GetKeyDown(KeyCode.Z))
             {
+                if (interactable.destroyAfter) Destroy(interactable.gameObject);
                 // great! let's let the event manager do the rest of the work
                 EventManager.ProcessEvent(interactable.doOnInteract);
             }
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            //Debug.Log("on collision enter " + collision);
         }
     }
 

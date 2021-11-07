@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoBgm: bgm_title_wip
+  transferPoints: []
 --- !u!1 &1231219737
 GameObject:
   m_ObjectHideFlags: 0

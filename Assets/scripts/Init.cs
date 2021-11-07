@@ -12,6 +12,7 @@ namespace spacegame
 
         public static void Initialization()
         {
+            Debug.Log("initializing");
             if (initialized) return;
             initialized = true;
 

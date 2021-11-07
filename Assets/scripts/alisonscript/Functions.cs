@@ -63,6 +63,7 @@ namespace spacegame.alisonscript
             yield break;
         }
 
+        // functions are coroutines instead of delegates solely because of wait. yup
         [Function("wait", 1)] 
         public IEnumerator Wait(FunctionArgs args)
         {
@@ -156,6 +157,7 @@ namespace spacegame.alisonscript
         public IEnumerator EndProcessing(FunctionArgs args)
         {
             // don't need to invoke the callback here 
+            Debug.Log("end processing");
             Interpreter.runningScript.Finished();
             yield break;
         }
@@ -172,6 +174,19 @@ namespace spacegame.alisonscript
         public IEnumerator PlaySfx(FunctionArgs args)
         {
             SFXPlayer.instance.Play(args.args[0]);
+            args.callback.Invoke();
+            yield break;
+        }
+
+        [Function("npc_move", 3)]
+        public IEnumerator NpcMove(FunctionArgs args)
+        {
+            // get the npc we're requesting
+            GameObject npc = (from g in GameObject.FindGameObjectsWithTag("npc") 
+                              where g.name == args.args[0]
+                              select g).ToArray()[0];
+            // move them
+            npc.GetComponent<NPC>().MoveTo(new Vector2(float.Parse(args.args[1]), float.Parse(args.args[2])));
             args.callback.Invoke();
             yield break;
         }

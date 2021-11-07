@@ -21,6 +21,10 @@ namespace spacegame
             instance = this;
             canvas = gameObject;
             StartCoroutine(ProcessInputQueue());
+
+            if (Global.debugMode)
+                // create debug ui
+                Instantiate(PrefabManager.instance.GetPrefab("debug ui"), instance.transform);
         }
 
         // pretty much 100% sure there's a better way to do this

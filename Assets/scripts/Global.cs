@@ -11,6 +11,7 @@ namespace spacegame
     public class Global : MonoBehaviour
     {
         public static Global instance;
+        public static bool debugMode;
 
         // Start is called before the first frame update
         void Awake()
@@ -19,8 +20,27 @@ namespace spacegame
             DontDestroyOnLoad(gameObject);
             instance = this;
             //SceneManager.sceneLoaded += SceneLoaded;
-            
+
             Init.Initialization();
         }
+
+        public void EnterDebugMode()
+        {
+            debugMode = true;
+            GameState.SetBoolean("debug_mode", true);
+
+            // create debug ui
+            Instantiate(PrefabManager.instance.GetPrefab("debug ui"), UIManager.instance.transform);
+        }
+
+        // the purpose of this coroutine is to give the init scene a moment to load so the loading text appears
+        // as Resources.LoadAll is pretty slow
+        // this is commented out for now because i don't load many resources but i might need it in the future
+        /*
+        IEnumerator Thing()
+        {
+            yield return new WaitForSeconds(0.1f);
+            Init.Initialization();
+        }*/
     }
 }
