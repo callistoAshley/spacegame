@@ -30,6 +30,7 @@ namespace spacegame
         // components
         [HideInInspector] public Animator animator;
         [HideInInspector] public BoxCollider2D coll;
+        [HideInInspector] public Rigidbody2D rigidbody2d;
 
         // singleton
         public static Controller instance;
@@ -39,6 +40,7 @@ namespace spacegame
         {
             animator = GetComponent<Animator>();
             coll = GetComponent<BoxCollider2D>();
+            rigidbody2d = GetComponent<Rigidbody2D>();
             instance = this;
 
             // add movement hooks
@@ -89,10 +91,18 @@ namespace spacegame
             animator.SetTrigger("idle");
         }
 
-        private void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
+        // horizontal movement
+        public void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
             int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
             transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
+        }
+
+        // vertical movement
+        public void VerticalMovement(object sender, InputManager.KeyPressedEventArgs e)
+        {
+            int verticalVelocity = e.key == InputManager.instance.down ? -1 : 1;
+            transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
         }
 
         private void Flip()
@@ -102,6 +112,11 @@ namespace spacegame
             // flip sprite by inverting x value of scale
             facingRight = !facingRight;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+
+        public void SetGravity(float gravity)
+        {
+            rigidbody2d.gravityScale = gravity;
         }
 
         // interaction
@@ -128,9 +143,7 @@ namespace spacegame
             // process actual interaction
             else if (Input.GetKeyDown(KeyCode.Z))
             {
-                if (interactable.destroyAfter) Destroy(interactable.gameObject);
-                // great! let's let the event manager do the rest of the work
-                EventManager.ProcessEvent(interactable.doOnInteract);
+                interactable.OnInteract();
             }
         }
     }
