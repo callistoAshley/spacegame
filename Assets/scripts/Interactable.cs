@@ -11,5 +11,11 @@ namespace spacegame
     {
         public Event doOnInteract;
         public bool destroyAfter;
+
+        public virtual void OnInteract()
+        {
+            if (destroyAfter) Destroy(gameObject);
+            EventManager.ProcessEvent(doOnInteract);
+        }
     }
 }
