@@ -42,7 +42,23 @@ namespace spacegame
             instance = this;
 
             // add movement hooks
-            InputManager.instance.horizontalKeyPressed += HorizontalMovement;
+            ToggleMovementHooks(true);
+        }
+
+        public void ToggleMovementHooks(bool add)
+        {
+            if (add)
+            {
+                InputManager.instance.horizontalKeyHeld += HorizontalMoveAnimation;
+                InputManager.instance.horizontalKeyReleased += StopHorizontalAnimation;
+                InputManager.instance.fixedHorizontalKeyHeld += HorizontalMovement;
+            }
+            else
+            {
+                InputManager.instance.horizontalKeyHeld -= HorizontalMoveAnimation;
+                InputManager.instance.horizontalKeyReleased -= StopHorizontalAnimation;
+                InputManager.instance.fixedHorizontalKeyHeld -= HorizontalMovement;
+            }
         }
 
         // Update is called once per frame
@@ -51,31 +67,30 @@ namespace spacegame
             ProcessInteraction();
         }
 
-        private void FixedUpdate()
+        private void HorizontalMoveAnimation(object sender, InputManager.KeyPressedEventArgs e)
         {
-            Debug.Log("fixed update");
-        }
-
-        private void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
-        {
-            Debug.Log("horizontal movement");
             if (!canMove) return;
 
             // walk animation
             animator.SetTrigger("walking");
-            // add a KEY RELEASED event to input manager to set idle animation
 
             // flip
             if (e.key == InputManager.instance.right && !facingRight)
                 Flip();
             else if (e.key == InputManager.instance.left && facingRight)
                 Flip();
+        }
 
-            // fixed update
-            if (!Time.inFixedTimeStep) return;
+        private void StopHorizontalAnimation(object sender, InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove) return;
 
-            Debug.Log("we're in fixed time");
+            animator.ResetTrigger("walking");
+            animator.SetTrigger("idle");
+        }
 
+        private void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
+        {
             int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
             transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
         }
