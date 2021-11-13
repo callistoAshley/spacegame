@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace spacegame
 {
@@ -39,35 +40,44 @@ namespace spacegame
             animator = GetComponent<Animator>();
             coll = GetComponent<BoxCollider2D>();
             instance = this;
+
+            // add movement hooks
+            InputManager.instance.horizontalKeyPressed += HorizontalMovement;
         }
 
         // Update is called once per frame
         void Update()
         {
-            WalkAnimation();
             ProcessInteraction();
         }
 
         private void FixedUpdate()
         {
-            // move left/right
-            if (canMove)
-                transform.Translate(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0, 0);
+            Debug.Log("fixed update");
         }
 
-        private void WalkAnimation()
+        private void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
+            Debug.Log("horizontal movement");
+            if (!canMove) return;
+
             // walk animation
-            if (Input.GetAxis("Horizontal") == 0 || !canMove)
-                animator.SetTrigger("idle");
-            else
-                animator.SetTrigger("walking");
+            animator.SetTrigger("walking");
+            // add a KEY RELEASED event to input manager to set idle animation
 
             // flip
-            if (Input.GetAxis("Horizontal") > 0 && !facingRight)
+            if (e.key == InputManager.instance.right && !facingRight)
                 Flip();
-            else if (Input.GetAxis("Horizontal") < 0 && facingRight)
+            else if (e.key == InputManager.instance.left && facingRight)
                 Flip();
+
+            // fixed update
+            if (!Time.inFixedTimeStep) return;
+
+            Debug.Log("we're in fixed time");
+
+            int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
+            transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
         }
 
         private void Flip()
