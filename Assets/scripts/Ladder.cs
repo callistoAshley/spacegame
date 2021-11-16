@@ -11,6 +11,9 @@ namespace spacegame
     {
         public override void OnInteract()
         {
+            if (Controller.instance.onLadder) return;
+            Controller.instance.onLadder = true;
+
             // allow vertical movement
             InputManager.instance.fixedVerticalKeyHeld += Controller.instance.VerticalMovement;
 
@@ -22,13 +25,25 @@ namespace spacegame
         }
 
         private void LeaveLadder(object sender, InputManager.KeyPressedEventArgs e)
+            => LeaveLadder();
+
+        private void LeaveLadder()
         {
+            if (!Controller.instance.onLadder) return;
+            Controller.instance.onLadder = false;
+
             // disallow vertical movement and leaving the ladder
             InputManager.instance.fixedHorizontalKeyHeld -= LeaveLadder;
             InputManager.instance.fixedVerticalKeyHeld -= Controller.instance.VerticalMovement;
 
             // reset the gravity back to 1
             Controller.instance.SetGravity(1);
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+                LeaveLadder();
         }
     }
 }

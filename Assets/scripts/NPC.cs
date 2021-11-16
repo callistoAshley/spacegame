@@ -52,5 +52,17 @@ namespace spacegame
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
             facingRight = !facingRight;
         }
+
+        public Follower BecomeFollower()
+        {
+            Follower follower = this as Follower;
+
+            // destroy the npc component and re-add the new follower
+            Destroy(GetComponent<NPC>());
+            Follower f = gameObject.AddComponent<Follower>();
+            f = follower;
+            
+            return follower;
+        }
     }
 }
