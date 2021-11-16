@@ -16,6 +16,7 @@ namespace spacegame
         // other movement
         public bool canMove = true;
         private bool facingRight = true;
+        public bool onLadder;
 
         // interaction
         [SerializeField] private Interactable interactable; // the interactable component of the game object the player is colliding with that they can interact with
@@ -94,6 +95,8 @@ namespace spacegame
         // horizontal movement
         public void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
+            if (!canMove) return;
+
             int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
             transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
         }
@@ -101,6 +104,8 @@ namespace spacegame
         // vertical movement
         public void VerticalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
+            if (!canMove) return;
+
             int verticalVelocity = e.key == InputManager.instance.down ? -1 : 1;
             transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
         }
@@ -122,11 +127,11 @@ namespace spacegame
         // interaction
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("interactable") && collision.TryGetComponent(out Interactable i))
+            if ((collision.CompareTag("interactable") || collision.CompareTag("npc"))
+                && collision.TryGetComponent(out Interactable i))
             {
                 interactable = i;
             }
-            //Debug.Log("on trigger enter " + collision.gameObject.name);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
