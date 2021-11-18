@@ -17,11 +17,9 @@ namespace spacegame
 
         private bool facingRight = true;
 
-        private void Awake()
+        public virtual void Awake()
         {
-            // turns out unity overloads == so i can't use ??=, that sucks
-            if (anim != null)
-                anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
             anim.Play(idleAnimation);
         }
 
@@ -53,16 +51,18 @@ namespace spacegame
             facingRight = !facingRight;
         }
 
+        // please unity add casting components
         public Follower BecomeFollower()
         {
-            Follower follower = this as Follower;
-
             // destroy the npc component and re-add the new follower
             Destroy(GetComponent<NPC>());
             Follower f = gameObject.AddComponent<Follower>();
-            f = follower;
-            
-            return follower;
+            f.anim = anim;
+            f.idleAnimation = idleAnimation;
+            f.walkAnimation = walkAnimation;
+            f.facingRight = facingRight;
+
+            return f;
         }
     }
 }

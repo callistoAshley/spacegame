@@ -28,7 +28,7 @@ namespace spacegame
             => LeaveLadder();
 
         private void LeaveLadder()
-        {
+        { 
             if (!Controller.instance.onLadder) return;
             Controller.instance.onLadder = false;
 
@@ -42,7 +42,7 @@ namespace spacegame
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Player"))
                 LeaveLadder();
         }
     }
