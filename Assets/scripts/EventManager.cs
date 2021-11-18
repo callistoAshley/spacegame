@@ -12,7 +12,7 @@ namespace spacegame
         // this method processes events, which are usually only in interactables
         public static void ProcessEvent(Event ev)
         {
-            switch (ev.eventType)
+            switch (ev?.eventType)
             {
                 case Event.EventType.RunScript:
                     // run a script

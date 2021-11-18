@@ -191,6 +191,21 @@ namespace spacegame.alisonscript
             yield break;
         }
 
+        [Function("foll_from_npc", 1)]
+        public IEnumerator FollowerFromNpc(FunctionArgs args)
+        {
+            // get the npc we're requesting
+            GameObject npc = (from g in GameObject.FindGameObjectsWithTag("npc")
+                              where g.name == args.args[0]
+                              select g).ToArray()[0];
+            // make them a follower
+            Follower follower = npc.GetComponent<NPC>().BecomeFollower();
+            Controller.instance.followers.Add(follower);
+
+            args.callback.Invoke();
+            yield break;
+        }
+
         public struct FunctionArgs
         {
             public Action callback;

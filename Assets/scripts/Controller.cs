@@ -15,8 +15,11 @@ namespace spacegame
 
         // other movement
         public bool canMove = true;
-        private bool facingRight = true;
-        public bool onLadder;
+        [HideInInspector] public bool facingRight = true;
+        [HideInInspector] public bool onLadder;
+
+        // followers
+        public List<Follower> followers = new List<Follower>();
 
         // interaction
         [SerializeField] private Interactable interactable; // the interactable component of the game object the player is colliding with that they can interact with
@@ -68,6 +71,7 @@ namespace spacegame
         void Update()
         {
             ProcessInteraction();
+            UpdateFollowers();
         }
 
         private void HorizontalMoveAnimation(object sender, InputManager.KeyPressedEventArgs e)
@@ -124,11 +128,18 @@ namespace spacegame
             rigidbody2d.gravityScale = gravity;
         }
 
+        private void UpdateFollowers()
+        {
+            // use i as a parameter to determine the offset from the last follower
+            for (int i = 0; i < followers.Count; i++)
+                followers[i].UpdatePosition(i);
+        }
+
         // interaction
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if ((collision.CompareTag("interactable") || collision.CompareTag("npc"))
-                && collision.TryGetComponent(out Interactable i))
+                && collision.TryGetComponent(out Interactable i) && i.doOnInteract != null)
             {
                 interactable = i;
             }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 396545784327300167}
   m_Layer: 0
   m_Name: alison
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,9 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1
   canMove: 1
+  onLadder: 0
   interactable: {fileID: 0}
   animator: {fileID: 0}
   coll: {fileID: 0}
+  rigidbody2d: {fileID: 0}
 --- !u!61 &5875236119702543300
 BoxCollider2D:
   m_ObjectHideFlags: 0
