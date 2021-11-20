@@ -23,26 +23,29 @@ namespace spacegame
             anim.Play(idleAnimation);
         }
 
-        public void MoveTo(Vector2 position)
+        public void PlayAnimation(string stateName) => anim.Play(stateName);
+
+        public void MoveTo(Vector2 position, float maxDistanceDelta = 5, bool animate = true)
         {
-            StartCoroutine("InternalMoveTo", position);
+            StopAllCoroutines();
+            StartCoroutine(InternalMoveTo(position, maxDistanceDelta, animate));
         }
 
-        private IEnumerator InternalMoveTo(Vector2 position)
+        private IEnumerator InternalMoveTo(Vector2 position, float maxDistanceDelta, bool animate)
         {
             // flip if the npc isn't facing the position 
             if ((position.x > transform.position.x && !facingRight) 
                 || (position.x < transform.position.x && facingRight))
                 Flip();
 
-            anim.Play(walkAnimation); // play walk animation
+            if (animate) PlayAnimation(walkAnimation); // play walk animation
             // move toward position
             while ((Vector2)transform.position != position)
             {
-                transform.position = Vector3.MoveTowards(transform.position, position, 5 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, position, maxDistanceDelta * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
-            anim.Play(idleAnimation); // play idle animation
+            if (animate) PlayAnimation(idleAnimation); // play idle animation
         }
 
         private void Flip()

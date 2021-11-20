@@ -10,4 +10,19 @@ cond "@in_args0"
         ;spk "|alison the robot| k"
         ;foll_from_npc "microwave man sam"
         ;end_processing
+    when "follower2"
+        ;spk "|microwave man sam| i will follow you now"
+        ;spk "|alison the robot| k"
+        ;foll_from_npc "microwave man sam2"
+        ;end_processing
+    when "follower3"
+        ;spk "|microwave man sam| i will follow you now"
+        ;spk "|alison the robot| k"
+        ;foll_from_npc "microwave man sam3"
+        ;end_processing
+    when "follower4"
+        ;spk "|microwave man sam| i will follow you now"
+        ;spk "|alison the robot| k"
+        ;foll_from_npc "microwave man sam4"
+        ;end_processing
 end
