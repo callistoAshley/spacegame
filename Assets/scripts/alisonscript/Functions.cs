@@ -200,7 +200,7 @@ namespace spacegame.alisonscript
                               select g).ToArray()[0];
             // make them a follower
             Follower follower = npc.GetComponent<NPC>().BecomeFollower();
-            Controller.instance.followers.Add(follower);
+            Controller.followers.Add(follower);
 
             args.callback.Invoke();
             yield break;

@@ -5,9 +5,12 @@ ScriptsOnlyBuild:
     - spacegame.Controller
     - spacegame.DebugUI
     - spacegame.Global
+    - spacegame.InputManager
     - spacegame.Interactable
+    - spacegame.Ladder
     - spacegame.MainCamera
     - spacegame.MapData
+    - spacegame.NPC
     - spacegame.PrefabManager
     - spacegame.SFXPlayer
     - spacegame.SpaceshipDoor
@@ -18,9 +21,12 @@ ScriptsOnlyBuild:
     - spacegame.alisonscript.Functions
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
+    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
+    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.Graphs.dll:
@@ -40,72 +46,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/scenes/debug_guy.unity:
-    - Class: 1
-      Script: {instanceID: 0}
-    - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
-    - Class: 21
-      Script: {instanceID: 0}
-    - Class: 28
-      Script: {instanceID: 0}
-    - Class: 48
-      Script: {instanceID: 0}
-    - Class: 50
-      Script: {instanceID: 0}
-    - Class: 61
-      Script: {instanceID: 0}
-    - Class: 66
-      Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
-      Script: {instanceID: 0}
-    - Class: 104
-      Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 598}
-    - Class: 114
-      Script: {instanceID: 9692}
-    - Class: 114
-      Script: {instanceID: 10236}
-    - Class: 114
-      Script: {instanceID: 10928}
-    - Class: 114
-      Script: {instanceID: 11162}
-    - Class: 114
-      Script: {instanceID: 11256}
-    - Class: 114
-      Script: {instanceID: 11258}
-    - Class: 114
-      Script: {instanceID: 11594}
-    - Class: 115
-      Script: {instanceID: 0}
-    - Class: 157
-      Script: {instanceID: 0}
-    - Class: 212
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
-      Script: {instanceID: 0}
-    - Class: 19719996
-      Script: {instanceID: 0}
-    - Class: 156049354
-      Script: {instanceID: 0}
-    - Class: 483693784
-      Script: {instanceID: 0}
-    - Class: 1839735485
-      Script: {instanceID: 0}
-    Assets/scenes/init.unity:
+    Assets/scenes/0init.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -149,27 +90,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10236}
     - Class: 114
-      Script: {instanceID: 10614}
+      Script: {instanceID: 10416}
     - Class: 114
-      Script: {instanceID: 10716}
+      Script: {instanceID: 10616}
     - Class: 114
-      Script: {instanceID: 10898}
+      Script: {instanceID: 10718}
     - Class: 114
-      Script: {instanceID: 10928}
+      Script: {instanceID: 10768}
     - Class: 114
-      Script: {instanceID: 11162}
+      Script: {instanceID: 10904}
     - Class: 114
-      Script: {instanceID: 11258}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11438}
+      Script: {instanceID: 11148}
     - Class: 114
-      Script: {instanceID: 11490}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11594}
+      Script: {instanceID: 11206}
     - Class: 114
-      Script: {instanceID: 11600}
+      Script: {instanceID: 11232}
     - Class: 114
-      Script: {instanceID: 19010}
+      Script: {instanceID: 11268}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11602}
+    - Class: 114
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -181,6 +130,142 @@ ScriptsOnlyBuild:
     - Class: 213
       Script: {instanceID: 0}
     - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/scenes/debug_guy.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 598}
+    - Class: 114
+      Script: {instanceID: 9692}
+    - Class: 114
+      Script: {instanceID: 10236}
+    - Class: 114
+      Script: {instanceID: 10934}
+    - Class: 114
+      Script: {instanceID: 11170}
+    - Class: 114
+      Script: {instanceID: 11266}
+    - Class: 114
+      Script: {instanceID: 11268}
+    - Class: 114
+      Script: {instanceID: 11602}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/scenes/debug_npctest.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 598}
+    - Class: 114
+      Script: {instanceID: 9692}
+    - Class: 114
+      Script: {instanceID: 10236}
+    - Class: 114
+      Script: {instanceID: 10768}
+    - Class: 114
+      Script: {instanceID: 10934}
+    - Class: 114
+      Script: {instanceID: 11148}
+    - Class: 114
+      Script: {instanceID: 11170}
+    - Class: 114
+      Script: {instanceID: 11206}
+    - Class: 114
+      Script: {instanceID: 11266}
+    - Class: 114
+      Script: {instanceID: 11268}
+    - Class: 114
+      Script: {instanceID: 11602}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 223
       Script: {instanceID: 0}
@@ -232,19 +317,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 10928}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11162}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11198}
+      Script: {instanceID: 11206}
     - Class: 114
-      Script: {instanceID: 11256}
+      Script: {instanceID: 11266}
     - Class: 114
-      Script: {instanceID: 11258}
+      Script: {instanceID: 11268}
     - Class: 114
-      Script: {instanceID: 11548}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 11594}
+      Script: {instanceID: 11602}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -291,15 +376,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10302}
     - Class: 114
-      Script: {instanceID: 11162}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11256}
+      Script: {instanceID: 11266}
     - Class: 114
-      Script: {instanceID: 11258}
+      Script: {instanceID: 11268}
     - Class: 114
-      Script: {instanceID: 11548}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 11594}
+      Script: {instanceID: 11602}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -483,7 +568,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: e3034f88dcaccd55a9b7176aedcd6cfc
+      Hash: beecba1d9af0948168b7b13eb438e218
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Interactable
@@ -517,6 +602,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 48ae645c1d03a80f5a59d4bf99f2bddb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: DebugUI
   - hash:
       serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
@@ -579,6 +670,18 @@ ScriptsOnlyBuild:
     className: Global
   - hash:
       serializedVersion: 2
+      Hash: 031f58674818336c69357c341954883a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: Follower
+  - hash:
+      serializedVersion: 2
+      Hash: beecba1d9af0948168b7b13eb438e218
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: Ladder
+  - hash:
+      serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -633,7 +736,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 10f06b7eb2d1e974d216aa2835ea64ed
+      Hash: 19ea71c510b788b6ad5a347cfbc2cad7
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Controller
@@ -649,6 +752,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: 031f58674818336c69357c341954883a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: NPC
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
@@ -673,6 +782,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: SpaceshipDoor
+  - hash:
+      serializedVersion: 2
+      Hash: 55ac8c85db23a0779640b56746f333ef
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: InputManager
   - hash:
       serializedVersion: 2
       Hash: 8fe9293591131089d2f42fef1fff55a9
@@ -811,16 +926,11 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 48ae645c1d03a80f5a59d4bf99f2bddb
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: spacegame
-    className: DebugUI
   platform: 5
   scenePathNames:
-  - Assets/scenes/init.unity
+  - Assets/scenes/0init.unity
   - Assets/scenes/title.unity
   - Assets/scenes/ship_alison_intro.unity
   - Assets/scenes/debug_guy.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/07NOV2021/space!!!!.exe
+  - Assets/scenes/debug_npctest.unity
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/19NOV2021/space!!!!.exe

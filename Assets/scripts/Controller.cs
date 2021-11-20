@@ -19,7 +19,7 @@ namespace spacegame
         [HideInInspector] public bool onLadder;
 
         // followers
-        public List<Follower> followers = new List<Follower>();
+        public static List<Follower> followers = new List<Follower>();
 
         // interaction
         [SerializeField] private Interactable interactable; // the interactable component of the game object the player is colliding with that they can interact with
@@ -71,7 +71,6 @@ namespace spacegame
         void Update()
         {
             ProcessInteraction();
-            UpdateFollowers();
         }
 
         private void HorizontalMoveAnimation(object sender, InputManager.KeyPressedEventArgs e)
@@ -94,12 +93,17 @@ namespace spacegame
 
             animator.ResetTrigger("walking");
             animator.SetTrigger("idle");
+
+            // stop the followers from walking
+            foreach (Follower f in followers) 
+                f.StopWalking();
         }
 
         // horizontal movement
         public void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
+            UpdateFollowers();
 
             int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
             transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
@@ -109,6 +113,7 @@ namespace spacegame
         public void VerticalMovement(object sender, InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
+            UpdateFollowers();
 
             int verticalVelocity = e.key == InputManager.instance.down ? -1 : 1;
             transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
