@@ -736,7 +736,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 19ea71c510b788b6ad5a347cfbc2cad7
+      Hash: 458d39ddc3eb6eb13e1b1acb1021e8f6
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: Controller
@@ -933,4 +933,4 @@ ScriptsOnlyBuild:
   - Assets/scenes/ship_alison_intro.unity
   - Assets/scenes/debug_guy.unity
   - Assets/scenes/debug_npctest.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/19NOV2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/21NOV2021/space!!!!.exe

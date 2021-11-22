@@ -13,6 +13,8 @@ namespace spacegame.alisonscript
 {
     public static class Interpreter
     {
+        public static bool interpreterRunning;
+
         private static RunningScript _runningScript;
         public static RunningScript runningScript
         {
@@ -20,7 +22,7 @@ namespace spacegame.alisonscript
             {
                 return _runningScript;
             }
-            set
+            private set
             {
                 if (_runningScript != null && value != null)
                     throw new Exception("shouldn't set the running script to a value while a script is running");
@@ -53,6 +55,8 @@ namespace spacegame.alisonscript
 
         public static void Run(string script, params string[] args)
         {
+            interpreterRunning = true;
+
             string fullScriptPath = Application.streamingAssetsPath + "/alisonscript/" + script + ".alisonscript";
 
             if (runningScript != null)
@@ -77,6 +81,11 @@ namespace spacegame.alisonscript
 
             // process first line
             runningScript.lines[0].Process(runningScript); 
+        }
+
+        public static void DisposeRunningScript()
+        {
+            runningScript = null;
         }
     }
 }
