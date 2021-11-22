@@ -83,7 +83,8 @@ namespace spacegame.alisonscript
         public void Finished()
         {
             Controller.instance.canMove = true;
-            Interpreter.runningScript = null;
+            Interpreter.DisposeRunningScript();
+            Interpreter.interpreterRunning = false;
         }
         
         public Label GetLabelByName(int start, string name)

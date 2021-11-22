@@ -58,19 +58,15 @@ namespace spacegame
                 InputManager.instance.horizontalKeyHeld += HorizontalMoveAnimation;
                 InputManager.instance.horizontalKeyReleased += StopHorizontalAnimation;
                 InputManager.instance.fixedHorizontalKeyHeld += HorizontalMovement;
+                InputManager.instance.selectKeyDown += ProcessInteraction;
             }
             else
             {
                 InputManager.instance.horizontalKeyHeld -= HorizontalMoveAnimation;
                 InputManager.instance.horizontalKeyReleased -= StopHorizontalAnimation;
                 InputManager.instance.fixedHorizontalKeyHeld -= HorizontalMovement;
+                InputManager.instance.selectKeyDown -= ProcessInteraction;
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            ProcessInteraction();
         }
 
         private void HorizontalMoveAnimation(object sender, InputManager.KeyPressedEventArgs e)
@@ -141,6 +137,13 @@ namespace spacegame
         }
 
         // interaction
+        private void ProcessInteraction(object sender, InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove || !canInteract || alisonscript.Interpreter.interpreterRunning) return;
+
+            interactable.OnInteract();
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if ((collision.CompareTag("interactable") || collision.CompareTag("npc"))
@@ -156,17 +159,5 @@ namespace spacegame
             if (interactable != null && collision.gameObject == interactable.gameObject)
                 interactable = null;
         }
-
-        private void ProcessInteraction()
-        {
-            if (!canMove || !canInteract) return;
-
-            // process actual interaction
-            else if (Input.GetKeyDown(KeyCode.Z))
-            {
-                interactable.OnInteract();
-            }
-        }
     }
-
 }

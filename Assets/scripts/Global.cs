@@ -19,7 +19,6 @@ namespace spacegame
             // singleton stuff
             DontDestroyOnLoad(gameObject);
             instance = this;
-            //SceneManager.sceneLoaded += SceneLoaded;
 
             Init.Initialization();
         }
@@ -31,6 +30,9 @@ namespace spacegame
 
             // create debug ui
             Instantiate(PrefabManager.instance.GetPrefab("debug ui"), UIManager.instance.transform);
+
+            // register debug commands
+            DebugConsole.Commands.RegisterCommands();
         }
 
         // the purpose of this coroutine is to give the init scene a moment to load so the loading text appears

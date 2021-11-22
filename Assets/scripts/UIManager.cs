@@ -11,8 +11,8 @@ namespace spacegame
         public static UIManager instance;
         public Stack<UI> inputQueue = new Stack<UI>(); // a stack is a LAST IN FIRST OUT queue
 
-        private bool pressedSelect => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X);
-        private bool pressedVertical => Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0;
+        //private bool pressedSelect => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X);
+        //private bool pressedVertical => Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0;
 
         public GameObject canvas;
 
@@ -20,15 +20,40 @@ namespace spacegame
         {
             instance = this;
             canvas = gameObject;
-            StartCoroutine(ProcessInputQueue());
+            //StartCoroutine(ProcessInputQueue());
 
             if (Global.debugMode)
                 // create debug ui
                 Instantiate(PrefabManager.instance.GetPrefab("debug ui"), instance.transform);
+
+            // hook input manager events to process input queue
+            InputManager.instance.verticalKeyDown += ProcessInputQueue;
+            InputManager.instance.selectKeyDown += ProcessInputQueue;
         }
 
-        // pretty much 100% sure there's a better way to do this
-        public IEnumerator ProcessInputQueue()
+        public void ProcessInputQueue(object sender, InputManager.KeyPressedEventArgs e)
+        {
+            // only continue if the queue isn't empty
+            if (inputQueue.Count == 0) return;
+
+            // get the first object
+            UI ui = inputQueue.Peek();
+
+            if (ui is UINavigateable && (e.key == InputManager.instance.up || e.key == InputManager.instance.down))
+            {
+                (ui as UINavigateable).Navigate(e.key == InputManager.instance.up);
+            }
+            else if (e.key == InputManager.instance.select)
+            {
+                ui.inputProcessedCallback.Invoke(); // invoke the callback
+
+                // check if the ui has been destroyed, and if it has, dequeue it
+                if (ui.readyToDequeue) // unity doesn't actually dispose objects when you use destroy for no reason 
+                    inputQueue.Pop(); // pop
+            }
+        }
+
+        /*public IEnumerator ProcessInputQueue()
         {
             while (true)
             {
@@ -61,7 +86,7 @@ namespace spacegame
                 // loop after the end of the frame
             }
             throw new Exception("broke out of ui input queue loop");
-        }
+        }*/
 
         public UI New(Vector2 position, Vector2 size) 
         {
