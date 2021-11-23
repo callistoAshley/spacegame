@@ -15,10 +15,10 @@ namespace spacegame
             Controller.instance.onLadder = true;
 
             // allow vertical movement
-            InputManager.instance.fixedVerticalKeyHeld += Controller.instance.VerticalMovement;
+            InputManager.fixedVerticalKeyHeld += Controller.instance.VerticalMovement;
 
             // allow leaving the ladder
-            InputManager.instance.fixedHorizontalKeyHeld += LeaveLadder;
+            InputManager.fixedHorizontalKeyHeld += LeaveLadder;
 
             // set the player's gravity to 0 so they can move up the ladder
             Controller.instance.SetGravity(0);
@@ -33,8 +33,8 @@ namespace spacegame
             Controller.instance.onLadder = false;
 
             // disallow vertical movement and leaving the ladder
-            InputManager.instance.fixedHorizontalKeyHeld -= LeaveLadder;
-            InputManager.instance.fixedVerticalKeyHeld -= Controller.instance.VerticalMovement;
+            InputManager.fixedHorizontalKeyHeld -= LeaveLadder;
+            InputManager.fixedVerticalKeyHeld -= Controller.instance.VerticalMovement;
 
             // reset the gravity back to 1
             Controller.instance.SetGravity(1);

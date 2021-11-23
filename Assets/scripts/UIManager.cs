@@ -27,8 +27,8 @@ namespace spacegame
                 Instantiate(PrefabManager.instance.GetPrefab("debug ui"), instance.transform);
 
             // hook input manager events to process input queue
-            InputManager.instance.verticalKeyDown += ProcessInputQueue;
-            InputManager.instance.selectKeyDown += ProcessInputQueue;
+            InputManager.verticalKeyDown += ProcessInputQueue;
+            InputManager.selectKeyDown += ProcessInputQueue;
         }
 
         public void ProcessInputQueue(object sender, InputManager.KeyPressedEventArgs e)
@@ -39,11 +39,11 @@ namespace spacegame
             // get the first object
             UI ui = inputQueue.Peek();
 
-            if (ui is UINavigateable && (e.key == InputManager.instance.up || e.key == InputManager.instance.down))
+            if (ui is UINavigateable && (e.key == InputManager.up || e.key == InputManager.down))
             {
-                (ui as UINavigateable).Navigate(e.key == InputManager.instance.up);
+                (ui as UINavigateable).Navigate(e.key == InputManager.up);
             }
-            else if (e.key == InputManager.instance.select)
+            else if (e.key == InputManager.select)
             {
                 ui.inputProcessedCallback.Invoke(); // invoke the callback
 

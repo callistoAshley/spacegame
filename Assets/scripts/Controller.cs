@@ -55,17 +55,17 @@ namespace spacegame
         {
             if (add)
             {
-                InputManager.instance.horizontalKeyHeld += HorizontalMoveAnimation;
-                InputManager.instance.horizontalKeyReleased += StopHorizontalAnimation;
-                InputManager.instance.fixedHorizontalKeyHeld += HorizontalMovement;
-                InputManager.instance.selectKeyDown += ProcessInteraction;
+                InputManager.horizontalKeyHeld += HorizontalMoveAnimation;
+                InputManager.horizontalKeyReleased += StopHorizontalAnimation;
+                InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
+                InputManager.selectKeyDown += ProcessInteraction;
             }
             else
             {
-                InputManager.instance.horizontalKeyHeld -= HorizontalMoveAnimation;
-                InputManager.instance.horizontalKeyReleased -= StopHorizontalAnimation;
-                InputManager.instance.fixedHorizontalKeyHeld -= HorizontalMovement;
-                InputManager.instance.selectKeyDown -= ProcessInteraction;
+                InputManager.horizontalKeyHeld -= HorizontalMoveAnimation;
+                InputManager.horizontalKeyReleased -= StopHorizontalAnimation;
+                InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
+                InputManager.selectKeyDown -= ProcessInteraction;
             }
         }
 
@@ -77,9 +77,9 @@ namespace spacegame
             animator.SetTrigger("walking");
 
             // flip
-            if (e.key == InputManager.instance.right && !facingRight)
+            if (e.key == InputManager.right && !facingRight)
                 Flip();
-            else if (e.key == InputManager.instance.left && facingRight)
+            else if (e.key == InputManager.left && facingRight)
                 Flip();
         }
 
@@ -101,7 +101,7 @@ namespace spacegame
             if (!canMove) return;
             UpdateFollowers();
 
-            int horizontalVelocity = e.key == InputManager.instance.left ? -1 : 1;
+            int horizontalVelocity = e.key == InputManager.left ? -1 : 1;
             transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
         }
 
@@ -111,7 +111,7 @@ namespace spacegame
             if (!canMove) return;
             UpdateFollowers();
 
-            int verticalVelocity = e.key == InputManager.instance.down ? -1 : 1;
+            int verticalVelocity = e.key == InputManager.down ? -1 : 1;
             transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
         }
 
