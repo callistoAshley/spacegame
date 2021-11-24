@@ -24,7 +24,7 @@ namespace spacegame
             Controller.instance.SetGravity(0);
         }
 
-        private void LeaveLadder(object sender, InputManager.KeyPressedEventArgs e)
+        private void LeaveLadder(InputManager.KeyPressedEventArgs e)
             => LeaveLadder();
 
         private void LeaveLadder()

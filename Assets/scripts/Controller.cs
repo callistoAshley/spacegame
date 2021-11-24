@@ -55,21 +55,21 @@ namespace spacegame
         {
             if (add)
             {
-                InputManager.horizontalKeyHeld += HorizontalMoveAnimation;
-                InputManager.horizontalKeyReleased += StopHorizontalAnimation;
+                InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
+                InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
-                InputManager.selectKeyDown += ProcessInteraction;
             }
             else
             {
-                InputManager.horizontalKeyHeld -= HorizontalMoveAnimation;
-                InputManager.horizontalKeyReleased -= StopHorizontalAnimation;
+                InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
+                InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
-                InputManager.selectKeyDown -= ProcessInteraction;
             }
         }
 
-        private void HorizontalMoveAnimation(object sender, InputManager.KeyPressedEventArgs e)
+        private void HorizontalMoveAnimation(InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
 
@@ -83,7 +83,7 @@ namespace spacegame
                 Flip();
         }
 
-        private void StopHorizontalAnimation(object sender, InputManager.KeyPressedEventArgs e)
+        private void StopHorizontalAnimation(InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
 
@@ -96,7 +96,7 @@ namespace spacegame
         }
 
         // horizontal movement
-        public void HorizontalMovement(object sender, InputManager.KeyPressedEventArgs e)
+        public void HorizontalMovement(InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
             UpdateFollowers();
@@ -106,7 +106,7 @@ namespace spacegame
         }
 
         // vertical movement
-        public void VerticalMovement(object sender, InputManager.KeyPressedEventArgs e)
+        public void VerticalMovement(InputManager.KeyPressedEventArgs e)
         {
             if (!canMove) return;
             UpdateFollowers();
@@ -137,7 +137,7 @@ namespace spacegame
         }
 
         // interaction
-        private void ProcessInteraction(object sender, InputManager.KeyPressedEventArgs e)
+        private void ProcessInteraction(InputManager.KeyPressedEventArgs e)
         {
             if (!canMove || !canInteract || alisonscript.Interpreter.interpreterRunning) return;
 

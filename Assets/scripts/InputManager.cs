@@ -48,28 +48,54 @@ namespace spacegame
         private KeyPressedEvent[] events = new KeyPressedEvent[]
         {
             // horizontal keys
-            new KeyPressedEvent(left, KeyPressedType.Held, ref horizontalKeyHeld),
-            new KeyPressedEvent(right, KeyPressedType.Held, ref horizontalKeyHeld),
-            new KeyPressedEvent(left, KeyPressedType.Down, ref horizontalKeyDown),
-            new KeyPressedEvent(right, KeyPressedType.Down, ref horizontalKeyDown),
-            new KeyPressedEvent(left, KeyPressedType.Up, ref horizontalKeyReleased),
-            new KeyPressedEvent(right, KeyPressedType.Up, ref horizontalKeyReleased),
+            new KeyPressedEvent(left, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
+            new KeyPressedEvent(right, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
+            new KeyPressedEvent(left, KeyPressedType.Down, new DelegateHolder("horizontalKeyDown")),
+            new KeyPressedEvent(right, KeyPressedType.Down, new DelegateHolder("horizontalKeyDown")),
+            new KeyPressedEvent(left, KeyPressedType.Up, new DelegateHolder("horizontalKeyReleased")),
+            new KeyPressedEvent(right, KeyPressedType.Up, new DelegateHolder("horizontalKeyReleased")),
 
             // vertical keys
-            new KeyPressedEvent(up, KeyPressedType.Held, ref verticalKeyHeld),
-            new KeyPressedEvent(down, KeyPressedType.Held, ref verticalKeyHeld),
-            new KeyPressedEvent(up, KeyPressedType.Down, ref verticalKeyDown),
-            new KeyPressedEvent(down, KeyPressedType.Down, ref verticalKeyDown),
-            new KeyPressedEvent(up, KeyPressedType.Up, ref verticalKeyReleased),
-            new KeyPressedEvent(down, KeyPressedType.Up, ref verticalKeyReleased),
+            new KeyPressedEvent(up, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
+            new KeyPressedEvent(down, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
+            new KeyPressedEvent(up, KeyPressedType.Down, new DelegateHolder("verticalKeyDown")),
+            new KeyPressedEvent(down, KeyPressedType.Down, new DelegateHolder("verticalKeyDown")),
+            new KeyPressedEvent(up, KeyPressedType.Up, new DelegateHolder("verticalKeyReleased")),
+            new KeyPressedEvent(down, KeyPressedType.Up, new DelegateHolder("verticalKeyReleased")),
 
             // select
-            new KeyPressedEvent(select, KeyPressedType.Down, ref selectKeyDown, 0.1f), // have a delay of 0.1 seconds for the select key
-            new KeyPressedEvent(select, KeyPressedType.Held, ref selectKeyHeld),
-            new KeyPressedEvent(select, KeyPressedType.Up, ref selectKeyReleased),
+            new KeyPressedEvent(select, KeyPressedType.Down, new DelegateHolder("selectKeyDown"), 0.1f), // have a delay of 0.1 seconds for the select key
+            new KeyPressedEvent(select, KeyPressedType.Held, new DelegateHolder("selectKeyHeld")),
+            new KeyPressedEvent(select, KeyPressedType.Up, new DelegateHolder("selectKeyReleased")),
 
             // fixed update events go in fixed update in massive if chains
         };
+
+        public void AddEvent(string handlerName, KeyPressedEventHandler delegateInput)
+        {
+            foreach (KeyPressedEvent e in events)
+            {
+                if (e.eventHandler.name == handlerName)
+                {
+                    e.eventHandler.handler += delegateInput;
+                    return;
+                }
+            }
+            throw new Exception($"no KeyPressedEvent with an event with name {handlerName}");
+        }
+
+        public void RemoveEvent(string handlerName, KeyPressedEventHandler delegateInput)
+        {
+            foreach (KeyPressedEvent e in events)
+            {
+                if (e.eventHandler.name == handlerName)
+                {
+                    e.eventHandler.handler -= delegateInput;
+                    return;
+                }
+            }
+            throw new Exception($"no KeyPressedEvent with an event with name {handlerName}");
+        }
 
         private void Awake()
         {
@@ -101,10 +127,8 @@ namespace spacegame
 
                     if (pressed)
                     {
-                        Debug.Log("pressed");
-                        Debug.Log(e.eventHandler is null);
-                        e.eventHandler?.Invoke(new KeyPressedEventArgs(e.key));
-                        if (e.eventHandler != null) yield return new WaitForSeconds(e.delay);
+                        e.eventHandler.handler?.Invoke(new KeyPressedEventArgs(e.key));
+                        if (e.eventHandler.handler != null) yield return new WaitForSeconds(e.delay);
                     }
                 }
                 yield return new WaitForEndOfFrame();
@@ -135,15 +159,26 @@ namespace spacegame
         {
             public KeyCode key;
             public KeyPressedType pressedType;
-            public KeyPressedEventHandler eventHandler;
+            public DelegateHolder eventHandler;
             public float delay;
 
-            public KeyPressedEvent(KeyCode key, KeyPressedType pressedType, ref KeyPressedEventHandler eventHandler, float delay = 0)
+            public KeyPressedEvent(KeyCode key, KeyPressedType pressedType, DelegateHolder eventHandler, float delay = 0)
             {
                 this.key = key;
                 this.pressedType = pressedType;
                 this.eventHandler = eventHandler;
                 this.delay = delay;
+            }
+        }
+
+        public class DelegateHolder
+        {
+            public string name;
+            public KeyPressedEventHandler handler;
+
+            public DelegateHolder(string name)
+            {
+                this.name = name;
             }
         }
     }
