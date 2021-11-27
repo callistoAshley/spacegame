@@ -71,7 +71,6 @@ namespace spacegame
 
         private void HorizontalMoveAnimation(InputManager.KeyPressedEventArgs e)
         {
-            Debug.Log("horizontal animation");
             if (!canMove) return;
 
             // walk animation
