@@ -428,6 +428,14 @@ MonoBehaviour:
   autoBgm: 
   transferPoints:
   - {x: 0, y: 0}
+  parallaxes:
+  - sprite: {fileID: 21300000, guid: 2e1e869cc6a0e224cb7f2414378a6fa2, type: 3}
+    followPlayerX: 1
+    followPlayerY: 1
+    dynamicResizeX: 0
+    dynamicResizeY: 0
+    scaleToScreen: 1
+  parallaxObjects: []
 --- !u!4 &181864139
 Transform:
   m_ObjectHideFlags: 0
@@ -495,7 +503,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -156519635
-  m_SortingLayer: 8
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 59e23e4b3e763f24297b373779681e8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -696,7 +704,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 62205549
-  m_SortingLayer: 5
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d99e73818edc974498c93193443550f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -919,7 +927,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1520363119
-  m_SortingLayer: 7
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7680a1314ef6882469ac8ca68307f0a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

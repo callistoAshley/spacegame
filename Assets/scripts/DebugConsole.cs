@@ -184,6 +184,20 @@ namespace spacegame
                     instance.Out(ex.Message);
                 }
             }
+
+            [Command("cam_size", 1)]
+            public static void CameraSize(string[] args)
+            {
+                try
+                {
+                    MainCamera.instance.GetComponent<Camera>().orthographicSize = float.Parse(args[0]);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log($"exception: {ex}");
+                    instance.Out(ex.Message);
+                }
+            }
         }
 
         private class CommandAttribute : Attribute

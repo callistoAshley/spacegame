@@ -56,6 +56,7 @@ namespace spacegame
             if (add)
             {
                 InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.AddEvent("horizontalKeyHeld", UpdateParallaxes);
                 InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
                 InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
@@ -63,6 +64,7 @@ namespace spacegame
             else
             {
                 InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.RemoveEvent("horizontalKeyHeld", UpdateParallaxes);
                 InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
                 InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
@@ -113,6 +115,16 @@ namespace spacegame
 
             int verticalVelocity = e.key == InputManager.down ? -1 : 1;
             transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
+        }
+
+        // update parallaxes
+        public void UpdateParallaxes(InputManager.KeyPressedEventArgs e)
+        {
+            foreach (Parallax p in MapData.map.parallaxObjects)
+            {
+                p.UpdateX(this);
+                p.UpdateY(this);
+            }
         }
 
         private void Flip()

@@ -27,7 +27,10 @@ namespace spacegame
                 + $"interpreter line: {(alisonscript.Interpreter.runningScript != null ? alisonscript.Interpreter.runningScript.lines[alisonscript.Interpreter.runningScript.lineIndex] : "<none>")}\n"
                 + $"cool robot: yup\n"
                 + $"delta: {Time.deltaTime}\n"
-                + $"rb: v: {(Controller.instance != null ? Controller.instance.rigidbody2d.velocity.ToString() : "<none>")}";
+                + $"rb: v: {(Controller.instance != null ? Controller.instance.rigidbody2d.velocity.ToString() : "<none>")} "
+                + $"av: {(Controller.instance != null ? Controller.instance.rigidbody2d.angularVelocity.ToString() : "<none>")} "
+                + $"d: {(Controller.instance != null ? Controller.instance.rigidbody2d.drag.ToString() : "<none>")} "
+                + $"ad: {(Controller.instance != null ? Controller.instance.rigidbody2d.angularDrag.ToString() : "<none>")} ";
         }
     }
 }

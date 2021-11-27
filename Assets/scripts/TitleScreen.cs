@@ -44,7 +44,7 @@ namespace spacegame
             }
         }
 
-        IEnumerator DebugCode()
+        private IEnumerator DebugCode()
         {
             // MOLLY
             foreach (KeyCode k in new KeyCode[] { KeyCode.M, KeyCode.O, KeyCode.L, KeyCode.L, KeyCode.Y })
