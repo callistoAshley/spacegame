@@ -18,19 +18,6 @@ namespace spacegame
         } 
 
         // key pressed events
-        public static KeyPressedEventHandler horizontalKeyHeld;
-        public static KeyPressedEventHandler horizontalKeyDown;
-        public static KeyPressedEventHandler horizontalKeyReleased;
-        public static KeyPressedEventHandler fixedHorizontalKeyHeld;
-
-        public static KeyPressedEventHandler verticalKeyHeld;
-        public static KeyPressedEventHandler verticalKeyDown;
-        public static KeyPressedEventHandler verticalKeyReleased;
-        public static KeyPressedEventHandler fixedVerticalKeyHeld;
-
-        public static KeyPressedEventHandler selectKeyHeld;
-        public static KeyPressedEventHandler selectKeyDown;
-        public static KeyPressedEventHandler selectKeyReleased;
 
         // key codes
         public static KeyCode left = KeyCode.LeftArrow;
@@ -48,18 +35,18 @@ namespace spacegame
         private KeyPressedEvent[] events = new KeyPressedEvent[]
         {
             // horizontal keys
-            new KeyPressedEvent(left, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
-            new KeyPressedEvent(right, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
             new KeyPressedEvent(left, KeyPressedType.Down, new DelegateHolder("horizontalKeyDown")),
             new KeyPressedEvent(right, KeyPressedType.Down, new DelegateHolder("horizontalKeyDown")),
+            new KeyPressedEvent(left, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
+            new KeyPressedEvent(right, KeyPressedType.Held, new DelegateHolder("horizontalKeyHeld")),
             new KeyPressedEvent(left, KeyPressedType.Up, new DelegateHolder("horizontalKeyReleased")),
             new KeyPressedEvent(right, KeyPressedType.Up, new DelegateHolder("horizontalKeyReleased")),
 
             // vertical keys
-            new KeyPressedEvent(up, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
-            new KeyPressedEvent(down, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
             new KeyPressedEvent(up, KeyPressedType.Down, new DelegateHolder("verticalKeyDown")),
             new KeyPressedEvent(down, KeyPressedType.Down, new DelegateHolder("verticalKeyDown")),
+            new KeyPressedEvent(up, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
+            new KeyPressedEvent(down, KeyPressedType.Held, new DelegateHolder("verticalKeyHeld")),
             new KeyPressedEvent(up, KeyPressedType.Up, new DelegateHolder("verticalKeyReleased")),
             new KeyPressedEvent(down, KeyPressedType.Up, new DelegateHolder("verticalKeyReleased")),
 
@@ -70,6 +57,9 @@ namespace spacegame
 
             // fixed update events go in fixed update in massive if chains
         };
+
+        public static KeyPressedEventHandler fixedHorizontalKeyHeld;
+        public static KeyPressedEventHandler fixedVerticalKeyHeld;
 
         public void AddEvent(string handlerName, KeyPressedEventHandler delegateInput)
         {
@@ -100,49 +90,51 @@ namespace spacegame
         private void Awake()
         {
             instance = this;
-            StartCoroutine(ProcessEventsLoop());
         }
+
+        // for self:
+        // the delegates ARE getting passed by reference, but Input.GetKeyDown is returning false because of the WaitForEndOfFrame
 
         // TODO: comment this 
         private IEnumerator ProcessEventsLoop()
         {
-            while (true)
+            foreach (KeyPressedEvent e in events)
             {
-                foreach (KeyPressedEvent e in events)
+                bool pressed = false;
+
+                switch (e.pressedType)
                 {
-                    bool pressed = false;
-
-                    switch (e.pressedType)
-                    {
-                        case KeyPressedType.Down:
-                            pressed = Input.GetKeyDown(e.key);
-                            break;
-                        case KeyPressedType.Held:
-                            pressed = Input.GetKey(e.key);
-                            break;
-                        case KeyPressedType.Up:
-                            pressed = Input.GetKeyUp(e.key);
-                            break;
-                    }
-
-                    if (pressed)
-                    {
-                        e.eventHandler.Invoke(e.key);
-                        if (e.eventHandler.handler != null) yield return new WaitForSeconds(e.delay);
-                    }
+                    case KeyPressedType.Down:
+                        pressed = Input.GetKeyDown(e.key);
+                        break;
+                    case KeyPressedType.Held:
+                        pressed = Input.GetKey(e.key);
+                        break;
+                    case KeyPressedType.Up:
+                        pressed = Input.GetKeyUp(e.key);
+                        break;
                 }
-                yield return new WaitForEndOfFrame();
+
+                if (pressed)
+                {
+                    e.eventHandler.Invoke(e.key); // i will spoon my eyes out
+                    if (e.eventHandler.handler != null) yield return new WaitForSeconds(e.delay);
+                }
             }
-            throw new Exception("broke out of input manager processing loop");
+        }
+
+        private void Update()
+        {
+            StartCoroutine(ProcessEventsLoop());
         }
 
         private void FixedUpdate()
         {
-            if (Input.GetKey(left)) fixedHorizontalKeyHeld?.Invoke(new KeyPressedEventArgs(KeyCode.LeftArrow));
-            if (Input.GetKey(right)) fixedHorizontalKeyHeld?.Invoke(new KeyPressedEventArgs(KeyCode.RightArrow));
+            if (Input.GetKey(left)) fixedHorizontalKeyHeld?.Invoke(new KeyPressedEventArgs(left));
+            if (Input.GetKey(right)) fixedHorizontalKeyHeld?.Invoke(new KeyPressedEventArgs(right));
 
-            if (Input.GetKey(up)) fixedVerticalKeyHeld?.Invoke(new KeyPressedEventArgs(KeyCode.UpArrow));
-            if (Input.GetKey(down)) fixedVerticalKeyHeld?.Invoke(new KeyPressedEventArgs(KeyCode.DownArrow));
+            if (Input.GetKey(up)) fixedVerticalKeyHeld?.Invoke(new KeyPressedEventArgs(up));
+            if (Input.GetKey(down)) fixedVerticalKeyHeld?.Invoke(new KeyPressedEventArgs(down));
         }
 
         public class KeyPressedEventArgs : EventArgs
