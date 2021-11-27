@@ -68,10 +68,8 @@ namespace spacegame
                 if (e.eventHandler.name == handlerName)
                 {
                     e.eventHandler.Add(delegateInput);
-                    return;
                 }
             }
-            throw new Exception($"no KeyPressedEvent with an event with name {handlerName}");
         }
 
         public void RemoveEvent(string handlerName, KeyPressedEventHandler delegateInput)
@@ -81,10 +79,8 @@ namespace spacegame
                 if (e.eventHandler.name == handlerName)
                 {
                     e.eventHandler.Remove(delegateInput);
-                    return;
                 }
             }
-            throw new Exception($"no KeyPressedEvent with an event with name {handlerName}");
         }
 
         private void Awake()
@@ -92,10 +88,8 @@ namespace spacegame
             instance = this;
         }
 
-        // for self:
-        // the delegates ARE getting passed by reference, but Input.GetKeyDown is returning false because of the WaitForEndOfFrame
-
         // TODO: comment this 
+        private bool dontProcessQueue;
         private IEnumerator ProcessEventsLoop()
         {
             foreach (KeyPressedEvent e in events)
@@ -118,14 +112,22 @@ namespace spacegame
                 if (pressed)
                 {
                     e.eventHandler.Invoke(e.key); // i will spoon my eyes out
-                    if (e.eventHandler.handler != null) yield return new WaitForSeconds(e.delay);
+                    if (e.eventHandler.handler != null && e.delay > 0)
+                    {
+                        dontProcessQueue = true;
+                        yield return new WaitForSeconds(e.delay);
+                        dontProcessQueue = false;
+                    }
                 }
             }
         }
 
         private void Update()
         {
-            StartCoroutine(ProcessEventsLoop());
+            if (!dontProcessQueue)
+            {
+                StartCoroutine(ProcessEventsLoop());
+            }
         }
 
         private void FixedUpdate()
