@@ -12,7 +12,7 @@ namespace spacegame
         public static MainCamera instance;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             instance = this;
             if (player == null) player = GameObject.Find("alison");
