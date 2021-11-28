@@ -89,7 +89,7 @@ namespace spacegame
         }
 
         // TODO: comment this 
-        private bool dontProcessQueue;
+        private List<KeyCode> blacklist = new List<KeyCode>();
         private IEnumerator ProcessEventsLoop()
         {
             foreach (KeyPressedEvent e in events)
@@ -109,14 +109,15 @@ namespace spacegame
                         break;
                 }
 
-                if (pressed)
+                if (pressed && !blacklist.Contains(e.key))
                 {
                     e.eventHandler.Invoke(e.key); // i will spoon my eyes out
+
                     if (e.eventHandler.handler != null && e.delay > 0)
                     {
-                        dontProcessQueue = true;
+                        blacklist.Add(e.key);
                         yield return new WaitForSeconds(e.delay);
-                        dontProcessQueue = false;
+                        blacklist.Remove(e.key);
                     }
                 }
             }
@@ -124,10 +125,7 @@ namespace spacegame
 
         private void Update()
         {
-            if (!dontProcessQueue)
-            {
-                StartCoroutine(ProcessEventsLoop());
-            }
+            StartCoroutine(ProcessEventsLoop());
         }
 
         private void FixedUpdate()
