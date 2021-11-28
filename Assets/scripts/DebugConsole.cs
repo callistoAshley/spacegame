@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
@@ -177,6 +178,25 @@ namespace spacegame
                 try
                 {
                     MapManager.ChangeMap(args[0], args.Length > 1 ? int.Parse(args[1]) : 0);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log($"exception: {ex}");
+                    instance.Out(ex.Message);
+                }
+            }
+
+            [Command("maps")]
+            public static void MapList(string[] args)
+            {
+                try
+                {
+                    string[] sceneNames = new string[SceneManager.sceneCount];
+
+                    for (int i = 0; i < SceneManager.sceneCount; i++)
+                        sceneNames[i] = SceneManager.GetSceneAt(i).name;
+
+                    instance.Out(string.Join(",", sceneNames));
                 }
                 catch (Exception ex)
                 {
