@@ -38,7 +38,6 @@ namespace spacegame
 
         private void CreateStar(bool fadeIn)
         {
-            Debug.Log("creating a star");
             // pick random position (relative to the camera)
             Vector2 position = new Vector2(
                 UnityEngine.Random.Range(-5.2f, 5.3f),
