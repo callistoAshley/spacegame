@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace spacegame
 {
@@ -211,6 +212,24 @@ namespace spacegame
                 try
                 {
                     MainCamera.instance.GetComponent<Camera>().orthographicSize = float.Parse(args[0]);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log($"exception: {ex}");
+                    instance.Out(ex.Message);
+                }
+            }
+
+            [Command("scripts")]
+            public static void ScriptsList(string[] args)
+            {
+                try
+                {
+                    IEnumerable<string> files = Directory.EnumerateFiles(Application.streamingAssetsPath + "/alisonscript", "*.alisonscript", SearchOption.AllDirectories);
+                    List<string> filesList = files.ToList();
+                    filesList.ForEach((string file) => file = file.Remove(0, file.LastIndexOf("\\")));
+
+                    instance.Out(string.Join(",", filesList));
                 }
                 catch (Exception ex)
                 {

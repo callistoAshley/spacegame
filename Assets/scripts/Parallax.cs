@@ -10,7 +10,7 @@ namespace spacegame
     public class Parallax : MonoBehaviour
     {
         public ParallaxData data;
-        [HideInInspector] public float moveSpeedMultiplier;
+        /*[HideInInspector] */public float moveSpeedMultiplier;
 
         public void Init()
         {

@@ -51,6 +51,16 @@ namespace spacegame
             ToggleMovementHooks(true);
         }
 
+        private void Update()
+        {
+            // are we falling/has unity's physics engine gone WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+            if (rigidbody2d.velocity != Vector2.zero)
+            {
+                // update the parallaxes y
+                UpdateParallaxesY(new InputManager.KeyPressedEventArgs(KeyCode.None));
+            }
+        }
+
         public void ToggleMovementHooks(bool add)
         {
             if (add)

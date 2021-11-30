@@ -25,6 +25,7 @@ namespace spacegame
 
             // create parallaxes
             GameObject parallax = PrefabManager.instance.GetPrefab("parallax object");
+
             for (int i = 0; i < parallaxes?.Length; i++)
             {
                 // instantiate the prefab at the origin point
@@ -36,7 +37,8 @@ namespace spacegame
                 // set the data and add the parallax to the parallaxObjects list
                 Parallax p = inst.GetComponent<Parallax>();
                 p.data = parallaxes[i];
-                p.moveSpeedMultiplier = (i + 1) * 0.1f;
+                // set move speed multiplier so that the parallax at the front (deeper in the array) moves slowest and the back (earlier in the array) moves fastest
+                p.moveSpeedMultiplier = (i + 1) * 0.1f; 
                 parallaxObjects.Add(p);
 
                 // call init
