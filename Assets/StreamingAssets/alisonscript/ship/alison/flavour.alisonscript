@@ -3,6 +3,12 @@ cond "@in_args0"
         ;spk "|alison the robot| it's my console it has a lot of buttons"
         ;spk "|alison the robot| but i can't reach them without standing on my chair"
         #;goto "spin_on_chair"
+        ;end_processing
+    when "chair"
+        ;spk "|alison the robot| it's a chair"
+        ;spk "|alison the robot| i like to spin around on it"
+        # alisonscript bug rn where having more than one branch in a conditional throws a stray end statement error
+        ;end_processing
 end
 
 ;end_processing
