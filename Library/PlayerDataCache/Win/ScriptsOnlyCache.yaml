@@ -126,9 +126,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11504}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11608}
     - Class: 114
-      Script: {instanceID: 11612}
+      Script: {instanceID: 11614}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -197,7 +197,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11272}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -268,7 +268,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11272}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -333,7 +333,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11272}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -402,11 +402,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11272}
     - Class: 114
-      Script: {instanceID: 11560}
+      Script: {instanceID: 11530}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11562}
     - Class: 114
-      Script: {instanceID: 14688}
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -459,11 +459,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11272}
     - Class: 114
-      Script: {instanceID: 11560}
+      Script: {instanceID: 11530}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11562}
     - Class: 114
-      Script: {instanceID: 14688}
+      Script: {instanceID: 11608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -955,6 +955,12 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: spacegame
+    className: Stars
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1019,12 +1025,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: spacegame
-    className: Stars
   platform: 5
   scenePathNames:
   - Assets/scenes/0init.unity
@@ -1033,4 +1033,4 @@ ScriptsOnlyBuild:
   - Assets/scenes/debug_guy.unity
   - Assets/scenes/debug_npctest.unity
   - Assets/scenes/debug_parallax.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/29NOV2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/30NOV2021/space!!!!.exe
