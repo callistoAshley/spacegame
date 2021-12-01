@@ -24,7 +24,9 @@ namespace spacegame
         public static KeyCode right = KeyCode.RightArrow;
         public static KeyCode up = KeyCode.UpArrow;
         public static KeyCode down = KeyCode.DownArrow;
+        public static KeyCode run = KeyCode.LeftShift;
         public static KeyCode select = KeyCode.Z;
+        public static KeyCode menu = KeyCode.Escape;
 
         // singleton instance
         public static InputManager instance;

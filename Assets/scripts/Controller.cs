@@ -11,7 +11,7 @@ namespace spacegame
         public float speedMultiplier = 1; // run/walk speed is always multiplied by speedMultiplier
         private float walkSpeed => 5 * speedMultiplier;
         private float runSpeed => 7 * speedMultiplier;
-        public float movementSpeed => Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed; // actual movement speed
+        public float movementSpeed => Input.GetKey(InputManager.run) ? runSpeed : walkSpeed; // actual movement speed
 
         // other movement
         public bool canMove = true;
