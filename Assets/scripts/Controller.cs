@@ -31,6 +31,20 @@ namespace spacegame
             }
         }
 
+        // can open menu
+        private bool _canOpenMenu;
+        public bool canOpenMenu
+        {
+            get
+            {
+                return canMove || _canOpenMenu;
+            }
+            set
+            {
+                _canOpenMenu = value;
+            }
+        }
+
         // components
         [HideInInspector] public Animator animator;
         [HideInInspector] public BoxCollider2D coll;
@@ -58,6 +72,17 @@ namespace spacegame
             {
                 // update the parallaxes y
                 UpdateParallaxesY(new InputManager.KeyPressedEventArgs(KeyCode.None));
+            }
+
+            // open in game menu
+            if (Input.GetKeyDown(InputManager.menu) && canOpenMenu)
+            {
+                // disable movement
+                canMove = !canMove;
+
+                // open menu
+                // the menu manager has a boolean that determines whether it's open, and return on the first line of this method if it is
+                InGameMenuManager.Open();
             }
         }
 
