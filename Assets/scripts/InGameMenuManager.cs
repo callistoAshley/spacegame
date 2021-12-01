@@ -72,7 +72,7 @@ namespace spacegame
                             UI.PrintTextOptions.Instant | UI.PrintTextOptions.DestroyUIAfterCallback | UI.PrintTextOptions.CallbackAfterInput);
 
                         // also destroy the textbox after the callback
-                        textbox.alsoDestroy.Add(options);
+                        options.alsoDestroy.Add(textbox);
 
                         // set the options
                         options.SetOptions(new string[]
@@ -102,7 +102,7 @@ namespace spacegame
                     
                     textbox.StartCoroutine(textbox.PrintText(
                         $"are you sure you want to return to the title screen? (last saved format this seconds ago)",
-                        createOptions, UI.PrintTextOptions.CallbackAfterPrinting));
+                        createOptions, UI.PrintTextOptions.CallbackAfterPrinting | UI.PrintTextOptions.DontPushToInputQueue));
 
                     break;
             }

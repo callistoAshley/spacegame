@@ -10,6 +10,7 @@ namespace spacegame
     {
         public static UIManager instance;
         public Stack<UI> inputQueue = new Stack<UI>(); // a stack is a LAST IN FIRST OUT queue
+        public bool canProcessInputQueue = true;
 
         public GameObject canvas;
 
@@ -29,8 +30,8 @@ namespace spacegame
 
         public void ProcessInputQueue(InputManager.KeyPressedEventArgs e)
         {
-            // only continue if the queue isn't empty
-            if (inputQueue.Count == 0) return;
+            // only continue if the queue isn't empty or we can process the input queue
+            if (inputQueue.Count == 0 || !canProcessInputQueue) return;
 
             // get the first object
             UI ui = inputQueue.Peek();
@@ -42,11 +43,14 @@ namespace spacegame
             else if (e.key == InputManager.select)
             {
                 ui.inputProcessedCallback.Invoke(); // invoke the callback
-
-                // check if the ui has been destroyed, and if it has, dequeue it
-                if (ui.readyToDequeue) // unity doesn't actually dispose objects when you use destroy for no reason 
-                    inputQueue.Pop(); // pop
             }
+        }
+
+        // dequeue the top ui from the input queue if it's ready to dequeue
+        private void Update()
+        {
+            if (inputQueue.Count > 0 && inputQueue.Peek().readyToDequeue)  
+                inputQueue.Pop(); // pop
         }
 
         public UI New(Vector2 position, Vector2 size) 
