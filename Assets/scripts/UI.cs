@@ -28,6 +28,7 @@ namespace spacegame
             DontCallback = 0b_0000_1000,
             DestroyUIAfterCallback = 0b_0001_0000,
             Instant = 0b_0010_0000,
+            DontPushToInputQueue = 0b_0100_0000,
         }
 
         public virtual void Initialize(Vector2 size)
@@ -50,12 +51,16 @@ namespace spacegame
             text.alignment = alignment;
         }
 
+        // TODO: tidy this up
         // also check out the stack overflow page i stole this code from: https://www.taste.com.au/recipes/collections/spaghetti-recipes
         public virtual IEnumerator PrintText(
             string text, // text input
             Action callback = null, // callback (in alisonscript this is usually just increment the line index)
             PrintTextOptions options = PrintTextOptions.CallbackAfterInput) // options
         {
+            // disallow processing the input queue until the coroutine has finished
+            UIManager.instance.canProcessInputQueue = false;
+
             // automatically skip through the text if holding left ctrl
             if (Input.GetKey(KeyCode.LeftControl))
             {
@@ -126,23 +131,31 @@ namespace spacegame
                     });
                 }
 
-                //Debug.Log("enqueing " + text);
-                UIManager.instance.inputQueue.Push(this);
+                // add to input queue
+                if (!options.HasFlag(PrintTextOptions.DontPushToInputQueue))
+                    AddToInputQueue();
+
+                // allow processing the input queue
+                UIManager.instance.canProcessInputQueue = true;
             }
         }
 
         public void AddToInputQueue()
         {
-            UIManager.instance.inputQueue.Push(this);
+            if (!UIManager.instance.inputQueue.Contains(this))
+                UIManager.instance.inputQueue.Push(this);
         }
 
         public void DestroyGameObject()
         {
             foreach (UI ui in alsoDestroy)
-                ui.DestroyGameObject();
+                ui?.DestroyGameObject();
             Destroy(gameObject);
+        }
 
-            readyToDequeue = true; // unity is the worst game development engine istg
+        private void OnDestroy()
+        {
+            readyToDequeue = true;
         }
     }
 }

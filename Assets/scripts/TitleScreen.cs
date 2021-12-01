@@ -54,7 +54,7 @@ namespace spacegame
 
             UI ui = UIManager.instance.New(new Vector2(-220, -60), new Vector2(440, 240));
             StartCoroutine(ui.PrintText("wow it's debug mode", 
-                options: UI.PrintTextOptions.DestroyUIAfterCallback));
+                options: UI.PrintTextOptions.DestroyUIAfterCallback | UI.PrintTextOptions.CallbackAfterInput));
         }
     }
 }
