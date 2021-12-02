@@ -159,6 +159,7 @@ namespace spacegame
             foreach (UI ui in alsoDestroy)
                 ui?.DestroyGameObject();
             Destroy(gameObject);
+            Destroy(this);
         }
 
         private void OnDestroy()
