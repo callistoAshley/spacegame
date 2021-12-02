@@ -108,10 +108,18 @@ namespace spacegame
             }
             if (options.HasFlag(PrintTextOptions.CallbackAfterInput))
             {
+                // if the options has the destroy ui after callback flag, add destroy game object to the input processed callback
+                if (options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
+                    inputProcessedCallback += DestroyGameObject;
+                // if a callback was given, add it to the input processed callback
+                if (callback != null)
+                    inputProcessedCallback += callback;
+
+                /*
                 // if a callback wasn't given and we're told to destroy the ui, destroy the ui
                 if (callback is null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
                 {
-                    inputProcessedCallback = new Action(() => DestroyGameObject());
+                    
                 }
                 // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
                 else if (callback != null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
@@ -129,7 +137,7 @@ namespace spacegame
                     {
                         callback.Invoke();
                     });
-                }
+                }*/
 
                 // add to input queue
                 if (!options.HasFlag(PrintTextOptions.DontPushToInputQueue))

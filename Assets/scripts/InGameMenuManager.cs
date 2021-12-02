@@ -14,6 +14,7 @@ namespace spacegame
 
         public static void Open()
         {
+            Debug.Log("opening");
             // don't open the menu if it's already open
             if (open) return;
             open = !open;
@@ -35,11 +36,11 @@ namespace spacegame
         public static void Close()
         {
             Debug.Log("closing");
-            if (!open) return;
-            open = !open;
+            open = false;
 
             // destroy ui
             ui.DestroyGameObject();
+            ui.readyToDequeue = true;
             ui = null;
 
             // allow movement
@@ -68,7 +69,7 @@ namespace spacegame
                     Action createOptions = new Action(() =>
                     {
                         // create navigateable
-                        options = UIManager.instance.NewNavigateable(new Vector2(92, -134), new Vector2(485, 100), 
+                        options = UIManager.instance.NewNavigateable(new Vector2(92, -134), new Vector2(485, 50), 
                             UI.PrintTextOptions.Instant | UI.PrintTextOptions.DestroyUIAfterCallback | UI.PrintTextOptions.CallbackAfterInput);
 
                         // also destroy the textbox after the callback
@@ -83,8 +84,6 @@ namespace spacegame
                         // callback
                         new Action(() => 
                         {
-                            Close();
-
                             switch (options.selectedOption)
                             {
                                 case "no": // do nothing
@@ -92,6 +91,7 @@ namespace spacegame
                                     options.DestroyGameObject();
                                     break;
                                 case "yes":
+                                    Close();
                                     MapManager.ChangeMap("title");
                                     break;
                             }
