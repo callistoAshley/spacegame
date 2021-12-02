@@ -46,23 +46,6 @@ namespace spacegame
             }
         }
 
-        public UI[] skadoobly;
-        // dequeue the top ui from the input queue if it's ready to dequeue
-        private void Update()
-        {
-            skadoobly = inputQueue.ToArray();
-            if (inputQueue.Count > 0 && inputQueue.Peek().readyToDequeue)
-            {
-                Debug.Log("popping " + inputQueue.Peek().text.text);
-                inputQueue.Pop(); // pop
-            }
-            /*
-            else if (inputQueue.Count == 0)
-            {
-                Debug.Log("input queue count is 0");
-            }*/
-        }
-
         public UI New(Vector2 position, Vector2 size) 
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas

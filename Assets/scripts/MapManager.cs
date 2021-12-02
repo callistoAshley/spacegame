@@ -16,6 +16,8 @@ namespace spacegame
         public static void ChangeMap(string name, int transferPoint = 0)
         {
             Controller.instance?.ToggleMovementHooks(false);
+            InputManager.instance.RemoveEvent("verticalKeyDown", UIManager.instance.ProcessInputQueue);
+            InputManager.instance.RemoveEvent("selectKeyDown", UIManager.instance.ProcessInputQueue);
 
             // load the scene
             AsyncOperation a = SceneManager.LoadSceneAsync(name);
