@@ -14,7 +14,6 @@ namespace spacegame
 
         public static void Open()
         {
-            Debug.Log("opening");
             // don't open the menu if it's already open
             if (open) return;
             open = !open;
@@ -26,16 +25,15 @@ namespace spacegame
             ui.SetOptions(new string[]
             {
                 "back",
-                "save",
-                "settings",
                 "inventory",
+                "settings",
+                "save",
                 "title"
             }, new Action(() => ProcessMenuButton(ui.selectedOption)));
         }
 
         public static void Close()
         {
-            Debug.Log("closing");
             open = false;
 
             // destroy ui
@@ -54,11 +52,11 @@ namespace spacegame
                 case "back":
                     Close();
                     break;
-                case "save":
+                case "inventory":
                     break;
                 case "settings":
                     break;
-                case "inventory":
+                case "save":
                     break;
                 // return to title screen
                 case "title":
