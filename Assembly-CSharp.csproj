@@ -101,13 +101,40 @@
     <Compile Include="Assets\scripts\UI.cs" />
     <Compile Include="Assets\scripts\UIManager.cs" />
     <Compile Include="Assets\scripts\UINavigateable.cs" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\net20\Newtonsoft.Json.xml" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\net35\Newtonsoft.Json.xml" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\netstandard2.0\Newtonsoft.Json.xml" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\netstandard1.0\Newtonsoft.Json.xml" />
     <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.xml" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\net40\Newtonsoft.Json.xml" />
-    <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\netstandard1.3\Newtonsoft.Json.xml" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -286,25 +313,7 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net20/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net35/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net40/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
       <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard1.0/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard1.3/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/maste/Desktop/Unity Projects/space!!!!/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -659,9 +668,6 @@
     </Reference>
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
-    </Reference>
-    <Reference Include="Newstonsoft.Json">
-      <HintPath>/Packages/Newtonsoft.Json.13.0.1/lib/net45/Newstonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
