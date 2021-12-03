@@ -12,6 +12,8 @@ namespace spacegame
         public GameObject debugConsole;
         public Text debugText;
 
+        public static string lastLogMessage;
+
         // Update is called once per frame
         void Update()
         {
@@ -30,7 +32,8 @@ namespace spacegame
                 + $"rb: v: {(Controller.instance != null ? Controller.instance.rigidbody2d.velocity.ToString() : "<none>")} "
                 + $"av: {(Controller.instance != null ? Controller.instance.rigidbody2d.angularVelocity.ToString() : "<none>")} "
                 + $"d: {(Controller.instance != null ? Controller.instance.rigidbody2d.drag.ToString() : "<none>")} "
-                + $"ad: {(Controller.instance != null ? Controller.instance.rigidbody2d.angularDrag.ToString() : "<none>")} ";
+                + $"ad: {(Controller.instance != null ? Controller.instance.rigidbody2d.angularDrag.ToString() : "<none>")}\n"
+                + $"last log message: {lastLogMessage}";
         }
     }
 }

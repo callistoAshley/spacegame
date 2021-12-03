@@ -16,9 +16,9 @@ namespace spacegame
             trigger = GetComponent<BoxCollider2D>();
         }
 
-        private IEnumerator OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (closing || opening) yield break;
+            if (closing || opening) return;
 
             if (collision.CompareTag("Player"))
             {
@@ -68,9 +68,9 @@ namespace spacegame
             }
         }
 
-        private IEnumerator OnTriggerExit2D(Collider2D collision)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (closing || opening) yield break;
+            if (closing || opening) return;
 
             if (collision.CompareTag("Player"))
             {

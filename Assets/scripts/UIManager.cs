@@ -46,6 +46,14 @@ namespace spacegame
             }
         }
 
+        private void Update()
+        {
+            if (inputQueue.Count > 0 && inputQueue.Peek().readyToDequeue)
+            {
+                inputQueue.Pop(); // pop
+            }
+        }
+
         public UI New(Vector2 position, Vector2 size) 
         {
             // get prefab from PrefabManager and instantiate it as a child of the canvas

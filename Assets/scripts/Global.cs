@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 namespace spacegame
 {
@@ -21,6 +22,51 @@ namespace spacegame
             instance = this;
 
             Init.Initialization();
+
+            Application.logMessageReceived += LogMessageHandler;
+        }
+
+        private void LogMessageHandler(string condition, string stackTrace, LogType type)
+        {
+            DebugUI.lastLogMessage = $"msg: {condition} type: {type}";
+
+            // exception handler
+            if (type == LogType.Exception)
+            {
+                try
+                {
+                    Debug.Log($"\n===============================\n" +
+                        $"exception: {condition}\n{stackTrace}" +
+                        $"\n===============================\n");
+
+                    // get prefab
+                    GameObject g = PrefabManager.instance.GetPrefab("exception msg");
+                    Instantiate(g,
+                        // ui manager is attached to the canvas
+                        UIManager.instance.transform.position, Quaternion.identity, UIManager.instance.transform);
+                    // set text
+                    g.GetComponentInChildren<Text>().text = $"an exception was encountered:\n\n{condition}\n{stackTrace.Substring(0, 200) + "..."}\n\nthe full stack trace was logged";
+
+                    Debug.Log($"\n===============================\n");
+
+                    // this doesn't work for no reason
+                    // get handy dandies to destroy the ui after the select key is pressed unless the handy dandies instance is null
+                    StartCoroutine(HandyDandies.instance?.DoAfter(() => Input.GetKeyDown(InputManager.select), () => Destroy(g)));
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log("\n===============================\n" +
+                        "an exception was encountered while handling an exception:" +
+                        "\n===============================\n");
+
+                    Debug.Log($"original exception:\n{condition}\n{stackTrace}" +
+                        $"\n===============================\n");
+
+                    Debug.Log($"new exception:\n{ex}\n===============================\n");
+
+                    Application.Quit();
+                }
+            }
         }
 
         public void EnterDebugMode()
