@@ -26,7 +26,6 @@ namespace spacegame
 
             // init items
             InventoryManager.InitItems();
-            InventoryManager.GenerateItemDataSkeleton(Application.streamingAssetsPath + "\\item_data.json");
 
             // then go to title screen
             MapManager.ChangeMap("title");
