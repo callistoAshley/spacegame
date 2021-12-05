@@ -124,118 +124,86 @@ namespace spacegame
 
             public static void Call(string command, string[] args)
             {
-                args = args.Skip(1).ToArray();
-
-                foreach (string s in commands.Keys)
+                try
                 {
-                    if (s == command)
+                    args = args.Skip(1).ToArray();
+
+                    foreach (string s in commands.Keys)
                     {
-                        CommandAttribute c = (CommandAttribute)commands[s].GetMethodInfo().GetCustomAttribute(typeof(CommandAttribute));
-                        // catch insufficient args
-                        if (args.Length < c.minimumArgs)
+                        if (s == command)
                         {
-                            instance.Out($"insufficient args for command \"{command}\" ({c.minimumArgs} expected, received {args.Length})");
+                            CommandAttribute c = (CommandAttribute)commands[s].GetMethodInfo().GetCustomAttribute(typeof(CommandAttribute));
+                            // catch insufficient args
+                            if (args.Length < c.minimumArgs)
+                            {
+                                instance.Out($"insufficient args for command \"{command}\" ({c.minimumArgs} expected, received {args.Length})");
+                                return;
+                            }
+
+                            // Debug.Log($"exception: {ex}");
+                            // instance.Out(ex.Message);
+                            commands[command].DynamicInvoke(new object[] { args });
                             return;
                         }
-
-                        commands[command].DynamicInvoke(new object[] { args });
-                        return;
                     }
+                    instance.Out($"no debug command \"{command}\"");
                 }
-                instance.Out($"no debug command \"{command}\"");
+                catch (Exception ex)
+                {
+                    Debug.Log($"exception: {ex}");
+                    instance.Out(ex.Message);
+                }
             }
 
             [Command("help")]
             public static void Help(string[] args)
             {
-                try
-                {
-                    instance.Out($"commands:\n{string.Join(",", commands.Keys)}");
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log(ex.ToString());
-                    instance.Out(ex.Message);
-                }
+                instance.Out($"commands:\n{string.Join(",", commands.Keys)}");
             }
 
             [Command("clear")]
             public static void Clear(string[] args)
             {
-                try
-                {
-                    instance.text.text = string.Empty;
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"exception: {ex}");
-                    instance.Out(ex.Message);
-                }
+                instance.text.text = string.Empty;
             }
 
             [Command("change_map", 1)]
             public static void ChangeMap(string[] args)
             {
-                try
-                {
-                    MapManager.ChangeMap(args[0], args.Length > 1 ? int.Parse(args[1]) : 0);
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"exception: {ex}");
-                    instance.Out(ex.Message);
-                }
+                MapManager.ChangeMap(args[0], args.Length > 1 ? int.Parse(args[1]) : 0);
             }
 
             [Command("maps")]
             public static void MapList(string[] args)
             {
-                try
-                {
-                    string[] sceneNames = new string[SceneManager.sceneCount];
+                string[] sceneNames = new string[SceneManager.sceneCount];
 
-                    for (int i = 0; i < SceneManager.sceneCount; i++)
-                        sceneNames[i] = SceneManager.GetSceneAt(i).name;
+                for (int i = 0; i < SceneManager.sceneCount; i++)
+                    sceneNames[i] = SceneManager.GetSceneAt(i).name;
 
-                    instance.Out(string.Join(",", sceneNames));
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"exception: {ex}");
-                    instance.Out(ex.Message);
-                }
+                instance.Out(string.Join(",", sceneNames));
             }
 
             [Command("cam_size", 1)]
             public static void CameraSize(string[] args)
             {
-                try
-                {
-                    MainCamera.instance.GetComponent<Camera>().orthographicSize = float.Parse(args[0]);
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"exception: {ex}");
-                    instance.Out(ex.Message);
-                }
+                MainCamera.instance.GetComponent<Camera>().orthographicSize = float.Parse(args[0]);
             }
 
             [Command("scripts")]
             public static void ScriptsList(string[] args)
             {
-                try
-                {
-                    IEnumerable<string> files = Directory.EnumerateFiles(Application.streamingAssetsPath + "/alisonscript", "*.alisonscript", SearchOption.AllDirectories);
-                    List<string> filesList = files.ToList();
-                    filesList.ForEach((string file) => file = file.Remove(0, file.LastIndexOf("\\")));
+                IEnumerable<string> files = Directory.EnumerateFiles(Application.streamingAssetsPath + "/alisonscript", "*.alisonscript", SearchOption.AllDirectories);
+                List<string> filesList = files.ToList();
+                filesList.ForEach((string file) => file = file.Remove(0, file.LastIndexOf("\\")));
 
-                    instance.Out(string.Join(",", filesList));
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"exception: {ex}");
-                    instance.Out(ex.Message);
-                }
+                instance.Out(string.Join(",", filesList));
+            }
+
+            [Command("give_item", 1)]
+            public static void GiveItem(string[] args)
+            {
+                InventoryManager.GiveItem(args[0]);
             }
         }
 

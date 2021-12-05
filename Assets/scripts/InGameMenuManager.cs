@@ -56,6 +56,7 @@ namespace spacegame
                     Close();
                     break;
                 case "inventory":
+                    InventoryManager.OpenUI();
                     break;
                 case "settings":
                     break;
