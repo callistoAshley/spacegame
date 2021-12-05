@@ -53,6 +53,139 @@ namespace spacegame
         // singleton
         public static Controller instance;
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // Public Methods
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void ToggleMovementHooks(bool add)
+        {
+            if (add)
+            {
+                InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.AddEvent("horizontalKeyHeld", UpdateParallaxesX);
+                InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
+                InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
+                InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
+            }
+            else
+            {
+                InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
+                InputManager.instance.RemoveEvent("horizontalKeyHeld", UpdateParallaxesX);
+                InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
+                InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
+                InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
+            }
+        }
+
+        public void SetGravity(float gravity)
+        {
+            rigidbody2d.gravityScale = gravity;
+        }
+
+        public void StopHorizontalAnimation()
+        {
+            if (!canMove) return;
+
+            animator.ResetTrigger("walking");
+            animator.SetTrigger("idle");
+
+            // stop the followers from walking
+            foreach (Follower f in followers)
+                f.StopWalking();
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // Public Methods (for events)
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void HorizontalMovement(InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove) return;
+            UpdateFollowers();
+
+            int horizontalVelocity = e.key == InputManager.left ? -1 : 1;
+            transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
+        }
+
+        public void VerticalMovement(InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove) return;
+            UpdateFollowers();
+
+            int verticalVelocity = e.key == InputManager.down ? -1 : 1;
+            transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
+        }
+
+        public void UpdateParallaxesX(InputManager.KeyPressedEventArgs e)
+        {
+            foreach (Parallax p in MapData.map.parallaxObjects)
+            {
+                p.UpdateX(this);
+            }
+        }
+
+        public void UpdateParallaxesY(InputManager.KeyPressedEventArgs e)
+        {
+            foreach (Parallax p in MapData.map.parallaxObjects)
+            {
+                p.UpdateY(this);
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // Private Methods
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void Flip()
+        {
+            if (!canMove) return;
+
+            // flip sprite by inverting x value of scale
+            facingRight = !facingRight;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+
+        private void UpdateFollowers()
+        {
+            // use i as a parameter to determine the offset from the last follower
+            for (int i = 0; i < followers.Count; i++)
+                followers[i].UpdatePosition(i);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // Private Methods (for events)
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void ProcessInteraction(InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove || !canInteract || alisonscript.Interpreter.interpreterRunning) return;
+
+            interactable.OnInteract();
+        }
+
+        private void HorizontalMoveAnimation(InputManager.KeyPressedEventArgs e)
+        {
+            if (!canMove) return;
+
+            // walk animation
+            animator.SetTrigger("walking");
+
+            // flip
+            if (e.key == InputManager.right && !facingRight)
+                Flip();
+            else if (e.key == InputManager.left && facingRight)
+                Flip();
+        }
+
+        private void StopHorizontalAnimation(InputManager.KeyPressedEventArgs e)
+        {
+            StopHorizontalAnimation();
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // Unity
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -84,118 +217,6 @@ namespace spacegame
                 // the menu manager has a boolean that determines whether it's open, and return on the first line of this method if it is
                 InGameMenuManager.Open();
             }
-        }
-
-        public void ToggleMovementHooks(bool add)
-        {
-            if (add)
-            {
-                InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.AddEvent("horizontalKeyHeld", UpdateParallaxesX);
-                InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
-                InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
-                InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
-            }
-            else
-            {
-                InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.RemoveEvent("horizontalKeyHeld", UpdateParallaxesX);
-                InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
-                InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
-                InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
-            }
-        }
-
-        private void HorizontalMoveAnimation(InputManager.KeyPressedEventArgs e)
-        {
-            if (!canMove) return;
-
-            // walk animation
-            animator.SetTrigger("walking");
-
-            // flip
-            if (e.key == InputManager.right && !facingRight)
-                Flip();
-            else if (e.key == InputManager.left && facingRight)
-                Flip();
-        }
-
-        private void StopHorizontalAnimation(InputManager.KeyPressedEventArgs e)
-        {
-            if (!canMove) return;
-
-            animator.ResetTrigger("walking");
-            animator.SetTrigger("idle");
-
-            // stop the followers from walking
-            foreach (Follower f in followers) 
-                f.StopWalking();
-        }
-
-        // horizontal movement
-        public void HorizontalMovement(InputManager.KeyPressedEventArgs e)
-        {
-            if (!canMove) return;
-            UpdateFollowers();
-
-            int horizontalVelocity = e.key == InputManager.left ? -1 : 1;
-            transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
-        }
-
-        // vertical movement
-        public void VerticalMovement(InputManager.KeyPressedEventArgs e)
-        {
-            if (!canMove) return;
-            UpdateFollowers();
-
-            int verticalVelocity = e.key == InputManager.down ? -1 : 1;
-            transform.Translate(0, verticalVelocity * movementSpeed * Time.deltaTime, 0);
-        }
-
-        // update parallaxes
-        public void UpdateParallaxesX(InputManager.KeyPressedEventArgs e)
-        {
-            foreach (Parallax p in MapData.map.parallaxObjects)
-            {
-                p.UpdateX(this);
-            }
-        }
-
-        public void UpdateParallaxesY(InputManager.KeyPressedEventArgs e)
-        {
-            foreach (Parallax p in MapData.map.parallaxObjects)
-            {
-                p.UpdateY(this);
-            }
-        }
-
-        private void Flip()
-        {
-            if (!canMove) return;
-
-            // flip sprite by inverting x value of scale
-            facingRight = !facingRight;
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
-
-        public void SetGravity(float gravity)
-        {
-            rigidbody2d.gravityScale = gravity;
-        }
-
-        private void UpdateFollowers()
-        {
-            // use i as a parameter to determine the offset from the last follower
-            for (int i = 0; i < followers.Count; i++)
-                followers[i].UpdatePosition(i);
-        }
-
-        // interaction
-        private void ProcessInteraction(InputManager.KeyPressedEventArgs e)
-        {
-            if (!canMove || !canInteract || alisonscript.Interpreter.interpreterRunning) return;
-
-            interactable.OnInteract();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -66,8 +66,7 @@ namespace spacegame.alisonscript
                 throw new Exception($"couldn't find alisonscript file \"{script}\"");
 
             Controller.instance.canMove = false;
-            Controller.instance.animator.ResetTrigger("walking");
-            Controller.instance.animator.SetTrigger("idle");
+            Controller.instance.StopHorizontalAnimation();
 
             // read lines of file
             string[] file = File.ReadAllLines(fullScriptPath);
