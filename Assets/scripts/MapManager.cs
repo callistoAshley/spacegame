@@ -15,6 +15,8 @@ namespace spacegame
 
         public static void ChangeMap(string name, int transferPoint = 0)
         {
+            Debug.Log($"changing map: {name}, transferPoint {transferPoint}");
+
             Controller.instance?.ToggleMovementHooks(false);
             InputManager.instance.RemoveEvent("verticalKeyDown", UIManager.instance.ProcessInputQueue);
             InputManager.instance.RemoveEvent("selectKeyDown", UIManager.instance.ProcessInputQueue);

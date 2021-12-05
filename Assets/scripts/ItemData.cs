@@ -11,9 +11,11 @@ namespace spacegame
     {
         // name of the item in the ui
         public string name;
+        // description of the item in the ui
+        public string description;
 
         // whether the item should be shown as food in the ui
-        public bool food;
+        public bool consumeAfterUse;
         // whether item should be shown as armour in the ui
         public bool armour;
         // whether the item should be shown as a weapon in the ui
@@ -33,10 +35,19 @@ namespace spacegame
         // script args
         public string[] scriptArgs;
 
+        // the price that the item is bought/sold for in shops
+        public int shopPrice;
+
+        // whether the item can be used in the menu
+        public bool canBeUsedInMenu;
+        // whether the item can be used in battle
+        public bool canBeUsedInBattle;
+
         // constructor to initialize all of the fields manually, if needed
         public ItemData(
             string name,
-            bool food, 
+            string description,
+            bool consumeAfterUse, 
             bool armour, 
             bool weapon, 
             int healAmount, 
@@ -44,10 +55,14 @@ namespace spacegame
             int attackDamage, 
             string[] battleText,
             string script,
-            string[] scriptArgs)
+            string[] scriptArgs,
+            int shopPrice,
+            bool canBeUsedInMenu,
+            bool canBeUsedInBattle)
         {
             this.name = name;
-            this.food = food;
+            this.description = description;
+            this.consumeAfterUse = consumeAfterUse;
             this.armour = armour;
             this.weapon = weapon;
             this.healAmount = healAmount;
@@ -56,6 +71,9 @@ namespace spacegame
             this.battleText = battleText;
             this.script = script;
             this.scriptArgs = scriptArgs;
+            this.shopPrice = shopPrice;
+            this.canBeUsedInMenu = canBeUsedInMenu;
+            this.canBeUsedInBattle = canBeUsedInBattle;
         }
     }
 }
