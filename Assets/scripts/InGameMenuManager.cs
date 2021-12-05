@@ -18,6 +18,9 @@ namespace spacegame
             if (open) return;
             open = !open;
 
+            // stop the player's horizontal movement animation
+            Controller.instance.StopHorizontalAnimation();
+
             // create ui
             ui = UIManager.instance.NewNavigateable(new Vector2(-328, -4), new Vector2(292, 100),
                 customPrintTextOptions: UI.PrintTextOptions.CallbackAfterInput | UI.PrintTextOptions.Instant);
