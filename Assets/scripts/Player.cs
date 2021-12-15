@@ -5,7 +5,7 @@ using System;
 
 namespace spacegame
 {
-    public class Controller : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         // speed stuff
         public float speedMultiplier = 1; // run/walk speed is always multiplied by speedMultiplier
@@ -52,7 +52,7 @@ namespace spacegame
         [HideInInspector] public Rigidbody2D rigidbody2d;
 
         // singleton
-        public static Controller instance;
+        public static Player instance;
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         // Public Methods

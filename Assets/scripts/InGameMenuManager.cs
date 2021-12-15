@@ -19,7 +19,7 @@ namespace spacegame
             open = !open;
 
             // stop the player's horizontal movement animation
-            Controller.instance.StopHorizontalAnimation();
+            Player.instance.StopHorizontalAnimation();
 
             // create ui
             ui = UIManager.instance.NewNavigateable(new Vector2(-328, -4), new Vector2(292, 100),
@@ -45,7 +45,7 @@ namespace spacegame
             ui = null;
 
             // allow movement
-            Controller.instance.canMove = true;
+            Player.instance.canMove = true;
         }
 
         public static void ProcessMenuButton(string button)

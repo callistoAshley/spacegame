@@ -28,7 +28,7 @@ namespace spacegame
             }
         }
 
-        public void UpdateX(Controller player)
+        public void UpdateX(Player player)
         {
             if (data.followPlayerX)
             {
@@ -42,7 +42,7 @@ namespace spacegame
             }
         }
 
-        public void UpdateY(Controller player)
+        public void UpdateY(Player player)
         {
             if (data.followPlayerY)
             {
