@@ -30,6 +30,7 @@ namespace spacegame
                 return interactable != null;
             }
         }
+        private Transform canInteractObj; // the game object that becomes active when the player can interact with an object
 
         // can open menu
         private bool _canOpenMenu;
@@ -192,6 +193,7 @@ namespace spacegame
             animator = GetComponent<Animator>();
             coll = GetComponent<BoxCollider2D>();
             rigidbody2d = GetComponent<Rigidbody2D>();
+            canInteractObj = transform.Find("interact");
             instance = this;
 
             // add movement hooks
@@ -225,6 +227,7 @@ namespace spacegame
                 && collision.TryGetComponent(out Interactable i) && i.doOnInteract != null)
             {
                 interactable = i;
+                canInteractObj.gameObject.SetActive(true);
             }
         }
 
@@ -232,7 +235,10 @@ namespace spacegame
         {
             // compare the object we're leaving the trigger of, and if it's the interactable, set it to null
             if (interactable != null && collision.gameObject == interactable.gameObject)
+            {
                 interactable = null;
+                canInteractObj.gameObject.SetActive(false);
+            }
         }
     }
 }

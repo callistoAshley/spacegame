@@ -74,6 +74,9 @@ TagManager:
   - name: bg tiles 3
     uniqueID: 62205549
     locked: 0
+  - name: alt tile
+    uniqueID: 3191938569
+    locked: 0
   - name: alison
     uniqueID: 3736484397
     locked: 0
