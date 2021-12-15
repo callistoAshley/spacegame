@@ -117,7 +117,7 @@ namespace spacegame.alisonscript
         public IEnumerator ToggleMove(FunctionArgs args)
         {
             if (bool.TryParse(args.args[0], out bool result))
-                Controller.instance.canMove = result;
+                Player.instance.canMove = result;
             else
                 throw new ArgumentException($"failed to parse {args.args[0]} to boolean");
             args.callback.Invoke();
@@ -200,7 +200,7 @@ namespace spacegame.alisonscript
                               select g).ToArray()[0];
             // make them a follower
             Follower follower = npc.GetComponent<NPC>().BecomeFollower();
-            Controller.followers.Add(follower);
+            Player.followers.Add(follower);
 
             args.callback.Invoke();
             yield break;

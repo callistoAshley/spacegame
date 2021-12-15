@@ -52,7 +52,7 @@ namespace spacegame
                 BGMPlayer.instance.Play(autoBgm);
 
             if (transferPoints != null && transferPoints.Length > 0)
-                Controller.instance.gameObject.transform.position = transferPoints[transferPointIndex];
+                Player.instance.gameObject.transform.position = transferPoints[transferPointIndex];
         }
     }
 }
