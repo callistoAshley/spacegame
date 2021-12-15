@@ -28,7 +28,7 @@ namespace spacegame
             ui.SetOptions(new string[]
             {
                 "back",
-                "inventory",
+                //"inventory",
                 "settings",
                 "save",
                 "title"

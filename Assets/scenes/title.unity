@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4341521d9ce93364396949e10b1baedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoBgm: bgm_title_wip
+  autoBgm: bgm_title
   transferPoints: []
   parallaxes:
   - sprite: {fileID: 21300000, guid: 2e1e869cc6a0e224cb7f2414378a6fa2, type: 3}
