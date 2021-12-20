@@ -219,6 +219,12 @@ namespace spacegame
                 // the menu manager has a boolean that determines whether it's open, and return on the first line of this method if it is
                 InGameMenuManager.Open();
             }
+
+            // alt map
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                AltMapManager.instance?.Toggle(); // unless it's null
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
