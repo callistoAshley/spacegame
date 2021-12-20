@@ -19,6 +19,9 @@ namespace spacegame
         // these are the parallax game objects
         [HideInInspector] public List<Parallax> parallaxObjects = new List<Parallax>();
 
+        [HideInInspector] public GameObject mainTileGrid;
+        [HideInInspector] public GameObject altTileGrid;
+
         private void Awake()
         {
             map = this;
@@ -44,6 +47,14 @@ namespace spacegame
                 // call init
                 p.Init();
             }
+
+            // get tile grids
+            GameObject[] tiles = GameObject.FindGameObjectsWithTag("tiles");
+            if (tiles.Length >= 2)
+            {
+                mainTileGrid = tiles.Where((GameObject g) => g.name == "TileGrid").First();
+                altTileGrid = tiles.Where((GameObject g) => g.name == "AltTileGrid").First();
+            }   
         }
 
         public void Init(int transferPointIndex = 0)
