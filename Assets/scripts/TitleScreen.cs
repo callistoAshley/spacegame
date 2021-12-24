@@ -23,7 +23,7 @@ namespace spacegame
         {
             menu = UIManager.instance.NewNavigateable(new Vector2(0, -140), new Vector2(400, 100),
                 UI.PrintTextOptions.CallbackAfterInput | UI.PrintTextOptions.Instant); // don't destroy the ui after callback
-            menu.SetOptions(new string[] { "play game", "don't play game", "fabjsdgfjk", "hi" },
+            menu.SetOptions(new string[] { "new game", "load game", "configure game", "don't game" },
                 new Action(() => TitleInput(menu.selectedOption)));
         }
 
@@ -31,12 +31,12 @@ namespace spacegame
         {
             switch (selectedOption)
             {
-                case "play game":
+                case "new game":
                     // force the ui to be ready to pop from the input queue (we don't want it to destroy when the quit confirmation appears)
                     menu.readyToDequeue = true;
                     MapManager.ChangeMap("ship_alison_intro");
                     break;
-                case "don't play game":
+                case "don't game":
                     UI ui = UIManager.instance.New(new Vector2(0, -140), new Vector2(400, 200));
                     StartCoroutine(ui.PrintText("see ya later!", new Action(() => Application.Quit()),
                         UI.PrintTextOptions.CallbackAfterInput));

@@ -64,6 +64,7 @@ namespace spacegame
 
                     Debug.Log($"new exception:\n{ex}\n===============================\n");
 
+                    // yeah i'm not dealing with that, have fun!
                     Application.Quit();
                 }
             }
