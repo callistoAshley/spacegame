@@ -10,7 +10,7 @@ namespace spacegame
         // speed stuff
         public float speedMultiplier = 1; // run/walk speed is always multiplied by speedMultiplier
         private float walkSpeed => 5 * speedMultiplier;
-        private float runSpeed => 7 * speedMultiplier;
+        private float runSpeed => 8 * speedMultiplier;
         public float movementSpeed => Input.GetKey(InputManager.run) ? runSpeed : walkSpeed; // actual movement speed
 
         // other movement
@@ -33,6 +33,8 @@ namespace spacegame
         private Transform canInteractObj; // the game object that becomes active when the player can interact with an object
 
         // can open menu
+        // not necessary for now, but leaving it commented out just in case
+        /*
         private bool _canOpenMenu;
         public bool canOpenMenu
         {
@@ -44,7 +46,7 @@ namespace spacegame
             {
                 _canOpenMenu = value;
             }
-        }
+        }*/
 
         // components
         [HideInInspector] public Animator animator;
@@ -85,10 +87,13 @@ namespace spacegame
 
         public void StopHorizontalAnimation()
         {
-            if (!canMove) return;
+            //if (!canMove) return;
 
             animator.ResetTrigger("walking");
             animator.SetTrigger("idle");
+
+            // stop velocity
+            rigidbody2d.velocity = Vector2.zero;
 
             // stop the followers from walking
             foreach (Follower f in followers)
@@ -105,7 +110,8 @@ namespace spacegame
             UpdateFollowers();
 
             int horizontalVelocity = e.key == InputManager.left ? -1 : 1;
-            transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
+            //transform.Translate(horizontalVelocity * movementSpeed * Time.deltaTime, 0, 0);
+            rigidbody2d.velocity = new Vector2(horizontalVelocity * movementSpeed * Time.deltaTime * 50, rigidbody2d.velocity.y);
         }
 
         public void VerticalMovement(InputManager.KeyPressedEventArgs e)
@@ -210,13 +216,10 @@ namespace spacegame
             }
 
             // open in game menu
-            if (Input.GetKeyDown(InputManager.menu) && canOpenMenu)
+            if (Input.GetKeyDown(InputManager.menu))
             {
-                // disable movement
-                canMove = !canMove;
-
                 // open menu
-                // the menu manager has a boolean that determines whether it's open, and return on the first line of this method if it is
+                // the menu manager closes the menu here if it's already open
                 InGameMenuManager.Open();
             }
 

@@ -22,10 +22,11 @@ namespace spacegame
                 debugConsole.SetActive(!debugConsole.activeSelf);
 
             // set debug text
+            // i am so sorry
             debugText.text
                 = $"scene: {SceneManager.GetActiveScene().name ?? "<none, somehow>"}\n"
                 + $"player world position: {(Player.instance != null ? Player.instance.gameObject.transform.position.ToString() : "<none>")}\n"
-                + $"bgm: {(BGMPlayer.instance.aud.clip.name != null ? BGMPlayer.instance.aud.clip.name : "<none>")}\n"
+                + $"bgm: {(BGMPlayer.instance.playingClip != null ? BGMPlayer.instance.playingClip.name : "<none>")}\n"
                 + $"interpreter line: {(alisonscript.Interpreter.runningScript != null ? alisonscript.Interpreter.runningScript.lines[alisonscript.Interpreter.runningScript.lineIndex] : "<none>")}\n"
                 + $"cool robot: yup\n"
                 + $"delta: {Time.deltaTime}\n"
