@@ -149,6 +149,7 @@ namespace spacegame.alisonscript
                 {
                     Interpreter.runningScript.AddObject(args.args[0], ui.selectedOption);
                     args.callback.Invoke();
+                    SFXPlayer.instance.Play("sfx_menu_confirm");
                 })) ;
             yield break;
         }
