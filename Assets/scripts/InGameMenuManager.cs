@@ -14,12 +14,17 @@ namespace spacegame
 
         public static void Open()
         {
-            // don't open the menu if it's already open
-            if (open) return;
+            // if the menu is already open, close it
+            if (open)
+            {
+                Close();
+                return;
+            }
             open = !open;
 
-            // stop the player's horizontal movement animation
+            // stop the player's horizontal movement animation and disallow movement
             Player.instance.StopHorizontalAnimation();
+            Player.instance.canMove = false;
 
             // create ui
             ui = UIManager.instance.NewNavigateable(new Vector2(-328, -4), new Vector2(292, 100),
@@ -33,6 +38,9 @@ namespace spacegame
                 "save",
                 "title"
             }, new Action(() => ProcessMenuButton(ui.selectedOption)));
+
+            // play sound
+            SFXPlayer.instance.Play("sfx_menu_confirm");
         }
 
         public static void Close()
@@ -46,6 +54,9 @@ namespace spacegame
 
             // allow movement
             Player.instance.canMove = true;
+
+            // play sound
+            SFXPlayer.instance.Play("sfx_menu_back");
         }
 
         public static void ProcessMenuButton(string button)
