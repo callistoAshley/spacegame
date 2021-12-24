@@ -42,6 +42,7 @@ namespace spacegame
                         UI.PrintTextOptions.CallbackAfterInput));
                     break;
             }
+            SFXPlayer.instance.Play("sfx_menu_confirm");
         }
 
         private IEnumerator DebugCode()

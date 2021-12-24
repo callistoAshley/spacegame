@@ -54,6 +54,7 @@ namespace spacegame
             {
                 case "back":
                     Close();
+                    SFXPlayer.instance.Play("sfx_menu_back");
                     break;
                 case "inventory":
                     InventoryManager.OpenUI();
@@ -84,20 +85,21 @@ namespace spacegame
                             "yes",
                         },
                         // callback
-                        new Action(() => 
+                        () => 
                         {
                             switch (options.selectedOption)
                             {
                                 case "no": // do nothing
                                     // destroy ui after callback isn't working here for some reason so i'll just do this
                                     options.DestroyGameObject();
+                                    SFXPlayer.instance.Play("sfx_menu_back");
                                     break;
                                 case "yes":
                                     Close();
                                     MapManager.ChangeMap("title");
                                     break;
                             }
-                        }));
+                        });
                     });
 
                     textbox = UIManager.instance.New(new Vector2(92, 94), new Vector2(484, 257));
