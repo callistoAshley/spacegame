@@ -45,7 +45,8 @@ namespace spacegame
                         // ui manager is attached to the canvas
                         UIManager.instance.transform.position, Quaternion.identity, UIManager.instance.transform);
                     // set text
-                    g.GetComponentInChildren<Text>().text = $"an exception was encountered:\n\n{condition}\n{stackTrace.Substring(0, 200) + "..."}\n\nthe full stack trace was logged";
+                    // clamp the length of the stack trace substring between 0 and 200 so we don't get an index out of range
+                    g.GetComponentInChildren<Text>().text = $"an exception was encountered:\n\n{condition}\n{stackTrace.Substring(0, Mathf.Clamp(stackTrace.Length, 0, 200)) + "..."}\n\nthe full stack trace was logged";
 
                     Debug.Log($"\n===============================\n");
 

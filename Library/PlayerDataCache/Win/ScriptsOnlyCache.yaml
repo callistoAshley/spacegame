@@ -15,6 +15,7 @@ ScriptsOnlyBuild:
     - spacegame.NPC
     - spacegame.Parallax
     - spacegame.Player
+    - spacegame.PlayerFeet
     - spacegame.PrefabManager
     - spacegame.SFXPlayer
     - spacegame.SpaceshipDoor
@@ -25,13 +26,9 @@ ScriptsOnlyBuild:
     - spacegame.UINavigateable
     - spacegame.alisonscript.Functions
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.Graphs.dll:
@@ -99,6 +96,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10240}
     - Class: 114
       Script: {instanceID: 10422}
+    - Class: 114
+      Script: {instanceID: 10478}
     - Class: 114
       Script: {instanceID: 10502}
     - Class: 114
@@ -197,6 +196,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10240}
     - Class: 114
+      Script: {instanceID: 10478}
+    - Class: 114
       Script: {instanceID: 10952}
     - Class: 114
       Script: {instanceID: 11190}
@@ -263,6 +264,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 9694}
     - Class: 114
       Script: {instanceID: 10240}
+    - Class: 114
+      Script: {instanceID: 10478}
     - Class: 114
       Script: {instanceID: 10784}
     - Class: 114
@@ -335,6 +338,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9694}
     - Class: 114
+      Script: {instanceID: 10478}
+    - Class: 114
       Script: {instanceID: 10784}
     - Class: 114
       Script: {instanceID: 10952}
@@ -405,6 +410,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10240}
     - Class: 114
       Script: {instanceID: 10306}
+    - Class: 114
+      Script: {instanceID: 10478}
     - Class: 114
       Script: {instanceID: 10952}
     - Class: 114
@@ -919,7 +926,7 @@ ScriptsOnlyBuild:
     className: InputManager
   - hash:
       serializedVersion: 2
-      Hash: 5e97d0b7687027be4ba41f9603326cbe
+      Hash: ea2e7b7b3b9039d861799ddb9949a80d
     assemblyName: Assembly-CSharp.dll
     namespaceName: spacegame
     className: MapData
@@ -1069,4 +1076,4 @@ ScriptsOnlyBuild:
   - Assets/scenes/debug_guy.unity
   - Assets/scenes/debug_npctest.unity
   - Assets/scenes/debug_parallax.unity
-  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/24DEC2021/space!!!!.exe
+  playerPath: C:/Users/maste/Desktop/Things I Made/space!!!!/29DEC2021/space!!!!.exe

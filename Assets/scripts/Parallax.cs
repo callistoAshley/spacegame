@@ -35,7 +35,7 @@ namespace spacegame
                 transform.position = player.transform.position;
             }
             // only move the parallax further from the player if the player has moved
-            else if (player.transform.hasChanged && data.moveX)
+            else if (player.rigidbody2d.transform.hasChanged && data.moveX) 
             {
                 int distanceX = player.facingRight ? 1 : -1;
                 transform.position -= new Vector3(distanceX * player.movementSpeed * moveSpeedMultiplier * Time.deltaTime, 0);
