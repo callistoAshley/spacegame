@@ -194,7 +194,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b843eb015d595bf4e84a0a0050f83413, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -289,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6386787409232459589}
   - component: {fileID: 3928037881325858692}
+  - component: {fileID: 2819047099188967498}
   m_Layer: 0
   m_Name: feet
   m_TagString: Untagged
@@ -336,3 +337,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20581648, y: 0.113859594}
   m_EdgeRadius: 0
+--- !u!114 &2819047099188967498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962685919800002259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae7eb96ca7b912498a48474ef4ad1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGround: 0
