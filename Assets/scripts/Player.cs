@@ -32,22 +32,6 @@ namespace spacegame
         }
         private Transform canInteractObj; // the game object that becomes active when the player can interact with an object
 
-        // can open menu
-        // not necessary for now, but leaving it commented out just in case
-        /*
-        private bool _canOpenMenu;
-        public bool canOpenMenu
-        {
-            get
-            {
-                return canMove || _canOpenMenu;
-            }
-            set
-            {
-                _canOpenMenu = value;
-            }
-        }*/
-
         // components
         [HideInInspector] public Animator animator;
         [HideInInspector] public BoxCollider2D coll;
@@ -73,10 +57,10 @@ namespace spacegame
             else
             {
                 InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.RemoveEvent("horizontalKeyHeld", UpdateParallaxesX);
                 InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
                 InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
+                InputManager.fixedHorizontalKeyHeld -= UpdateParallaxesX;
             }
         }
 
