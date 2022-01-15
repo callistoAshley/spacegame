@@ -65,10 +65,10 @@ namespace spacegame
             if (add)
             {
                 InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.AddEvent("horizontalKeyHeld", UpdateParallaxesX);
                 InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
                 InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
+                InputManager.fixedHorizontalKeyHeld += UpdateParallaxesX;
             }
             else
             {
