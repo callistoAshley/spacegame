@@ -67,9 +67,6 @@ namespace spacegame
                     Close();
                     SFXPlayer.instance.Play("sfx_menu_back");
                     break;
-                case "inventory":
-                    InventoryManager.OpenUI();
-                    break;
                 case "settings":
                     break;
                 case "save":
