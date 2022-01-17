@@ -16,7 +16,7 @@ namespace spacegame
 
             // allow vertical movement
             InputManager.fixedVerticalKeyHeld += Player.instance.VerticalMovement;
-            InputManager.instance.AddEvent("verticalKeyHeld", Player.instance.UpdateParallaxesY);
+            InputManager.instance.AddEvent(Constants.Input.VERTICAL_KEY_HELD, Player.instance.UpdateParallaxesY);
 
             // allow leaving the ladder
             InputManager.fixedHorizontalKeyHeld += LeaveLadder;
@@ -36,7 +36,7 @@ namespace spacegame
             // disallow vertical movement and leaving the ladder
             InputManager.fixedHorizontalKeyHeld -= LeaveLadder;
             InputManager.fixedVerticalKeyHeld -= Player.instance.VerticalMovement;
-            InputManager.instance.RemoveEvent("verticalKeyHeld", Player.instance.UpdateParallaxesY);
+            InputManager.instance.RemoveEvent(Constants.Input.VERTICAL_KEY_HELD, Player.instance.UpdateParallaxesY);
 
             // reset the gravity back to 1
             Player.instance.SetGravity(1);
