@@ -64,18 +64,18 @@ namespace spacegame
         {
             if (add)
             {
-                InputManager.instance.AddEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.AddEvent("horizontalKeyHeld", UpdateParallaxesX);
-                InputManager.instance.AddEvent("horizontalKeyReleased", StopHorizontalAnimation);
-                InputManager.instance.AddEvent("selectKeyDown", ProcessInteraction);
+                InputManager.instance.AddEvent(Constants.Input.HORIZONTAL_KEY_HELD, HorizontalMoveAnimation);
+                InputManager.instance.AddEvent(Constants.Input.HORIZONTAL_KEY_HELD, UpdateParallaxesX);
+                InputManager.instance.AddEvent(Constants.Input.HORIZONTAL_KEY_RELEASED, StopHorizontalAnimation);
+                InputManager.instance.AddEvent(Constants.Input.SELECT_KEY_DOWN, ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld += HorizontalMovement;
             }
             else
             {
-                InputManager.instance.RemoveEvent("horizontalKeyHeld", HorizontalMoveAnimation);
-                InputManager.instance.RemoveEvent("horizontalKeyHeld", UpdateParallaxesX);
-                InputManager.instance.RemoveEvent("horizontalKeyReleased", StopHorizontalAnimation);
-                InputManager.instance.RemoveEvent("selectKeyDown", ProcessInteraction);
+                InputManager.instance.RemoveEvent(Constants.Input.HORIZONTAL_KEY_HELD, HorizontalMoveAnimation);
+                InputManager.instance.RemoveEvent(Constants.Input.HORIZONTAL_KEY_HELD, UpdateParallaxesX);
+                InputManager.instance.RemoveEvent(Constants.Input.HORIZONTAL_KEY_RELEASED, StopHorizontalAnimation);
+                InputManager.instance.RemoveEvent(Constants.Input.SELECT_KEY_DOWN, ProcessInteraction);
                 InputManager.fixedHorizontalKeyHeld -= HorizontalMovement;
             }
         }
