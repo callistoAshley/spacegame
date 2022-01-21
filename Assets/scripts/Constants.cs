@@ -23,5 +23,9 @@ namespace spacegame
             public const string SELECT_KEY_HELD = "selectKeyHeld";
             public const string SELECT_KEY_RELEASED = "selectKeyReleased";
         }
+        public static class Meta
+        {
+            public const string VERSION = "pre-alpha 0.dev";
+        }
     }
 }
