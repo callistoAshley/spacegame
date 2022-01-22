@@ -17,37 +17,65 @@ namespace spacegame
 
         public static void Init()
         {
-            // create the logs directory if it doesn't exist
-            if (!Directory.Exists(logsPath))
-                Directory.CreateDirectory(logsPath);
+            try
+            {
+                // create the logs directory if it doesn't exist
+                if (!Directory.Exists(logsPath))
+                    Directory.CreateDirectory(logsPath);
 
-            // logs go under Documents/space!!!!/logs/
-            writer = new StreamWriter($"{logsPath}log {DateTime.Now.ToString().Replace("/", ".").Replace(":", ".")}.txt");
+                // logs go under Documents/space!!!!/logs/
+                writer = new StreamWriter($"{logsPath}log {DateTime.Now.ToString().Replace("/", ".").Replace(":", ".")}.txt");
 
-            // call Done when the application is quitting
-            Application.quitting += Done;
+                // call Done when the application is quitting
+                Application.quitting += Done;
+
+                WriteLine("logger initialized");
+            }
+            catch (Exception ex)
+            {
+                Debug.Log($"an exception was encountered in the logger!\n{ex}");
+            }
         }
 
         public static void WriteLine(string line)
         {
-            writer.WriteLine(line);
-            Debug.Log(line);
+            try
+            {
+                writer.WriteLine(line);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log($"an exception was encountered in the logger!\n{ex}");
+            }
+            finally
+            {
+                Debug.Log(line);
+            }
         }
 
         public static void Done()
         {
-            List<string> delete = new List<string>();
-            foreach (FileInfo f in new DirectoryInfo(logsPath).GetFiles())
+            try
             {
-                // for every file in the /logs folder, check if it has been alive for more than 6 hours
-                DateTime lifespan = DateTime.Now - new TimeSpan(6, 0, 0);
+                List<string> delete = new List<string>();
+                foreach (FileInfo f in new DirectoryInfo(logsPath).GetFiles())
+                {
+                    // for every file in the /logs folder, check if it has been alive for more than 6 hours
+                    DateTime lifespan = DateTime.Now - new TimeSpan(6, 0, 0);
 
-                if (f.CreationTime <= lifespan) delete.Add(f.FullName); // and if it has, add it to a collection
+                    if (f.CreationTime <= lifespan) delete.Add(f.FullName); // and if it has, add it to a collection
+                }
+                foreach (string s in delete) new FileInfo(s).Delete(); // then delete every file in that collection
             }
-            foreach (string s in delete) new FileInfo(s).Delete(); // then delete every file in that collection
-
-            // close the stream writer
-            writer.Close();
+            catch (Exception ex)
+            {
+                Debug.Log($"an exception was encountered in the logger!\n{ex}");
+            }
+            finally
+            {
+                // close the stream writer
+                writer.Close();
+            }
         }
     }
 }
