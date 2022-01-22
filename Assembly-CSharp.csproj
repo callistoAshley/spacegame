@@ -86,6 +86,7 @@
     <Compile Include="Assets\scripts\Init.cs" />
     <Compile Include="Assets\scripts\InputManager.cs" />
     <Compile Include="Assets\scripts\Interactable.cs" />
+    <Compile Include="Assets\scripts\IReadable.cs" />
     <Compile Include="Assets\scripts\Ladder.cs" />
     <Compile Include="Assets\scripts\Logger.cs" />
     <Compile Include="Assets\scripts\MainCamera.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\scripts\Parallax.cs" />
     <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\PrefabManager.cs" />
+    <Compile Include="Assets\scripts\ReadToMeManager.cs" />
     <Compile Include="Assets\scripts\SFXPlayer.cs" />
     <Compile Include="Assets\scripts\SpaceshipDoor.cs" />
     <Compile Include="Assets\scripts\Stairs.cs" />
