@@ -12,8 +12,8 @@ namespace spacegame
     public interface IReadable
     {
         // a sort-of alt text that's interpreted by ReadSelf
-        public string readerAlt { get; set; }
+        string readerAlt { get; set; }
         // the string to return when ReadToMeManager.SayReadable is called
-        public string ReadSelf();
+        string ReadSelf();
     }
 }
