@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Speech.Synthesis;
+//using System.Speech.Synthesis;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace spacegame
 {
-    // space!!!! has a built-in sorta-screen-reader mode, and this is the class for it
-    // c# actually has some really good speech synthesis libraries so this wasn't super hard
     public static class ReadToMeManager
     {
+        /*
         private static SpeechSynthesizer speech;
         private static bool enabled = true; // this is just temporary and it'll be moved elsewhere when the settings menu is added
 
@@ -53,5 +52,6 @@ namespace spacegame
         {
             speech.SpeakAsyncCancelAll();
         }
+        */
     }
 }
