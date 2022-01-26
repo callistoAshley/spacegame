@@ -17,7 +17,6 @@ namespace spacegame
 
             // initialize logger and speech synthesizer
             Logger.Init();
-            //ReadToMeManager.Init();
 
             // alisonscript initialization
             alisonscript.Interpreter.RegisterFunctions();
