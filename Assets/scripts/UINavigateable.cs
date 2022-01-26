@@ -58,8 +58,8 @@ namespace spacegame
                 Quaternion.identity, gameObject.transform);
 
             // say the selected option if we can
-            ReadToMeManager.CancelPrompt(ReadToMeManager.GetCurrentlySaying());
-            ReadToMeManager.SayReadable(this);
+            //ReadToMeManager.CancelPrompt(ReadToMeManager.GetCurrentlySaying());
+            //ReadToMeManager.SayReadable(this);
         }
 
         public void Navigate(bool up)
@@ -81,8 +81,8 @@ namespace spacegame
                 moved = true;
             }
 
-            ReadToMeManager.CancelPrompt(ReadToMeManager.GetCurrentlySaying());
-            ReadToMeManager.SayReadable(this);
+            //ReadToMeManager.CancelPrompt(ReadToMeManager.GetCurrentlySaying());
+            //ReadToMeManager.SayReadable(this);
 
             if (moved) SFXPlayer.instance.Play("sfx_menu_select");
         }
