@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/scenes/debug_alpha_maptest3.unity
+- path: Assets/scenes/0init.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
