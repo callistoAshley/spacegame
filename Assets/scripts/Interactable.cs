@@ -10,6 +10,7 @@ namespace spacegame
     public class Interactable : MonoBehaviour
     {
         public Event doOnInteract;
+        public bool onTouch;
         public bool destroyAfter;
 
         public virtual void OnInteract()
