@@ -51,7 +51,6 @@ namespace spacegame
             text.alignment = alignment;
         }
 
-        // TODO: tidy this up
         // also check out the stack overflow page i stole this code from: https://www.taste.com.au/recipes/collections/spaghetti-recipes
         public virtual IEnumerator PrintText(
             string text, // text input
@@ -114,30 +113,6 @@ namespace spacegame
                 // if a callback was given, add it to the input processed callback
                 if (callback != null)
                     inputProcessedCallback += callback;
-
-                /*
-                // if a callback wasn't given and we're told to destroy the ui, destroy the ui
-                if (callback is null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
-                {
-                    
-                }
-                // if a callback was given and we're told to destroy the ui, invoke the callback and destroy the ui
-                else if (callback != null && options.HasFlag(PrintTextOptions.DestroyUIAfterCallback))
-                {
-                    inputProcessedCallback = new Action(() =>
-                    {
-                        callback.Invoke();
-                        DestroyGameObject();
-                    });
-                }
-                // calling it now this else is going to cause problems later
-                else
-                {
-                    inputProcessedCallback = new Action(() =>
-                    {
-                        callback.Invoke();
-                    });
-                }*/
 
                 // add to input queue
                 if (!options.HasFlag(PrintTextOptions.DontPushToInputQueue))
