@@ -13,7 +13,7 @@ namespace spacegame
         // the logger wraps a private StreamWriter instance
         // that's closed after the application is quit
         private static StreamWriter writer;
-        private static readonly string logsPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\My Games\\space!!!!\\logs\\";
+        public static readonly string logsPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\My Games\\space!!!!\\logs\\";
 
         public static void Init()
         {
