@@ -32,11 +32,24 @@ namespace spacegame.alisonscript
 
             List<string> args = new List<string>();
             for (int i = 0; i < argsCount.Count; i++)
-                // only treat the argument as an argument if it's the first argument or its index in the array isn divisible by 2
+            {
+                // only treat the argument as an argument if it's the first argument or its index in the array isn't divisible by 2
                 // this avoids treating the empty whitespaces between arguments as arguments,
                 // e.g. ;log "hello" "dooby" logs "hello" and "dooby" instead of "hello" " " and "dooby"
                 if (i == 0 || i % 2 == 0)
-                    args.Add(argsCount[i].Value);
+                {
+                    // mention a game state bool by using "gsb:" followed by the name of the bool
+                    if (new Regex(@"^gsb:.*?").IsMatch(argsCount[i].Value))
+                    {
+                        // brain is in a spaghetti code mood today apparently
+                        args.Add(GameState.GetBoolean(new Regex(@"^?<=gsb:").Match(argsCount[i].Value).Value).ToString());
+                    }
+                    else
+                    {
+                        args.Add(argsCount[i].Value);
+                    }
+                }
+            }
 
             return args.ToArray();
         }

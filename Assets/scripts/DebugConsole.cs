@@ -240,6 +240,12 @@ namespace spacegame
             {
                 Process.Start(Logger.logsPath);
             }
+
+            [Command("gsvis")]
+            public static void GameStateVisualizer(string[] args)
+            {
+                DebugUI.displayGameStateFlags = !DebugUI.displayGameStateFlags;
+            }
         }
 
         private class CommandAttribute : Attribute

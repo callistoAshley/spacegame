@@ -61,6 +61,10 @@ namespace spacegame.alisonscript
 
         public bool ConditionalTrue(string objectName, string value)
         {
+            // if "True" or "False" gets passed through as the object name, parse the object name to a bool and return it
+            if (bool.TryParse(objectName, out bool result))
+                return result;
+
             if (!objects.ContainsKey(objectName))
                 throw new AlisonscriptSyntaxError(GetCurrentLine(), $"the current script does not have an object called {objectName}");
 
@@ -68,7 +72,7 @@ namespace spacegame.alisonscript
             return objects[objectName].value == value;
         }
 
-        // NEVER use this get the actual line index, instead just get lineIndex
+        // NEVER use this to get the actual line index, instead just get lineIndex
         // this is just a tidy way of getting the current line for syntax errors
         public int GetCurrentLine()
         {
