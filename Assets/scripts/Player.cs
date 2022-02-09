@@ -5,6 +5,7 @@ using System;
 
 namespace spacegame
 {
+    // this is sealed to futureproof my code from my own clownery
     public sealed class Player : MonoBehaviour
     {
         // speed stuff

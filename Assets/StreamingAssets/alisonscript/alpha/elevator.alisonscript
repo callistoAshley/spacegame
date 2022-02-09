@@ -1,0 +1,21 @@
+cond "gsb:alpha_elevator"
+    when "False"
+        ;spk "this is one of the most high-tech elevator brands in the galaxy; it even has air conditioning!"
+        ;set_gsb "alpha_elevator" "True"
+        ;goto "break"
+    when "True"
+        ;spk "i am returning true actually"
+end
+
+&break
+;spk "where do you want it to take you?"
+
+;choice "@ch" "nevermind" "debug_alpha_lobby" "debug_alpha_roof"
+cond "@ch"
+    when "nevermind"
+        ;end_processing
+    when "debug_alpha_lobby"
+        ;change_map "debug_alpha_lobby" "0"
+    when "debug_alpha_roof"
+        ;change_map "debug_alpha_roof" "0"
+end
