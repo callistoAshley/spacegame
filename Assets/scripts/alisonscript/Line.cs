@@ -11,17 +11,58 @@ namespace spacegame.alisonscript
     // dumpster fire class
     public class Line
     {
+        // the contents of the line, not including indenting
         public string contents;
+        // the full contents of the line, including indenting
+        public string realContents;
+        // the index of the line in the script
         public int index;
+        // the script depth required to evaluate this line
+        public int requiredDepth;
+        // if this line is a label, this contains some basic data about it
+        public LabelData labelData;
 
-        public bool inConditional;
-
-        public Line(string contents, int index, bool inConditional = false)
+        public Line(string contents, int index)
         {
-            this.contents = contents;
+            // initialize the contents
+            // "realContents" is the contents of the line, including the indenting
+            // "contents" removes the indenting
+            realContents = contents;
+            this.contents = new Regex(@"\A\s*").Replace(realContents, string.Empty);
+            
+            // determine the required depth by first removing everything after and including a non-white space character
+            // this string will contain *only* the indenting from the real contents
+            string indenting = new Regex(@"(?=\S).*").Replace(realContents, string.Empty);
+            // then get the number of tabs in the string with a lil baby regex, just a tiny guy, baby man, so small,
+            requiredDepth = new Regex(@"\t").Matches(indenting).Count;
+
             this.index = index;
-            this.inConditional = inConditional;
+
+            // determine whether this line is a label
+            // the syntax for a label is &(label name)
+            // and you can go to a label with the ;goto function
+            if (contents.StartsWith("&"))
+                labelData = new LabelData(true, contents);
+            else
+                labelData = LabelData.noLabel;
         }
+
+        public static List<Line> FromStringArray(string[] array)
+        {
+            if (array.Length == 0)
+                throw new Exception("array is empty");
+            List<Line> lines = new List<Line>();
+
+            // initialize a line from every string in the array and add it to the list
+            for (int i = 0; i < array.Length; i++)
+                lines.Add(new Line(array[i], i));
+
+            // convert the list to an array and return
+            return lines;
+        }
+
+        #region OLD
+        public bool inConditional;
 
         // i stole this regex lol https://stackoverflow.com/questions/49239218/get-string-between-character-using-regex-c-sharp
         // this is used in Label too and it's a bit lengthy so i made it a method
@@ -126,6 +167,7 @@ namespace spacegame.alisonscript
             // if the line starts with cond, it's a conditional
             else if (line.StartsWith("cond"))
             {
+                /*
                 string[] args = ArgsRegex(line);
 
                 if (Interpreter.runningScript.inCond)
@@ -139,11 +181,12 @@ namespace spacegame.alisonscript
                 Interpreter.runningScript.inCond = true;
                 Interpreter.runningScript.condObjectName = args[0];
 
-                Interpreter.runningScript.IncrementIndex();
+                Interpreter.runningScript.IncrementIndex();*/
             }
             // when in conditional
             else if (line.StartsWith("when"))
             {
+                /*
                 string[] args = ArgsRegex(line);
 
                 if (!Interpreter.runningScript.inCond)
@@ -158,17 +201,18 @@ namespace spacegame.alisonscript
                     Interpreter.runningScript.IncrementIndex();
                 else
                     // otherwise, jump to the next occurence of when or end
-                    Interpreter.runningScript.JumpToNextOccurence(Interpreter.runningScript.lineIndex, "when");
+                    Interpreter.runningScript.JumpToNextOccurence(Interpreter.runningScript.lineIndex, "when");*/
             }
             // end conditional statement
             else if (line.StartsWith("end"))
             {
+                /*
                 if (Interpreter.runningScript.inCond)
                     Interpreter.runningScript.inCond = false;
                 else
                     throw new AlisonscriptSyntaxError(Interpreter.runningScript.GetCurrentLine(), "stray end statement");
 
-                Interpreter.runningScript.IncrementIndex();
+                Interpreter.runningScript.IncrementIndex();*/
             }
             else
             {
@@ -176,39 +220,11 @@ namespace spacegame.alisonscript
             }
         }
 
-        public static List<Line> FromStringArray(string[] array)
-        {
-            if (array.Length == 0)
-                throw new Exception("array is empty");
-            List<Line> lines = new List<Line>();
-
-            // initialize a line from every string in the array and add it to the list
-            bool inConditional = false;
-            for (int i = 0; i < array.Length; i++)
-            {
-                Line add = new Line(array[i], i);
-
-                // mark future lines as in conditional 
-                inConditional = add.contents.StartsWith("cond") && (!add.contents.StartsWith("end"));
-                /*
-                if (add.contents.StartsWith("cond"))
-                    inConditional = true;
-                else if (add.contents.StartsWith("end"))
-                    inConditional = false;*/
-
-                add.inConditional = inConditional;
-
-                lines.Add(add);
-            }
-
-            // convert the list to an array and return
-            return lines;
-        }
-
         // overload string cast to just return the contents of the line for efficiency
         public static implicit operator string(Line line)
         {
             return line.contents;
         }
+        #endregion
     }
 }

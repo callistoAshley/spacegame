@@ -63,11 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\alisonscript\AlisonscriptObject.cs" />
     <Compile Include="Assets\scripts\alisonscript\AlisonscriptSyntaxError.cs" />
     <Compile Include="Assets\scripts\alisonscript\FunctionAttribute.cs" />
+    <Compile Include="Assets\scripts\alisonscript\FunctionKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Functions.cs" />
+    <Compile Include="Assets\scripts\alisonscript\IKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Interpreter.cs" />
-    <Compile Include="Assets\scripts\alisonscript\Label.cs" />
+    <Compile Include="Assets\scripts\alisonscript\KeywordManager.cs" />
+    <Compile Include="Assets\scripts\alisonscript\LabelData.cs" />
     <Compile Include="Assets\scripts\alisonscript\Line.cs" />
     <Compile Include="Assets\scripts\alisonscript\Object.cs" />
     <Compile Include="Assets\scripts\alisonscript\RunningScript.cs" />

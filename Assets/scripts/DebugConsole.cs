@@ -246,6 +246,12 @@ namespace spacegame
             {
                 DebugUI.displayGameStateFlags = !DebugUI.displayGameStateFlags;
             }
+
+            [Command("script", 1)]
+            public static void RunScript(string[] args)
+            {
+                alisonscript.Interpreter.Run(args[0]);
+            }
         }
 
         private class CommandAttribute : Attribute
