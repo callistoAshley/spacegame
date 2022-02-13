@@ -19,6 +19,7 @@ namespace spacegame
             Logger.Init();
 
             // alisonscript initialization
+            alisonscript.Interpreter.RegisterKeywords();
             alisonscript.Interpreter.RegisterFunctions();
 
             // load resources
