@@ -10,6 +10,11 @@ namespace spacegame.alisonscript
     {
         public T value;
 
+        public AlisonscriptObject(T value)
+        {
+            this.value = value;
+        }
+
         public static implicit operator T(AlisonscriptObject<T> input)
         {
             return input.value;

@@ -157,9 +157,8 @@ namespace spacegame.alisonscript
         [Function("end_processing")]
         public IEnumerator EndProcessing(FunctionArgs args)
         {
-            // don't need to invoke the callback here 
-            Logger.WriteLine("end processing");
             Interpreter.runningScript.Finished();
+            Interpreter.DisposeRunningScript();
             yield break;
         }
 

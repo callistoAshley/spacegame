@@ -12,7 +12,10 @@ namespace spacegame.alisonscript
     public class RunningScript 
     {
         public readonly List<Line> lines;
-        public Dictionary<string, Object> objects = new Dictionary<string, Object>();
+        public Dictionary<string, AlisonscriptObject<object>> objects = new Dictionary<string, AlisonscriptObject<object>>();
+        // keywords that currently "encapsulate" the script, such as cond
+        // the encapsulation stack can be popped using the end keyword
+        public Stack<IEncapsulateableKeyword> encapsulationStack = new Stack<IEncapsulateableKeyword>();
         
         private int _lineIndex;
         public int lineIndex
@@ -113,7 +116,25 @@ namespace spacegame.alisonscript
             throw new Exception($"couldn't find an occurence of {input} from {start}");
         }
 
-        public void AddObject(string objectName, string objectValue)
+        public AlisonscriptObject<object> GetObject(string name)
+        {
+            if (!objects.ContainsKey(name))
+                return null;
+            return objects[name];
+        }
+
+        public bool TryGetObject(string name, out AlisonscriptObject<object> obj)
+        {
+            if (!objects.ContainsKey(name))
+            {
+                obj = null;
+                return false;
+            }
+            obj = objects[name];
+            return true;
+        }
+
+        public void AddObject(string objectName, object objectValue)
         {
             Logger.WriteLine($"adding object: {objectName} with value: {objectValue}");
             if (Interpreter.runningScript.objects.ContainsKey(objectName))
@@ -121,7 +142,7 @@ namespace spacegame.alisonscript
                 Interpreter.runningScript.objects[objectName].value = objectValue;
             else
                 // otherwise, create it and add it
-                Interpreter.runningScript.objects.Add(objectName, new Object(objectValue));
+                Interpreter.runningScript.objects.Add(objectName, new AlisonscriptObject<object>(objectValue));
         }
     }
 }
