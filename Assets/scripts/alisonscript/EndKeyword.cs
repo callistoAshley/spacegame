@@ -9,8 +9,9 @@ namespace spacegame.alisonscript
     public sealed class EndKeyword : IKeyword
     {
         public string name => "end";
+        public int minimumArgs => 0;
 
-        public void OnCall(RunningScript script, Line line)
+        public void OnCall(RunningScript script, Line line, string[] args)
         {
             // badoing
             if (script.encapsulationStack.Count == 0)
