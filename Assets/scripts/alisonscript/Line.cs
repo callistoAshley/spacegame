@@ -33,8 +33,9 @@ namespace spacegame.alisonscript
             // determine the required depth by first removing everything after and including a non-white space character
             // this string will contain *only* the indenting from the real contents
             string indenting = new Regex(@"(?=\S).*").Replace(realContents, string.Empty);
-            // then get the number of tabs in the string with a lil baby regex, just a tiny guy, baby man, so small,
-            requiredDepth = new Regex(@"\t").Matches(indenting).Count;
+            // then get the number of tabs in the string by dividing the length of the indenting by 4
+            // alisonscript is cranky and will want tabs to have 4 spaces
+            requiredDepth = indenting.Length / 4;
 
             this.index = index;
 

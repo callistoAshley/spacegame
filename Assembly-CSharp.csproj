@@ -65,16 +65,19 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\alisonscript\AlisonscriptObject.cs" />
     <Compile Include="Assets\scripts\alisonscript\AlisonscriptSyntaxError.cs" />
+    <Compile Include="Assets\scripts\alisonscript\ConditionalKeyword.cs" />
+    <Compile Include="Assets\scripts\alisonscript\EndKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\FunctionAttribute.cs" />
     <Compile Include="Assets\scripts\alisonscript\FunctionKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Functions.cs" />
+    <Compile Include="Assets\scripts\alisonscript\IEncapsulateableKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\IKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Interpreter.cs" />
     <Compile Include="Assets\scripts\alisonscript\KeywordManager.cs" />
     <Compile Include="Assets\scripts\alisonscript\LabelData.cs" />
     <Compile Include="Assets\scripts\alisonscript\Line.cs" />
-    <Compile Include="Assets\scripts\alisonscript\Object.cs" />
     <Compile Include="Assets\scripts\alisonscript\RunningScript.cs" />
+    <Compile Include="Assets\scripts\alisonscript\WhenKeyword.cs" />
     <Compile Include="Assets\scripts\AltMapManager.cs" />
     <Compile Include="Assets\scripts\BGMPlayer.cs" />
     <Compile Include="Assets\scripts\Constants.cs" />

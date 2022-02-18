@@ -149,8 +149,8 @@ namespace spacegame.alisonscript
                 EvaluateNextLine();
                 return;
             }
-            // set the depth to the line's required depth
-            depth = line.requiredDepth;
+            // set the depth to the line's required depth if the line's required depth is less then our depth
+            if (line.requiredDepth < depth) depth = line.requiredDepth;
 
             // try to get a keyword at this line
             if (KeywordManager.TryGetKeyword(line, out IKeyword keyword))
