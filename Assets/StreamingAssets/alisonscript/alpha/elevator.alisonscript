@@ -1,13 +1,7 @@
-cond "gsb:alpha_elevator"
-    when "False"
-        ;spk "this is one of the most high-tech elevator brands in the galaxy; it even has air conditioning!"
-        ;set_gsb "alpha_elevator" "True"
-        ;goto "break"
-    when "True"
-        ;spk "i am returning true actually"
+ifgsb "alpha_elevator" "False"
+    ;spk "this is one of the most high-tech elevator brands in the galaxy; it even has air conditioning!"
+    ;set_gsb "alpha_elevator" "True"
 end
-
-&break
 ;spk "where do you want it to take you?"
 
 ;choice "@ch" "nevermind" "debug_alpha_lobby" "debug_alpha_roof"

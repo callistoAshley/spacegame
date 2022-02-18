@@ -16,8 +16,8 @@ namespace spacegame.alisonscript
             // badoing
             if (script.encapsulationStack.Count == 0)
                 throw new AlisonscriptSyntaxError(script.GetCurrentLine(), "stray end keyword");
-            // pop the encapsulation stack and continue
-            script.encapsulationStack.Pop();
+            // wbat should that keyword do when it encounters an end keyword?
+            script.encapsulationStack.Peek().EndBehaviour();
             Interpreter.EvaluateNextLine();
         }
     }
