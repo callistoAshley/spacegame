@@ -15,6 +15,7 @@ namespace spacegame
         private static StreamWriter writer;
         public static readonly string logsPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\My Games\\space!!!!\\logs\\";
 
+        public static bool initialized;
         public static void Init()
         {
             try
@@ -30,10 +31,11 @@ namespace spacegame
                 Application.quitting += Done;
 
                 WriteLine("logger initialized");
+                initialized = true;
             }
             catch (Exception ex)
             {
-                Debug.Log($"an exception was encountered in the logger!\n{ex}");
+                Debug.Log($"an exception was encountered in the logger initialization!\n{ex}");
             }
         }
 
