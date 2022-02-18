@@ -71,6 +71,7 @@
     <Compile Include="Assets\scripts\alisonscript\FunctionKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Functions.cs" />
     <Compile Include="Assets\scripts\alisonscript\IEncapsulateableKeyword.cs" />
+    <Compile Include="Assets\scripts\alisonscript\IfGsbKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\IKeyword.cs" />
     <Compile Include="Assets\scripts\alisonscript\Interpreter.cs" />
     <Compile Include="Assets\scripts\alisonscript\KeywordManager.cs" />

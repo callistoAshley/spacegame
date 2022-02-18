@@ -155,8 +155,14 @@ namespace spacegame.alisonscript
             // try to get a keyword at this line
             if (KeywordManager.TryGetKeyword(line, out IKeyword keyword))
             {
+                // get the args
+                string[] args = ArgsRegex(line);
+                // error handling
+                if (args.Length < keyword.minimumArgs)
+                    throw new AlisonscriptSyntaxError(runningScript.GetCurrentLine(), 
+                        $"insufficient args required to evaluate keyword \"{keyword.name}\" (given {args.Length}, expected {keyword.minimumArgs})");
                 // if we get one, call the keyword's OnCall method
-                keyword.OnCall(runningScript, line);
+                keyword.OnCall(runningScript, line, args);
             }
             // if it's invalid, that's a syntax error
             else
