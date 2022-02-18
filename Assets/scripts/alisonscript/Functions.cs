@@ -135,7 +135,14 @@ namespace spacegame.alisonscript
         [Function("goto", 1)]
         public IEnumerator GotoLabel(FunctionArgs args) 
         {
-            Interpreter.runningScript.JumpToNextOccurence(0, $"&{args[0]}");
+            foreach (Line label in from line in Interpreter.runningScript.lines where line.labelData.isLabel select line)
+            {
+                if (label.labelData.labelName == args[0])
+                {
+                    Interpreter.lineIndex = label.index;
+                    Interpreter.EvaluateLine(label);
+                }
+            }
             args.callback.Invoke();
             yield break;
         }

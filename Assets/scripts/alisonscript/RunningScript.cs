@@ -70,34 +70,6 @@ namespace spacegame.alisonscript
             throw new Exception($"no such label with the name \"{name}\"");
         }
 
-        public void JumpToNextOccurence(int start, string input)
-        {
-            for (int i = start + 1; i < lines.Count; i++)
-            {
-                // remove indenting
-                Regex indenting = new Regex(@"\A\s*");
-                string line = indenting.Replace(lines[i], string.Empty);
-
-                if (line.StartsWith(input)
-                    || (input == "when" && line.StartsWith("end"))) // also jump to end if the input is when to break out of conditionals
-                {
-                    lineIndex = i;
-
-                    if (Interpreter.runningScript == null) // how does this happen part 2
-                    {
-                        Logger.WriteLine("running script is null " + lineIndex);
-                        return;
-                    }
-
-                    // break out of conditional if the line isn't in one
-                    //if (!Interpreter.runningScript.lines[lineIndex].inConditional)
-                        //Interpreter.runningScript.inCond = false;
-                    return;
-                }
-            }
-            throw new Exception($"couldn't find an occurence of {input} from {start}");
-        }
-
         public AlisonscriptObject<object> GetObject(string name)
         {
             if (!objects.ContainsKey(name))
