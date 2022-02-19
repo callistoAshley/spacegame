@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/debug_alpha_tabasco.unity
     guid: b0467c4ddb1e98042833199949386998
+  - enabled: 1
+    path: Assets/scenes/debug_alpha_nebula.unity
+    guid: ba2e341ae133eda4f93a6b5a47fb8519
   m_configObjects: {}

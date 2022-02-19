@@ -177,6 +177,14 @@ namespace spacegame.alisonscript
             yield break;
         }
 
+        [Function("bgm", 1)]
+        public IEnumerator PlayBgm(FunctionArgs args)
+        {
+            BGMPlayer.instance.Play(args[0]);
+            args.callback.Invoke();
+            yield break;
+        }
+
         [Function("sfx", 1)]
         public IEnumerator PlaySfx(FunctionArgs args)
         {
