@@ -10,7 +10,7 @@ namespace spacegame.alisonscript
     public sealed class FunctionKeyword : IKeyword
     {
         public string name => ";";
-        public int minimumArgs => 1;
+        public int minimumArgs => 0;
 
         public void OnCall(RunningScript script, Line line, string[] args)
         {

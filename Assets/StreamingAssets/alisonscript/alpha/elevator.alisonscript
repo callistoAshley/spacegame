@@ -4,12 +4,12 @@ ifgsb "alpha_elevator" "False"
 end
 ;spk "where do you want it to take you?"
 
-;choice "@ch" "nevermind" "debug_alpha_lobby" "debug_alpha_roof"
+;choice "@ch" "nevermind" "lobby" "tabasco" "roof"
 cond "@ch"
-    when "nevermind"
-        ;end_processing
-    when "debug_alpha_lobby"
-        ;change_map "debug_alpha_lobby" "0"
-    when "debug_alpha_roof"
+    when "lobby"
+        ;change_map "debug_alpha_lobby" "1"
+    when "tabasco"
+        ;change_map "debug_alpha_tabasco" "0"
+    when "roof"
         ;change_map "debug_alpha_roof" "0"
 end
