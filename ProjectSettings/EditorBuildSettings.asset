@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/debug_alpha_roof.unity
     guid: 1d3aef7cdd1f9ce47a4bd88fe6ee45b3
+  - enabled: 1
+    path: Assets/scenes/debug_alpha_tabasco.unity
+    guid: b0467c4ddb1e98042833199949386998
   m_configObjects: {}
