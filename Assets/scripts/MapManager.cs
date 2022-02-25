@@ -36,6 +36,10 @@ namespace spacegame
                 MapData.map.Init(transferPoint);
                 // and set changingName back to an empty string 
                 changingName = string.Empty;
+                // also make sure the player's followers go back to the player's position
+                if (Player.instance != null)
+                    foreach (Follower f in Player.followers)
+                        f.transform.position = Player.instance.transform.position;
             });
 
             // movement hooks are re-added in Controller.Awake

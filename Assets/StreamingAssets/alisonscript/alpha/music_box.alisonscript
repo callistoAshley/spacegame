@@ -1,7 +1,7 @@
 cond "@in_args0"
 	when "init"
 		ifgsb "a_mbox"
-			;bgm "bgm_a_01"
+			;bgm "bgm_alpha_mbox"
 		end
 		;end_processing
 end
@@ -18,7 +18,7 @@ end
 ;choice "@ch" "yes" "no"
 cond "@ch"
 	when "yes"
-		;bgm "bgm_a_01"
+		;bgm "bgm_alpha_mbox"
 		;set_gsb "a_mbox" "True"
 	when "no"
 		;spk "alison decides to leave it alone"
