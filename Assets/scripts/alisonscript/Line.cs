@@ -29,13 +29,12 @@ namespace spacegame.alisonscript
             // "contents" removes the indenting
             realContents = contents;
             this.contents = new Regex(@"\A\s*").Replace(realContents, string.Empty);
-            
+
             // determine the required depth by first removing everything after and including a non-white space character
             // this string will contain *only* the indenting from the real contents
             string indenting = new Regex(@"(?=\S).*").Replace(realContents, string.Empty);
-            // then get the number of tabs in the string by dividing the length of the indenting by 4
-            // alisonscript is cranky and will want tabs to have 4 spaces
-            requiredDepth = indenting.Length / 4;
+            // then get the number of tabs in the string with a lil baby regex, just a tiny guy, baby man, so small,
+            requiredDepth = new Regex(@"\t").Matches(indenting).Count;
 
             this.index = index;
 
