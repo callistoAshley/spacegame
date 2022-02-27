@@ -24,7 +24,7 @@ namespace spacegame
         public static List<Follower> followers = new List<Follower>();
 
         // interaction
-        [SerializeField] private Interactable interactable; // the interactable component of the game object the player is colliding with that they can interact with
+        public Interactable interactable; // the interactable component of the game object the player is colliding, if that game object has one
         public bool canInteract
         {
             get
@@ -32,7 +32,7 @@ namespace spacegame
                 return interactable != null;
             }
         }
-        private Transform canInteractObj; // the game object that becomes active when the player can interact with an object
+        [HideInInspector] public Transform canInteractObj; // the game object that becomes active when the player can interact with an object
 
         // components
         [HideInInspector] public Animator animator;
