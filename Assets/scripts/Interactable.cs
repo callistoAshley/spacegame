@@ -18,5 +18,14 @@ namespace spacegame
             if (destroyAfter) Destroy(gameObject);
             EventManager.ProcessEvent(doOnInteract);
         }
+
+        private void OnDestroy()
+        {
+            if (Player.instance.interactable == this)
+            {
+                Player.instance.interactable = null;
+                Player.instance.canInteractObj.gameObject.SetActive(false);
+            }
+        }
     }
 }
