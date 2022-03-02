@@ -10,17 +10,16 @@ namespace spacegame
 {
     public static class MapManager
     {
-        // this string is set to the name of the scene that is being changed to while ChangeMap is being called
-        // to prevent changing the map twice, which skibbadoodles the player instance
-        private static string changingName;
+        // this is used to prevent changing to a map while there is already a map change in progress
+        public static bool changingMap { get; private set; }
 
         public static void ChangeMap(int id, int transferPoint = 0)
             => ChangeMap(SceneManager.GetSceneByBuildIndex(id).name, transferPoint);
 
         public static void ChangeMap(string name, int transferPoint = 0)
         {
-            if (changingName == name) return;
-            changingName = name;
+            if (changingMap) return;
+            changingMap = true;
 
             Logger.WriteLine($"changing map: {name}, transferPoint {transferPoint}");
 
@@ -34,12 +33,12 @@ namespace spacegame
             {
                 // call map data init as callback
                 MapData.map.Init(transferPoint);
-                // and set changingName back to an empty string 
-                changingName = string.Empty;
                 // also make sure the player's followers go back to the player's position
                 if (Player.instance != null)
                     foreach (Follower f in Player.followers)
                         f.transform.position = Player.instance.transform.position;
+                // and we aren't changing map anymore, so this can go back to being false
+                changingMap = false;
             });
 
             // movement hooks are re-added in Controller.Awake
