@@ -19,6 +19,7 @@ namespace spacegame
         public bool canMove = true;
         [HideInInspector] public bool facingRight = true;
         [HideInInspector] public bool onLadder;
+        public bool onStairs;
 
         // followers
         public static List<Follower> followers = new List<Follower>();

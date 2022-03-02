@@ -21,6 +21,8 @@ namespace spacegame
 
         private void OnDestroy()
         {
+            if (MapManager.changingMap) return;
+
             if (Player.instance.interactable == this)
             {
                 Player.instance.interactable = null;
