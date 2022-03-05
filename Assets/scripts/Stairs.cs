@@ -9,7 +9,7 @@ namespace spacegame
 {
     public class Stairs : MonoBehaviour
     {
-        private Player player; // the player component if the player is on the stairs
+        [SerializeField] private Player player; // the player component if the player is on the stairs
         private EdgeCollider2D stairsCollider; // the collider of the stairs, which is stored in a child game object
 
         public void EnterStairs(Player player)
@@ -26,7 +26,7 @@ namespace spacegame
         {
             // reset the player's gravity and set the player reference to null
             player.SetGravity(1);
-            this.player.onStairs = true;
+            this.player.onStairs = false;
             this.player = null;
         }
 
