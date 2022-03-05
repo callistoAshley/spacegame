@@ -10,6 +10,7 @@ namespace spacegame
     public static class InGameMenuManager 
     {
         private static bool open;
+        private static bool canClose;
         private static UINavigateable ui;
 
         public static void Open()
@@ -46,7 +47,8 @@ namespace spacegame
         public static void Close(bool force = false)
         {
             // disallow closing the menu while there's something else in the input queue
-            if (UIManager.instance.inputQueue.Count > 1 && !force) return;
+            if (!canClose && !force) return;
+
             open = false;
 
             // destroy ui
@@ -97,6 +99,7 @@ namespace spacegame
                         // callback
                         () => 
                         {
+                            canClose = true;
                             options.DestroyGameObject();
                             switch (options.selectedOption)
                             {
@@ -113,7 +116,8 @@ namespace spacegame
                     });
 
                     textbox = UIManager.instance.New(new Vector2(92, 94), new Vector2(484, 257));
-                    
+
+                    canClose = false;
                     textbox.StartCoroutine(textbox.PrintText(
                         $"are you sure you want to return to the title screen? (last saved format this seconds ago)",
                         createOptions, UI.PrintTextOptions.CallbackAfterPrinting | UI.PrintTextOptions.DontPushToInputQueue));
