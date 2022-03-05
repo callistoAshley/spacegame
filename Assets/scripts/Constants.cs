@@ -26,7 +26,7 @@ namespace spacegame
         }
         public static class Meta
         {
-            public const string VERSION = "alpha 1.0.dev";
+            public const string VERSION = "alpha 1.1";
         }
     }
 }
