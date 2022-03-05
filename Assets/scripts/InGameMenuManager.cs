@@ -43,8 +43,10 @@ namespace spacegame
             SFXPlayer.instance.Play("sfx_menu_confirm");
         }
 
-        public static void Close()
+        public static void Close(bool force = false)
         {
+            // disallow closing the menu while there's something else in the input queue
+            if (UIManager.instance.inputQueue.Count > 1 && !force) return;
             open = false;
 
             // destroy ui
@@ -95,15 +97,15 @@ namespace spacegame
                         // callback
                         () => 
                         {
+                            options.DestroyGameObject();
                             switch (options.selectedOption)
                             {
                                 case "no": // do nothing
                                     // destroy ui after callback isn't working here for some reason so i'll just do this
-                                    options.DestroyGameObject();
                                     SFXPlayer.instance.Play("sfx_menu_back");
                                     break;
                                 case "yes":
-                                    Close();
+                                    Close(true);
                                     MapManager.ChangeMap("title");
                                     break;
                             }
