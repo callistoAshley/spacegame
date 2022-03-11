@@ -24,5 +24,19 @@ namespace spacegame
                     return g;
             throw new Exception($"PrefabManager prefabs array does not have a prefab called {name}");
         }
+
+        public bool TryGetPrefab(string name, out GameObject prefab)
+        {
+            foreach (GameObject g in prefabs)
+            {
+                if (g.name == name)
+                {
+                    prefab = g;
+                    return true;
+                }
+            }
+            prefab = null;
+            return false;
+        }
     }
 }

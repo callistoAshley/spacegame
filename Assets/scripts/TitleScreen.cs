@@ -40,6 +40,10 @@ namespace spacegame
                     menu.readyToDequeue = true;
                     MapManager.ChangeMap("ship_alison_intro");
                     break;
+                case "load game":
+                    menu.readyToDequeue = true;
+                    SaveLoadManager.instance.Load();
+                    break;
                 case "don't game":
                     UI ui = UIManager.instance.New(new Vector2(0, -140), new Vector2(400, 200));
                     StartCoroutine(ui.PrintText("see ya later!", new Action(() => Application.Quit()),

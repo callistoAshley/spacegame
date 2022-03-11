@@ -252,6 +252,12 @@ namespace spacegame
             {
                 alisonscript.Interpreter.Run(args[0]);
             }
+
+            [Command("save")]
+            public static void Save(string[] args)
+            {
+                SaveLoadManager.instance.Save();
+            }
         }
 
         private class CommandAttribute : Attribute

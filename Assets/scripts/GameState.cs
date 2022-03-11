@@ -14,16 +14,6 @@ namespace spacegame
         private static Dictionary<string, bool> booleans = new Dictionary<string, bool>();
         private static Dictionary<string, int> integers = new Dictionary<string, int>();
 
-        public static Dictionary<string, bool> GetBooleansDictionary()
-        {
-            return booleans;
-        }
-
-        public static Dictionary<string, int> GetIntegersDictionary()
-        {
-            return integers;
-        }
-
         public static bool GetBoolean(string name)
         {
             Logger.WriteLine($"game state bool get: {name}");
@@ -66,6 +56,26 @@ namespace spacegame
             else
                 // otherwise, add it
                 integers.Add(name, value);
+        }
+
+        public static void ResetBooleansDictionary(Dictionary<string, bool> dictionary)
+        {
+            booleans = dictionary;
+        }
+
+        public static void ResetIntegersDictionary(Dictionary<string, int> dictionary)
+        {
+            integers = dictionary;
+        }
+
+        public static Dictionary<string, bool> GetBooleansDictionary()
+        {
+            return booleans;
+        }
+
+        public static Dictionary<string, int> GetIntegersDictionary()
+        {
+            return integers;
         }
     }
 }
