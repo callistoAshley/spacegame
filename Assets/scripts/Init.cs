@@ -15,8 +15,9 @@ namespace spacegame
             if (initialized) return;
             initialized = true;
 
-            // initialize logger and speech synthesizer
+            // initialize logger and save/load
             Logger.Init();
+            SaveLoadManager.instance.Init();
 
             // alisonscript initialization
             alisonscript.Interpreter.RegisterKeywords();

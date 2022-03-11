@@ -104,6 +104,10 @@
     <Compile Include="Assets\scripts\Parallax.cs" />
     <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\PrefabManager.cs" />
+    <Compile Include="Assets\scripts\SaveLoad\HandyDandies.cs" />
+    <Compile Include="Assets\scripts\SaveLoad\SaveReader.cs" />
+    <Compile Include="Assets\scripts\SaveLoad\SaveWriter.cs" />
+    <Compile Include="Assets\scripts\SaveLoadManager.cs" />
     <Compile Include="Assets\scripts\SFXPlayer.cs" />
     <Compile Include="Assets\scripts\SpaceshipDoor.cs" />
     <Compile Include="Assets\scripts\Stairs.cs" />

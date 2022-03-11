@@ -46,20 +46,20 @@ namespace spacegame
                 // disable the constraints
                 player.rigidbody2d.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
 
-            List<MonoBehaviour> thingsThatAreOnTheStairs = new List<MonoBehaviour> { player };
-            thingsThatAreOnTheStairs.AddRange(Player.followers);
+            List<Rigidbody2D> thingsThatAreOnTheStairs = new List<Rigidbody2D> { player.rigidbody2d };
+            thingsThatAreOnTheStairs.AddRange(Player.followers.Select(f => f.rigidbody2d));
 
             // fire a raycast down from each thing that is on the stairs
             // if the raycast hit the stairs, move the thing to the bottom of the ray hit
-            foreach (MonoBehaviour m in thingsThatAreOnTheStairs)
+            foreach (Rigidbody2D r in thingsThatAreOnTheStairs)
             {
-                foreach (RaycastHit2D ray in Physics2D.RaycastAll(m.transform.position, Vector2.down))
+                foreach (RaycastHit2D ray in Physics2D.RaycastAll(r.position, Vector2.down))
                 {
                     if (ray.transform == stairsCollider.transform)
                     {
-                        m.transform.position = new Vector3(m.transform.position.x,
+                        r.position = new Vector3(r.position.x,
                             ray.point.y + 1,
-                            m.transform.position.z);
+                            r.transform.position.z);
                         break;
                     }
                 }

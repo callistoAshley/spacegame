@@ -9,11 +9,9 @@ namespace spacegame
 {
     public class Follower : NPC
     {
-        private BoxCollider2D coll;
         public override void Awake()
         {
             base.Awake();
-            coll = GetComponent<BoxCollider2D>();
             transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         }

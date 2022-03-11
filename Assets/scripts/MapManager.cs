@@ -16,7 +16,7 @@ namespace spacegame
         public static void ChangeMap(int id, int transferPoint = 0)
             => ChangeMap(SceneManager.GetSceneByBuildIndex(id).name, transferPoint);
 
-        public static void ChangeMap(string name, int transferPoint = 0)
+        public static void ChangeMap(string name, int transferPoint = 0, Action<AsyncOperation> callback = null)
         {
             if (changingMap) return;
             changingMap = true;
@@ -40,6 +40,8 @@ namespace spacegame
                 // and we aren't changing map anymore, so this can go back to being false
                 changingMap = false;
             });
+            if (callback != null)
+                a.completed += callback;
 
             // movement hooks are re-added in Controller.Awake
         }

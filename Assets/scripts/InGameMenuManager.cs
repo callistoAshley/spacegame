@@ -34,7 +34,6 @@ namespace spacegame
             ui.SetOptions(new string[]
             {
                 "back",
-                //"inventory",
                 "settings",
                 "save",
                 "title"
@@ -118,8 +117,11 @@ namespace spacegame
                     textbox = UIManager.instance.New(new Vector2(92, 94), new Vector2(484, 257));
 
                     canClose = false;
-                    textbox.StartCoroutine(textbox.PrintText(
-                        $"are you sure you want to return to the title screen? (last saved format this seconds ago)",
+                    textbox.StartCoroutine(textbox.PrintText( 
+                        SaveLoadManager.instance.stopwatchStarted ?
+                        $"are you sure you want to return to the title screen? " +
+                        $"(last saved {HandyDandies.instance.GetElapsedTimeString(SaveLoadManager.instance.stopwatch.Elapsed)} ago)" :
+                        "are you sure you want to return to the title screen?",
                         createOptions, UI.PrintTextOptions.CallbackAfterPrinting | UI.PrintTextOptions.DontPushToInputQueue));
 
                     break;

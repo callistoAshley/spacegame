@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/scenes/title.unity
     guid: 2f842cd75c2758b489cd880ec09bbf72
   - enabled: 1
+    path: Assets/scenes/save_corrupt.unity
+    guid: 62c0c2e7740aa9e42ba684463a3426e4
+  - enabled: 1
     path: Assets/scenes/ship_alison_intro.unity
     guid: 964b1a3b6c4c4d54e96dfc3c0aa620ad
   - enabled: 1
