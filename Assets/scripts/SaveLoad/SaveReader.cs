@@ -50,7 +50,7 @@ namespace spacegame.SaveLoad
 
         public T[] GetObjectsOfType<T>()
         {
-            IEnumerable<T> stuff = (from obj in stuffInTheSaveFile.Values where obj.GetType() is T select obj).Cast<T>();
+            IEnumerable<T> stuff = (from obj in stuffInTheSaveFile.Values where obj is T select obj).Cast<T>();
             return stuff.ToArray();
         }
 
@@ -128,7 +128,7 @@ namespace spacegame.SaveLoad
                                 break;
                         }
 
-                        stuffInTheSaveFile.Add(name, prefab);
+                        stuffInTheSaveFile.Add(name, prefab.GetComponent<Follower>());
                         break;
                     default:
                         //throw new Exception($"unrecognized type code \"{code}\" at stream position {BaseStream.Position}");

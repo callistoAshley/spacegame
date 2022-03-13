@@ -13,6 +13,8 @@ namespace spacegame
         public bool onTouch;
         public bool destroyAfter;
 
+        [HideInInspector] [NonSerialized] public bool canInteract = true;
+
         public virtual void OnInteract()
         {
             if (destroyAfter) Destroy(gameObject);
