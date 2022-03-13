@@ -21,6 +21,10 @@ namespace spacegame
             StartCoroutine(DebugCode());
 
             versionText.text = Constants.Meta.VERSION;
+
+            foreach (Follower f in Player.followers)
+                Destroy(f.gameObject);
+            Player.followers.Clear();
         }
 
         private void CreateMainMenu()
