@@ -213,6 +213,8 @@ namespace spacegame
             if ((collision.CompareTag("interactable") || collision.CompareTag("npc"))
                 && collision.TryGetComponent(out Interactable i) && i.doOnInteract != null)
             {
+                if (!i.canInteract) return;
+
                 if (i.onTouch)
                 {
                     i.OnInteract();

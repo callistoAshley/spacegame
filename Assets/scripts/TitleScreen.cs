@@ -39,6 +39,8 @@ namespace spacegame
                     // force the ui to be ready to pop from the input queue (we don't want it to destroy when the quit confirmation appears)
                     menu.readyToDequeue = true;
                     MapManager.ChangeMap("ship_alison_intro");
+                    //GameState.ResetBooleansDictionary(new Dictionary<string, bool>());
+                    //GameState.ResetIntegersDictionary(new Dictionary<string, int>());
                     break;
                 case "load game":
                     menu.readyToDequeue = true;
@@ -46,7 +48,7 @@ namespace spacegame
                     break;
                 case "don't game":
                     UI ui = UIManager.instance.New(new Vector2(0, -140), new Vector2(400, 200));
-                    StartCoroutine(ui.PrintText("see ya later!", new Action(() => Application.Quit()),
+                    StartCoroutine(ui.PrintText("see ya later!", () => Application.Quit(),
                         UI.PrintTextOptions.CallbackAfterInput));
                     break;
             }

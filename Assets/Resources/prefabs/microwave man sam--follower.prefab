@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 999829025773980208}
   - component: {fileID: 999829025773980211}
   - component: {fileID: 4221322962655185380}
-  - component: {fileID: 1528941599351598105}
   - component: {fileID: 6220328719563508598}
   m_Layer: 0
   m_Name: microwave man sam--follower
@@ -151,20 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1528941599351598105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999829025773980237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1098145163fabed46915fa14f98c0924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameStateBool: a_sam
-  condition: 0
 --- !u!114 &6220328719563508598
 MonoBehaviour:
   m_ObjectHideFlags: 0

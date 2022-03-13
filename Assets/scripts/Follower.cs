@@ -14,6 +14,7 @@ namespace spacegame
             base.Awake();
             transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
+            canInteract = false;
         }
 
         public void UpdatePosition(int index)

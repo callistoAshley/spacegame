@@ -76,7 +76,7 @@ namespace spacegame.SaveLoad
                 case 'f':
                     // the save reader will interpret this by instantiating the prefab with the corresponding name,
                     // and adding it as a follower
-                    Write(((Follower)obj).gameObject.name + "--follower");
+                    Write($"{((Follower)obj).gameObject.name}--follower");
                     break;
                 default:
                     throw new Exception("can you not");

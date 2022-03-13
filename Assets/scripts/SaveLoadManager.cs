@@ -78,7 +78,11 @@ namespace spacegame
                         callback: x => 
                         { 
                             Player.instance.transform.position = playerPosition;
-                            Player.followers = followers;
+                            foreach (Follower f in followers)
+                            {
+                                GameObject follower = Instantiate(f.gameObject, Player.instance.transform.position, Quaternion.identity);
+                                Player.followers.Add(follower.GetComponent<Follower>());
+                            }
                         });
                     GameState.ResetBooleansDictionary(gameStateBools);
                     GameState.ResetIntegersDictionary(gameStateInts);
