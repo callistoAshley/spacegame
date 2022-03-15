@@ -10,7 +10,7 @@ namespace spacegame
     public static class InGameMenuManager 
     {
         private static bool open;
-        private static bool canClose;
+        private static bool canClose = true;
         private static UINavigateable ui;
 
         public static void Open()

@@ -43,8 +43,13 @@ namespace spacegame
                     // force the ui to be ready to pop from the input queue (we don't want it to destroy when the quit confirmation appears)
                     menu.readyToDequeue = true;
                     MapManager.ChangeMap("ship_alison_intro");
-                    //GameState.ResetBooleansDictionary(new Dictionary<string, bool>());
-                    //GameState.ResetIntegersDictionary(new Dictionary<string, int>());
+
+                    // reset the game state dictionaries
+                    // we want debug_mode to stay though, so we check if it's there
+                    Dictionary<string, bool> dict = new Dictionary<string, bool>();
+                    if (Global.debugMode) dict.Add("debug_mode", true);
+                    GameState.ResetBooleansDictionary(dict);
+                    GameState.ResetIntegersDictionary(new Dictionary<string, int>());
                     break;
                 case "load game":
                     menu.readyToDequeue = true;
