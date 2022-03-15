@@ -62,7 +62,7 @@ namespace spacegame
                     // double check the header first
                     if (!reader.VerifyHeader(out byte[] header))
                         throw new Exception($"couldn't verify file header of save data (ascii of first 13 bytes was {Encoding.ASCII.GetString(header)})");
-                    reader.GetVersion(false); // this is just to move position forward
+                    reader.GetVersion(false); // this is just to move the position forward
                     // then read the data into the dictionary
                     reader.ReadTheStuff();
 

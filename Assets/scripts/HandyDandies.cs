@@ -52,7 +52,7 @@ namespace spacegame
                     continue;
 
                 ret += $"{times[i]} {strings[i]}";
-                ret += times[i] > 1 ? "s " : "";
+                ret += times[i] > 1 ? "s" : "";
             }
 
             return ret;
