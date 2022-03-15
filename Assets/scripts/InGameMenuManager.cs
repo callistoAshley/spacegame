@@ -73,6 +73,17 @@ namespace spacegame
                 case "settings":
                     break;
                 case "save":
+                    UI textbox2 = UIManager.instance.New(new Vector2(92, 94), new Vector2(484, 257));
+                    try
+                    {
+                        SaveLoadManager.instance.Save();
+                        textbox2.StartCoroutine(textbox2.PrintText("saved!", options: UI.PrintTextOptions.DestroyUIAfterCallback | UI.PrintTextOptions.CallbackAfterInput));
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLine($"exception while saving: {ex}");
+                        textbox2.StartCoroutine(textbox2.PrintText("an error was encountered while saving....... :(", options: UI.PrintTextOptions.DestroyUIAfterCallback | UI.PrintTextOptions.CallbackAfterInput));
+                    }
                     break;
                 // return to title screen
                 case "title":
