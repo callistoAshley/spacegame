@@ -73,6 +73,8 @@ namespace spacegame
                 case "settings":
                     break;
                 case "save":
+                    SFXPlayer.instance.Play("sfx_menu_confirm");
+
                     UI textbox2 = UIManager.instance.New(new Vector2(92, 94), new Vector2(484, 257));
                     try
                     {
