@@ -33,6 +33,10 @@ namespace spacegame
         
         public void Save()
         {
+            // delete the save if it already exists because the binary writer does funky stuff i think
+            string path = savesPath + "save0.alison";
+            if (File.Exists(path)) File.Delete(path);
+
             Logger.WriteLine("saving");
             using (SaveLoad.SaveWriter writer = new SaveLoad.SaveWriter(new FileStream(savesPath + "save0.alison", FileMode.OpenOrCreate)))
             {
@@ -81,6 +85,7 @@ namespace spacegame
                             foreach (Follower f in followers)
                             {
                                 GameObject follower = Instantiate(f.gameObject, Player.instance.transform.position, Quaternion.identity);
+                                follower.name = follower.name.Replace("(Clone)", string.Empty); // adios
                                 Player.followers.Add(follower.GetComponent<Follower>());
                             }
                         });
