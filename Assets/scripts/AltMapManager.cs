@@ -20,31 +20,33 @@ namespace spacegame
             instance = this;
         }
 
-        public void Toggle()
+        public void Toggle(bool instant = false)
         {
             if (doingAnimation) return;
-            StartCoroutine(Animation(!altMapEnabled));
+            StartCoroutine(Animation(!altMapEnabled, instant));
         }
 
-        private IEnumerator Animation(bool enabled)
+        // setting "instant" to true just skips the animation and the sound
+        private IEnumerator Animation(bool enabled, bool instant = false)
         {
             doingAnimation = true;
+
+            if (!instant)
+                SFXPlayer.instance.Play(enabled ? "sfx_alt_activate" : "sfx_alt_deactivate");
             if (enabled)
             {
-                SFXPlayer.instance.Play("sfx_alt_activate");
                 while (MainCamera.instance.altMapMask.localScale.y <= 20)
                 {
                     MainCamera.instance.altMapMask.localScale += new Vector3(0, 10 * Time.deltaTime, 0);
-                    yield return new WaitForEndOfFrame();
+                    if (!instant) yield return new WaitForEndOfFrame();
                 }
             }
             else
             {
-                SFXPlayer.instance.Play("sfx_alt_deactivate");
                 while (MainCamera.instance.altMapMask.localScale.y >= 1)
                 {
                     MainCamera.instance.altMapMask.localScale -= new Vector3(0, 10 * Time.deltaTime, 0);
-                    yield return new WaitForEndOfFrame();
+                    if (!instant) yield return new WaitForEndOfFrame();
                 }
             }
             doingAnimation = false;
