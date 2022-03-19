@@ -37,8 +37,7 @@ namespace spacegame
                 if (Player.instance != null)
                     foreach (Follower f in Player.followers)
                         f.transform.position = Player.instance.transform.position;
-                // toggle alt map if it's enabled and stop the animation from playing between map changes
-                AltMapManager.instance.StopAllCoroutines();
+                // toggle alt map if it's enabled
                 if (AltMapManager.instance.altMapEnabled)
                     AltMapManager.instance.Toggle(true);
                 // and we aren't changing map anymore, so this can go back to being false

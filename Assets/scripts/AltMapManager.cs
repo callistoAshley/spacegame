@@ -29,7 +29,7 @@ namespace spacegame
         // setting "instant" to true just skips the animation and the sound
         private IEnumerator Animation(bool enabled, bool instant = false)
         {
-            doingAnimation = true;
+            doingAnimation = true && !instant;
 
             if (!instant)
                 SFXPlayer.instance.Play(enabled ? "sfx_alt_activate" : "sfx_alt_deactivate");
@@ -49,7 +49,7 @@ namespace spacegame
                     if (!instant) yield return new WaitForEndOfFrame();
                 }
             }
-            doingAnimation = false;
+            if (!instant) doingAnimation = false;
 
             altMapEnabled = enabled;
         }
