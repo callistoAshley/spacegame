@@ -198,7 +198,7 @@ namespace spacegame
                 UpdateParallaxesY(new InputManager.KeyPressedEventArgs(KeyCode.None));
 
             // open in game menu
-            if (Input.GetKeyDown(InputManager.menu))
+            if (Input.GetKeyDown(InputManager.menu) && canMove)
                 // open menu
                 // the menu manager closes the menu here if it's already open
                 InGameMenuManager.Open();
